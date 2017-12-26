@@ -31,11 +31,11 @@ CREATE TABLE `agenda` (
   CONSTRAINT `agenda_ibfk_1` FOREIGN KEY (`idProfesional`) REFERENCES `profesionales` (`idProfesional`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `agenda_ibfk_2` FOREIGN KEY (`idConsultorio`) REFERENCES `consultorios` (`idConsultorio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `agenda_ibfk_3` FOREIGN KEY (`idEspecialidad`) REFERENCES `especialidades` (`idEspecialidad`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 /*Data for the table `agenda` */
 
-insert  into `agenda`(`idAgenda`,`idEspecialidad`,`idConsultorio`,`idProfesional`,`Turno`,`Fecha`,`Periodo`) values (5,2,1,2,1,'2017-11-15','11/2017'),(6,2,1,1,1,'2017-11-15','11/2017'),(7,2,1,1,1,'2017-11-15','11/2017'),(8,2,2,1,1,'2017-11-15','11/2017'),(9,2,2,1,1,'2017-11-23','11/2017'),(10,2,2,1,2,'2017-11-10','11/2017'),(11,2,2,1,1,'2017-11-10','11/2017'),(12,2,2,1,2,'2017-11-04','11/2017'),(13,2,2,1,2,'2017-11-20','11/2017'),(14,2,2,2,1,'2017-11-06','11/2017'),(15,2,2,2,2,'2017-11-13','11/2017'),(16,2,2,2,2,'2017-11-24','11/2017'),(17,2,2,2,2,'2017-11-23','11/2017'),(18,2,2,2,2,'2017-11-15','11/2017'),(19,2,2,2,1,'2017-11-04','11/2017');
+insert  into `agenda`(`idAgenda`,`idEspecialidad`,`idConsultorio`,`idProfesional`,`Turno`,`Fecha`,`Periodo`) values (5,2,1,2,1,'2017-11-15','11/2017'),(6,2,1,1,1,'2017-11-15','11/2017'),(7,2,1,1,1,'2017-11-15','11/2017'),(8,2,2,1,1,'2017-11-15','11/2017'),(9,2,2,1,1,'2017-11-23','11/2017'),(10,2,2,1,2,'2017-11-10','11/2017'),(11,2,2,1,1,'2017-11-10','11/2017'),(12,2,2,1,2,'2017-11-04','11/2017'),(13,2,2,1,2,'2017-11-20','11/2017'),(14,2,2,2,1,'2017-11-06','11/2017'),(15,2,2,2,2,'2017-11-13','11/2017'),(16,2,2,2,2,'2017-11-24','11/2017'),(17,2,2,2,2,'2017-11-23','11/2017'),(18,2,2,2,2,'2017-11-15','11/2017'),(19,2,2,2,1,'2017-11-04','11/2017'),(20,2,2,1,1,'2017-11-07','11/2017'),(21,2,1,1,2,'2017-11-15','11/2017'),(22,2,1,2,1,'2017-11-16','11/2017'),(23,2,1,2,2,'2017-11-16','11/2017'),(24,10,2,12,2,'2017-11-30','11/2017'),(25,10,2,10,1,'2017-11-30','11/2017');
 
 /*Table structure for table `alquiler` */
 
@@ -86,11 +86,11 @@ CREATE TABLE `especialidades` (
   `Nombre` varchar(100) DEFAULT NULL,
   `CostoMod` float DEFAULT NULL,
   PRIMARY KEY (`idEspecialidad`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 /*Data for the table `especialidades` */
 
-insert  into `especialidades`(`idEspecialidad`,`Nombre`,`CostoMod`) values (2,'General',1250);
+insert  into `especialidades`(`idEspecialidad`,`Nombre`,`CostoMod`) values (2,'Psicología',1250),(3,'Dermatología',1250),(4,'Ginecología',1250),(5,'Traumatología',1250),(6,'Otorrino',1250),(7,'Homeopatía',800),(8,'Nutrición',0),(9,'Psiquiatría',0),(10,'Musicoterapia',0),(11,'Psicopedagogía',0),(12,'Pediatría',0),(13,'Kinesiología',0),(14,'Cirugía',0),(15,'Cardiología',0),(16,'Pología',0),(17,'Oftalmología',0);
 
 /*Table structure for table `profesionales` */
 
@@ -103,11 +103,11 @@ CREATE TABLE `profesionales` (
   `FechaVenc` date DEFAULT NULL,
   `DocCompleta` int(11) DEFAULT NULL,
   PRIMARY KEY (`idProfesional`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 /*Data for the table `profesionales` */
 
-insert  into `profesionales`(`idProfesional`,`Nombre`,`Matricula`,`FechaVenc`,`DocCompleta`) values (1,'maria clara mansur','25215','2010-01-01',1),(2,'Juan Carlos Pelotudo','46854','2020-11-30',1);
+insert  into `profesionales`(`idProfesional`,`Nombre`,`Matricula`,`FechaVenc`,`DocCompleta`) values (1,'Mansur Maria Clara','25215','2010-01-01',1),(2,'Nusshold','46854','2020-11-30',0),(3,'Cuello','','1899-11-30',0),(4,'Longas','','1899-11-30',0),(5,'Pereira','','1899-11-30',0),(6,'Bucci','','1899-11-30',0),(7,'Cousido','','1899-11-30',0),(8,'Trimarco Laura','','1899-11-30',0),(9,'Barreiro Laura','','1899-11-30',0),(10,'Castigione Luciano','','1899-11-30',0),(11,'Zampedri','','1899-11-30',0),(12,'Nieto','','1899-11-30',0),(13,'Enjuto','','1899-11-30',0),(14,'Pecchia','','1899-11-30',0),(15,'Flitt','','1899-11-30',0),(16,'Troilo Martha','','1899-11-30',0),(17,'Wybert Augusto','','1899-11-30',0);
 
 /*Table structure for table `usuarios` */
 
