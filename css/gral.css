@@ -1,0 +1,67 @@
+/*azul logo: rgb(27,74,128);*/
+@font-face {
+	font-family:oswald;
+	src:url("../fonts/Oswald-Regular.ttf");
+}
+@font-face {
+	font-family:oswald-light;
+	src:url("../fonts/Oswald-Light.ttf");
+}
+
+@font-face {
+	font-family:Abel;
+	src:url("../fonts/Abel-Regular.ttf");
+}
+@font-face {
+	font-family:Cabin;
+	src:url("../fonts/Cabin-Regular.ttf");
+}
+@font-face {
+	font-family:Nunito;
+	src:url("../fonts/Nunito-Regular.ttf");
+}
+@font-face {font-family:Dosis;src:url("../fonts/Dosis-Regular.ttf");}
+@font-face {font-family:Dosis-light;src:url("../fonts/Dosis-Light.ttf");}
+@font-face {font-family:Dosis-bold;src:url("../fonts/Dosis-Bold.ttf");}
+.botonok {
+background: #3498db;
+background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+background-image: -o-linear-gradient(top, #3498db, #2980b9);
+background-image: linear-gradient(to bottom, #3498db, #2980b9);
+-webkit-border-radius: 2;-moz-border-radius: 2;border-radius: 2px;
+text-shadow: 1px 1px 2px #000000;font-family: Dosis;color: #ffffff;font-size: 1em;padding: 5px 10px 5px 10px;border: solid #1f628d 1px;text-decoration: none;cursor:pointer;}
+.botonok:hover {background: #106286;text-decoration: none;//box-shadow:0px 0px 5px black;}
+.botonok:disabled {background:gray;color:white;cursor:auto;border:none;text-shadow:none;box-shadow:none;}
+.botoncancel {
+background: rgb(250,198,149); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(250,198,149,1) 0%, rgba(245,171,102,1) 47%, rgba(239,141,49,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(250,198,149,1) 0%,rgba(245,171,102,1) 47%,rgba(239,141,49,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(250,198,149,1) 0%,rgba(245,171,102,1) 47%,rgba(239,141,49,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fac695', endColorstr='#ef8d31',GradientType=0 ); /* IE6-9 */
+-webkit-border-radius: 2;-moz-border-radius: 2;border-radius: 2px;
+text-shadow: 1px 1px 2px #000000;font-family: Dosis;color: #ffffff;font-size: 1em;padding: 5px 10px 5px 10px;border: solid rgb(239,141,49) 1px;text-decoration: none;cursor:pointer;}
+.botoncancel:hover {background: rgb(250,198,149);text-decoration: none;//box-shadow:0px 0px 5px black;border:1px solid transparent}
+.botoncancel:disabled {background:gray;color:white;cursor:auto;border:none;text-shadow:none;box-shadow:none;}
+
+.fondonegro {position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.2);z-index:5000;overflow:hidden;}
+.ventana {border:1px solid #dddddd;background-color: white;border-radius: 5px;margin: 100px auto;box-shadow: 2px 2px 5px black;}
+.ventana h2 {font-family: Oswald; font-size: 1.1em;color:#ffffff;border-bottom: 1px solid gray; font-weight: normal;padding: 3px 8px; margin:0;background-color: #3388aa}
+.tabla1 {border:1px solid #dddddd;border-radius: 4px;font-family: Oswald;padding: 0px;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,e5e5e5+100;White+3D */
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */}
+.tabla1 th {background: #f2f5f6; 
+background: -moz-linear-gradient(top, #f2f5f6 0%, #e3eaed 37%, #c8d7dc 100%);
+background: -webkit-linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%);
+background: linear-gradient(to bottom, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); 
+color: #ffffff;text-shadow: 1px 1px 1px black;font-size: 1.1em; border-radius: 3px}
+.tabla1 td {background-color: transparent;color: #333333;text-shadow: 1px 1px 1px gray;font-size: 0.9em;padding: 3px}
+
+.linkGral {font-family: Abel;text-decoration:none; color:black;}
+h3 {font-family: oswald;font-size: 1.2em;color:white;text-shadow: 1px 1px 1px black;background-color: gray; padding: 8px; font-weight: normal;}
