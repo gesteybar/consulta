@@ -17,3 +17,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 #tblNPer input, select {border:1px solid #dddddd;border-radius: 3px;padding: 5px 8px; font-family: Abel}
 #tblNProf {margin:0 auto; width: 90%;font-family: Abel;}
 #tblNProf input, select {border:1px solid #dddddd;border-radius: 3px;padding: 5px 8px; font-family: Abel}
+#divAgenda {}
+#divProf {width: 20vw;min-height: 50vh;border:1px solid gray;float:left;}
+#divTurnos {width: 75vw;min-height: 50vh;border:1px solid gray;float:left;margin-left:20px;}

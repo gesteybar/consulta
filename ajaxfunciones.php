@@ -178,7 +178,7 @@ switch ($consulta) {
 		$esp, $cons, $prof, $mod, '$fecha', '$periodo')";*/
 		$cadena="Call SP_InsertAgenda($esp, $prof, $cons, $mod, '$fecha', '$periodo')";
 
-		echo query($cadena, "E");
+		echo query($cadena, "E", null);
 		break;
 	case 'leerAgenda':
 		$periodo=$_GET['periodo'];
@@ -191,8 +191,22 @@ switch ($consulta) {
 				WHERE a.idConsultorio=$cons
 				AND a.Periodo='$periodo'";
 
-		echo query($cadena, "Q");
+		echo query($cadena, "Q", null);
 		break;
+	case 'guardarParamAgenda':
+		$prof=$_GET['prof'];
+		$espec=$_GET['espec'];
+		$modulo=$_GET['modulo'];
+		$sobre=$_GET['sobre'];
+
+		$cadena="insert into paramagenda (idProfesional, idEspecialidad, Modulo, Sobreturnos) values ($prof, $espec, '$modulo', '$sobre')";
+
+		echo query($cadena, "E", null);
+		break;
+	case 'profxdia':
+		$fecha=$_GET['fecha'];
+
+
 
 }
 

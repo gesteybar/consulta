@@ -51,6 +51,7 @@
 			setValue('txtMat', obj[0].Matricula);
 			setValue('txtVenc', obj[0].FechaVenc);
 			setValue('cboDocComp', obj[0].DocCompleta);
+			cargarEspec();
 			$("#abm").show();
 			$("#cmdBorrar").show();
 
@@ -103,9 +104,97 @@
 		}
 
 	}
+	function cargarEspec() {
+		var prof=getValue('txtID');
+		oAjax.request="customQuery&query=select a.idParamAgenda, e.idEspecialidad, e.Nombre, a.Modulo, a.Sobreturnos from Especialidades e inner join paramagenda a on e.idEspecialidad=a.idEspecialidad and a.idProfesional="+prof+" order by 2&tipo=Q";
+		oAjax.send(resp);
+
+		function resp(data) {
+			if (data.responseText.length<3) {
+				setValue('tbodyEspec','');
+				return false;
+			}
+			var obj=JSON.parse(data.responseText);
+			JsonToTable(obj, 'tbodyEspec', false);
+			OcultarColumnaTabla('tbodyEspec',0);
+			OcultarColumnaTabla('tbodyEspec',1);
+			AgregarBotonTabla('tbodyEspec', 2, 'redalert.png', 'borrarEspec', 0, true);
+		}
+	}
+	function borrarEspec(id) {
+		oAjax.request="customQuery&query=delete from paramagenda where idParamAgenda="+id+"&tipo=E";
+		oAjax.send(resp);
+
+		function resp(data) {
+			if (data.responseText!='ok') {
+				alert(data.responseText);
+				return false;
+			}
+			cargarEspec();
+
+		}
+	}
+	function showAddEspec(ventana) {
+		var padre=document.getElementById(ventana).parentNode;
+		$(padre).show();		
+		var prof=getValue('txtID');
+		LlenarComboSQL('cboEspec', 'select idEspecialidad, Nombre from Especialidades where idEspecialidad not in (select idEspecialidad from paramagenda where idProfesional='+prof+')', false );
+
+	}
+	function cerrar(ventana) {
+		var padre=document.getElementById(ventana).parentNode;
+		$(padre).hide();
+	}	
+	function ingresarEspec() {
+		var espec=getValue('cboEspec');
+		var prof=getValue('txtID');
+		var modulo=getValue('txtDuracion');
+		var sobre=getValue('txtSobreturnos');
+
+		oAjax.request="guardarParamAgenda&prof="+prof+"&espec="+espec+"&modulo="+modulo+"&sobre="+sobre;
+		oAjax.send(resp);
+
+		function resp(data) {
+			if (data.responseText!='ok') {
+				alert(data.responseText);
+				return false;
+			}
+			cargarEspec();
+			cerrar('frmNuevaEspec');
+
+		}
+
+	}
 	</script>
 </head>
 <body>
+	<div class="fondonegro" style="display:none;">
+		<div id="frmNuevaEspec" class="ventana">
+			<h2>Agregar especialidad</h2>
+			<table id="tblNEspec">
+				<tr>
+					<td>Especialidad a agregar:</td>
+					<td><select id="cboEspec"></select></td>
+				</tr>
+				<tr>
+					<td>Duración del turno:</td>
+					<td><input type="number" id="txtDuracion"></td>
+				</tr>
+				<tr>
+					<td>Sobreturnos permitidos:</td>
+					<td><input type="number" id="txtSobreturnos"></td>
+				</tr>
+
+				<tr>
+					<td colspan="2" align="center">
+						<button class="botonok" type="button" onclick="ingresarEspec();">Aceptar</button>
+						<button class="botoncancel" type="button" onclick="cerrar('frmNuevaEspec');">Cancelar</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
 	<h3>Profesionales</h3>
 	<div id="wrapper1">
 		<button class="botonok" onclick="nuevoDato();">Agregar</button>
@@ -150,6 +239,13 @@
 					<button id="cmdBorrar" class="botonok" onclick="borrarDato();">Eliminar</button>
 				</td>
 			</tr>
+		</table>
+		<table id="tblEspec"  style="float:right;">
+			<thead><col width="60%"><tr><th>Especialidades</th><th></th><th><a href="javascript:vodi(0);" onclick="showAddEspec('frmNuevaEspec');"><img src="./imagenes/nueva.png" width="24"></a></th></tr>
+				<tr><th>Especialidad</th><th>Min x módulo</th><th>Sobreturnos</th></tr>
+			</thead>
+
+			<tbody id="tbodyEspec"></tbody>
 		</table>
 	</div>
 	<script>cargarDatos();</script>
