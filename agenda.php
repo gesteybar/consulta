@@ -83,6 +83,7 @@
 			if (tr.getElementsByTagName('a').length>0)
 				tbl.appendChild(tr);
 		}
+		AgregarBotonTabla('tbodyAgenda', 0, 'menu2.png', 'showMenu', 0, true, 'icono');
 		
 	}
 	function addProf(obj) {
@@ -154,6 +155,7 @@
 		armarGrilla(periodo);
 		var cons=getValue('cboConsultorio');
 
+		setValue('lblPeriodo', 'Período seleccionado: ' + periodo);
 		oAjax.request="leerAgenda&periodo="+periodo+"&cons="+cons;
 		oAjax.send(resp);
 
@@ -185,7 +187,37 @@
 		}
 
 	}
+	function copiarAgenda() {
+		
+	}
+</script>
+<script type="text/javascript">
 
+	function showMenu(id,obj) {
+		setValue('hidDoc', id);
+		var rect = obj.getBoundingClientRect();
+		//alert(rect.left);
+		var div=document.getElementById('ctxMenu');
+		div.style.position="absolute";
+		div.style.display="inline-block";
+		div.style.left=rect.left+"px";
+		div.style.top=rect.top+"px";
+		div.style.zIndex="10000";
+		div.width="150px";
+		div.height="auto";
+		
+		
+	}
+	$(document).mouseup(function(e) 
+	{
+	    var container = $("#ctxMenu");
+
+	    // if the target of the click isn't the container nor a descendant of the container
+	    if (!container.is(e.target) && container.has(e.target).length === 0) 
+	    {
+	        container.hide();
+	    }
+	});
 	</script>
 </head>
 <body>
@@ -238,6 +270,15 @@
 			</table>
 		</div>
 	</div>
+	<div class="contextMenu" id="ctxMenu" style="display:none;">
+		<input type="hidden" id="hidDoc">
+		<ul>
+			<li><a href="javascript:void(0);" onclick="evaluar('A')">Copiar semana</a></li>
+			<li><a href="javascript:void(0);" onclick="evaluar('R')">Rechazar</a></li>
+			<li><a href="javascript:void(0);" onclick="$('#ventana1').show();setValue('spanTituloVer',getValue('txtArchivo'));">Reenviar para aprobar</a></li>
+			<li><a href="javascript:void(0);" onclick="">Subir correcciones y aprobar</a></li>
+		</ul>
+	</div>	
 	<h3>Agenda</h3>
 	<div id="wrapper1">
 		<button class="botonok" onclick="mostrarNuevo('frmNuevoPeriodo');">Abrir nuevo Período</button>
@@ -252,6 +293,7 @@
 	<input type="hidden" id="hidPeriodo">
 	<div id="wrapper2">
 		<select id="cboConsultorio" onchange="cargarGrilla(getValue('hidPeriodo'));"></select>
+		<h3 style="display:inline-block;margin:0 10px;" id="lblPeriodo"></h3>
 		<script>LlenarComboSQL('cboConsultorio', 'select idConsultorio, Nombre from consultorios')</script>
 		<table id="tblAgenda" class="tabla1">
 			<thead>

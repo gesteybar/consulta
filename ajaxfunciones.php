@@ -206,6 +206,13 @@ switch ($consulta) {
 	case 'profxdia':
 		$fecha=$_GET['fecha'];
 
+		$cadena="SELECT a.idProfesional, p.Nombre
+				FROM agenda a LEFT JOIN profesionales p ON p.idProfesional=a.idProfesional
+				WHERE a.Fecha='$fecha'";
+
+		echo query($cadena, "Q", null);
+		break;
+
 
 
 }

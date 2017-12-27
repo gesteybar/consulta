@@ -14,7 +14,22 @@
 	<script type="text/javascript">
 	function cargarProf() {
 		var fecha=getValue('txtFecha');
-		oAjax.request=1;
+		oAjax.request="profxdia&fecha="+fecha;
+		oAjax.send(resp);
+
+		function resp(data) {
+			if (data.responseText.length<3) {
+				alert(data.responseText);
+				return false;
+			}
+			var obj=JSON.parse(data.responseText);
+			JsonToTable(obj, 'tbodyProf', false);
+			OcultarColumnaTabla('tbodyProf', 0);
+			AgregarBotonTabla('tbodyProf', 1, '', 'cargarTurnos', 0);
+		}
+	}
+	function cargarTurnos(id) {
+		
 	}
 	</script>
 </head>
@@ -44,12 +59,16 @@
 	</div>
 	<div id="divAgenda">
 		<div id="divProf">
+			<table id="tblProf">
 			<thead><tr><th>Profesionales</th></tr></thead>
 			<tbody id="tbodyProf"></tbody>
+			</table>
 		</div>
 		<div id="divTurnos">
+			<table id="tblTurnos">
 			<thead></thead>
 			<tbody id="tbodyTurnos"></tbody>
+			</table>
 		</div>
 	</div>
 

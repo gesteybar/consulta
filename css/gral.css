@@ -65,3 +65,10 @@ color: #ffffff;text-shadow: 1px 1px 1px black;font-size: 1.1em; border-radius: 3
 
 .linkGral {font-family: Abel;text-decoration:none; color:black;}
 h3 {font-family: oswald;font-size: 1.2em;color:white;text-shadow: 1px 1px 1px black;background-color: gray; padding: 8px; font-weight: normal;}
+.contextMenu {background-color: #dddddd;color:#444444;font-family: Abel;border:1px solid gray;box-shadow: 2px 2px 2px black;border-radius: 3px;}
+.contextMenu ul {padding:0;}
+.contextMenu li {list-style: none;margin: 0;border-bottom: 1px solid #bbbbbb}
+.contextMenu li:hover {background-color: #eeeeee; }
+.contextMenu a {background-color: none; color:#444444;text-decoration: none;padding:3px;}
+.contextMenu a:hover {text-decoration: none;}
+.icono {width: 24px;height: 24px;margin:5px 10px;}
