@@ -795,14 +795,32 @@ function BuscarDato(consulta) {
 }
 
 function espera(estado) {
-	var div=document.getElementById("divLoading");
-	var msg=document.getElementById("divMensaje");
+var body=document.getElementsByTagName('body')[0];
 	if (estado=='on') {
-		div.style.display="";
-		msg.style.display="";
+		var div=document.createElement('div');
+		var msg=document.createElement('div');
+		var p=document.createElement('p');
+		var img=document.createElement('img');
+
+		div.id='divLoading';
+		img.id="divMensaje";
+		p.innerHTML="Procesando";
+		div.classList.add('fondonegro');
+		img.src="./imagenes/uploading.gif";
+		
+		msg.classList.add('clsMensaje');
+		msg.appendChild(p);
+		msg.appendChild(img);
+		div.appendChild(msg);
+		body.appendChild(div);
+
+		$("#divLoading").show();
+		$("#divMensaje").show();
 	}
 	else {
-		div.style.display="none";
-		msg.style.display="none";
+		var fondo=document.getElementById('divLoading');
+		fondo.parentNode.removeChild(fondo);	
+		$("#divLoading").hide();
+		$("#divMensaje").hide();
 	}
 }

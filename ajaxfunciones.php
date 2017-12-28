@@ -206,14 +206,20 @@ switch ($consulta) {
 	case 'profxdia':
 		$fecha=$_GET['fecha'];
 
-		$cadena="SELECT a.idProfesional, p.Nombre
+		$cadena="SELECT distinct a.idProfesional, p.Nombre
 				FROM agenda a LEFT JOIN profesionales p ON p.idProfesional=a.idProfesional
 				WHERE a.Fecha='$fecha'";
 
 		echo query($cadena, "Q", null);
 		break;
+	case 'cargarTurnos':
+		$fecha=$_GET['fecha'];
+		$prof=$_GET['Prof'];
 
+		$cadena="Call SP_LeerTurnos('$fecha',$prof);";
 
+		echo query($cadena, "Q", null);
+		break;
 
 }
 

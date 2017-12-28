@@ -29,9 +29,58 @@
 		}
 	}
 	function cargarTurnos(id) {
+		espera('on');
+		var fecha=getValue('txtFecha');
+		var prof=id;
+		oAjax.request="cargarTurnos&fecha="+fecha+"&Prof="+prof;
+		oAjax.send(resp);
+
+		function resp(data) {
+			espera('off');
+			if (data.responseText.length<3) {
+				setValue('tbodyTurnos', '');
+				return false;
+			}
+			var obj=JSON.parse(data.responseText);
+			JsonToTable(obj, 'tbodyTurnos', false);
+			OcultarColumnaTabla('tbodyTurnos', 0);
+			OcultarColumnaTabla('tbodyTurnos', 2);
+			OcultarColumnaTabla('tbodyTurnos', 4);
+			AgregarBotonTabla('tbodyTurnos', 1, 'menu2.png', 'showMenu', 0, true, 'icono');
+
+		}
+	}
+
+	</script>
+
+<script type="text/javascript">
+
+	function showMenu(id,obj) {
+		setValue('hidDoc', id);
+		var rect = obj.getBoundingClientRect();
+		//alert(rect.left);
+		var div=document.getElementById('ctxMenu');
+		div.style.position="absolute";
+		div.style.display="inline-block";
+		div.style.left=rect.left+"px";
+		div.style.top=rect.top+"px";
+		div.style.zIndex="10000";
+		div.width="150px";
+		div.height="auto";
+		
 		
 	}
-	</script>
+	$(document).mouseup(function(e) 
+	{
+	    var container = $("#ctxMenu");
+
+	    // if the target of the click isn't the container nor a descendant of the container
+	    if (!container.is(e.target) && container.has(e.target).length === 0) 
+	    {
+	        container.hide();
+	    }
+	});
+</script>	
 </head>
 <body>
 	<div class="fondonegro" style="display:none;">
@@ -52,6 +101,15 @@
 		</div>
 
 	</div>
+	<div class="contextMenu" id="ctxMenu" style="display:none;">
+		<input type="hidden" id="hidDoc">
+		<ul>
+			<li><a href="javascript:void(0);" onclick="">Mover turno</a></li>
+			<li><a href="javascript:void(0);" onclick="">Anular turno</a></li>
+			<li><a href="javascript:void(0);" onclick="">Marcar asistencia</a></li>
+			<li><a href="javascript:void(0);" onclick="">Ficha Paciente</a></li>
+		</ul>
+	</div>		
 	<h3>Agenda diaria</h3>
 	<div id="divFecha">
 		<input id="txtFecha" type="date">
@@ -65,8 +123,8 @@
 			</table>
 		</div>
 		<div id="divTurnos">
-			<table id="tblTurnos">
-			<thead></thead>
+			<table id="tblTurnos" class="tabla1">
+			<thead><tr><th>Hora</th><th>Paciente</th><th>Especialidad</th><th>DNI</th><th>Celular</th></tr></thead>
 			<tbody id="tbodyTurnos"></tbody>
 			</table>
 		</div>

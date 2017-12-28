@@ -86,6 +86,7 @@
 		AgregarBotonTabla('tbodyAgenda', 0, 'menu2.png', 'showMenu', 0, true, 'icono');
 		
 	}
+
 	function addProf(obj) {
 		var periodo=getValue('hidPeriodo');
 
@@ -97,6 +98,7 @@
 		setValue('hidMod', obj.id);
 
 	}
+	
 	function cargarProf() {
 		var periodo=getValue('hidPeriodo');
 
@@ -188,7 +190,7 @@
 
 	}
 	function copiarAgenda() {
-		
+
 	}
 </script>
 <script type="text/javascript">

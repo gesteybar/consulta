@@ -72,3 +72,7 @@ h3 {font-family: oswald;font-size: 1.2em;color:white;text-shadow: 1px 1px 1px bl
 .contextMenu a {background-color: none; color:#444444;text-decoration: none;padding:3px;}
 .contextMenu a:hover {text-decoration: none;}
 .icono {width: 24px;height: 24px;margin:5px 10px;}
+
+.clsMensaje {width: 90%;height: 200px;margin:100px auto;background-color: white;border-radius: 5px;box-shadow: 5px 5px 15px black}
+.clsMensaje p {color:gray;font-family: Abel; font-size: 1em;margin:auto;text-align: center;}
+.clsMensaje img {width: 64px;height: 64px;margin:20px 50%;}
