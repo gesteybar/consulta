@@ -46,11 +46,55 @@
 			OcultarColumnaTabla('tbodyTurnos', 0);
 			OcultarColumnaTabla('tbodyTurnos', 2);
 			OcultarColumnaTabla('tbodyTurnos', 4);
+			AgregarBotonTabla('tbodyTurnos', 1, '', 'mostrarAsignarTurno', 0);
 			AgregarBotonTabla('tbodyTurnos', 1, 'menu2.png', 'showMenu', 0, true, 'icono');
 
 		}
 	}
+	function mostrarAsignarTurno(id, obj) {
+		setValue('txtHora', obj.innerText);
+		$("#frmNuevoTurno").parent().show();
+		$("#frmNuevoTurno").show();
+	}
+	function buscarPaciente() {
+		var tipo=getValue('cboDoc');
+		var nro=getValue('txtDNI');
+		var nom="";
+		if (tipo=='N' && nro.indexOf(",")>0) {
+			var s=nro.split(',');
+			nro=s[0].trim();
+			nom=s[1].trim();
+		}
 
+		oAjax.request="customQuery&query=Call SP_BuscarPaciente('"+tipo+"', '"+nro+"', '"+nom+"')&tipo=Q";
+		oAjax.send(resp);
+
+		function resp(data) {
+			if (data.responseText.length<3) {
+				$("#frmNuevoPaciente").parent().show();
+				$("#frmNuevoPaciente").show();				
+				setValue('tbodySelecPac', '');
+				return false;
+			}			
+			var obj=JSON.parse(data.responseText);
+			JsonToTable(obj, 'tbodySelecPac', false);	
+			AgregarBotonTabla('tbodySelecPac', -1, '','pickPaciente',0);
+			$("#frmListaPacientes").show();
+		}
+	}
+
+	function pickPaciente(id, obj) {
+		//alert(obj.innerHTML);
+		setValue('hidPaciente', id);
+		setValue('txtNombrePac', obj.parentNode.parentNode.cells[1].innerText);
+		$('#frmListaPacientes').hide();
+
+	}
+	function cerrar(ventana) {
+		$("#"+ventana).parent().hide();
+		$("#"+ventana).hide();
+
+	}
 	</script>
 
 <script type="text/javascript">
@@ -84,21 +128,67 @@
 </head>
 <body>
 	<div class="fondonegro" style="display:none;">
-		<div id="frmNuevoPeriodo" class="ventana">
-			<h2>Nuevo período</h2>
-			<table id="tblNPer">
+		<div id="frmNuevoTurno" class="ventana">
+			<h2>Nuevo turno</h2>
+			<table id="tblNTur">
 				<tr>
-					<td>Período a crear:</td>
-					<td><input type="text" id="txtNuevoPeriodo" placeholder="MM/AAAA"></td>
+					<td>Hora:</td>
+					<td><input type="time" id="txtHora" ></td>
+				</tr>
+				<tr>
+					<td>Paciente:</td>
+					<td>
+						<input type="hidden" id="hidPaciente">
+						<td>
+							<select id="cboDoc"><option value="N">Nombre</option><option value="D">DNI</option><option value="S">Socio</option></select>
+							<input id="txtDNI" type="text">
+							<button id="cmdBuscarPaciente" type="button" class="botonok" onclick="buscarPaciente();"><img src="./imagenes/lupa.png"></button>
+						</td>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="text" id="txtNombrePac"></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
 						<button class="botonok" type="button" onclick="ingresarPeriodo();">Aceptar</button>
-						<button class="botoncancel" type="button" onclick="cerrar('frmNuevoPeriodo');">Cancelar</button>
+						<button class="botoncancel" type="button" onclick="cerrar('frmNuevoTurno');">Cancelar</button>
 					</td>
 				</tr>
 			</table>
 		</div>
+		<div id="frmListaPacientes" class="ventana" style="z-index:10000;display:none;">
+			<h2>Seleccionar paciente <a href="javascript:void(0)" onclick="$('#frmListaPacientes').hide();"><img src="./imagenes/redalert.png" style="float:right;"></a></h2>
+			<table class="tabla1" id="tblSelecPac">
+				<thead><tr><th>H. Clínica</th><th>Nombre y apellido</th><th>Cobertura</th><th>Socio</th></tr></thead>
+				<tbody id="tbodySelecPac"></tbody>
+			</table>
+		</div>
+		<div id="frmNuevoPaciente" class="ventana" style="z-index:10000;display:none;">
+			<h2>Ingresar paciente <a href="javascript:void(0)" onclick="$('#frmNuevoPaciente').hide();"><img src="./imagenes/redalert.png" style="float:right;"></a></h2>
+			<table class="tabla1" id="tblNewPac">
+				<tr>
+					<td>Nombre</td><td>Apellido</td>
+				</tr>
+				<tr>
+					<td><input type="text" id="txtNewNombre"></td>
+					<td><input type="text" id="txtNewApellido"></td>
+				</tr>
+				<tr>
+					<td>Celular</td><td>DNI/Socio</td>
+				</tr>
+				<tr>
+					<td><input type="text" id="txtNewCel"></td>
+					<td><input type="text" id="txtNewDNI"></td>					
+				</tr>
+				<tr>
+					<td>
+						<button id="cmdAceptarNC" class="botonok", onclick="preCliente()">Aceptar</button>
+						<button class="botoncancel" onclick="$('#frmNuevoPaciente').hide();"">Cancelar</button>
+					</td>
+				</tr>
+			</table>
+		</div>		
 
 	</div>
 	<div class="contextMenu" id="ctxMenu" style="display:none;">

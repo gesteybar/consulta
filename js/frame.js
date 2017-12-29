@@ -135,17 +135,25 @@ function AgregarBotonTabla(tabla, col, imagen, funcion, refcol,prefijo, clase,co
 		var addClass='';
 	
 	for (var i = 0; i < tr.length; i++) {
-		var td=tr[i].cells;
-		if (td.length>0)
-			if (td[colcond].innerText==condicion || condicion=='' || condicion==undefined) {
-				if (imagen!='')
-					if (prefijo)
-						td[col].innerHTML='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+td[refcol].innerHTML+'\', this);"><img src="./imagenes/'+imagen+'" width="16" title="'+title+'"></a>'+td[col].innerHTML;	
-					else
-						td[col].innerHTML+='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+td[refcol].innerHTML+'\', this);"><img src="./imagenes/'+imagen+'" width="16" title="'+title+'"></a>';
-				else
-					td[col].innerHTML ='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+td[refcol].innerHTML+'\', this);">'+td[col].innerHTML+'</a>';
+		if (col<0) {
+			for (var j = 0; j < tr[i].cells.length; j++) {
+				
+				tr[i].cells[j].innerHTML ='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+tr[i].cells[j].innerHTML+'\', this);">'+tr[i].cells[j].innerHTML+'</a>';
+				
 			}
+		} else {
+			var td=tr[i].cells;
+			if (td.length>0)
+				if (td[colcond].innerText==condicion || condicion=='' || condicion==undefined) {
+					if (imagen!='')
+						if (prefijo)
+							td[col].innerHTML='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+td[refcol].innerHTML+'\', this);"><img src="./imagenes/'+imagen+'" width="16" title="'+title+'"></a>'+td[col].innerHTML;	
+						else
+							td[col].innerHTML+='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+td[refcol].innerHTML+'\', this);"><img src="./imagenes/'+imagen+'" width="16" title="'+title+'"></a>';
+					else
+						td[col].innerHTML ='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+td[refcol].innerHTML+'\', this);">'+td[col].innerHTML+'</a>';
+				}
+		}
 	}
 }
 

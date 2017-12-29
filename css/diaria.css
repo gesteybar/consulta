@@ -9,7 +9,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 #tblPeriodo {width: 10vw;}
 .tabla1 a {font-family: Abel;text-decoration:none; color:black;color:#444444;font-size: 1em;}
 .tabla1 a:hover {color:orange;}
-#frmNuevoPeriodo {width: 40vw;height: 200px;overflow: auto;}
+#frmNuevoTurno {width: 40vw;height: 200px;overflow: auto;}
 #frmAgregarProf {width: 40vw;height: 200px;overflow: auto;}
 #tblNPer {margin:0 auto; width: 90%;font-family: Abel;}
 #tblNPer input, select {border:1px solid #dddddd;border-radius: 3px;padding: 5px 8px; font-family: Abel}
@@ -20,3 +20,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 #divTurnos {width: 75vw;min-height: 50vh;border:1px solid gray;float:left;margin-left:20px;max-height: 70vh;overflow-y: auto;}
 #tblTurnos {width: 100%;border-collapse: collapse;}
 #tblTurnos td {border-bottom:1px dotted gray;}
+#frmListaPacientes {width: 40vw;height: 200px;overflow: auto;margin:-100px auto auto auto;}
+#tblSelecPac {width: 100%;}
+#frmNuevoPaciente {width: 40vw;height: 200px;overflow: auto;margin:-100px auto auto auto;}
