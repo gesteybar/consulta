@@ -112,9 +112,11 @@ CREATE TABLE `pacientes` (
   `NroSocio` varchar(50) DEFAULT NULL,
   `DNI` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`idPaciente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `pacientes` */
+
+insert  into `pacientes`(`idPaciente`,`idPrepaga`,`Apellido`,`Nombre`,`FechaNac`,`Celular`,`Mail`,`FechaAlta`,`NroSocio`,`DNI`) values (1,2,'ESTEYBAR','GUSTAVO','1976-08-25','1138986069','gesteybar@arimex.com','2017-12-29','12345678/9',25356574);
 
 /*Table structure for table `paramagenda` */
 
@@ -131,7 +133,7 @@ CREATE TABLE `paramagenda` (
   KEY `ParamAgenda_index3318` (`idEspecialidad`),
   CONSTRAINT `paramagenda_ibfk_1` FOREIGN KEY (`idEspecialidad`) REFERENCES `especialidades` (`idEspecialidad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `paramagenda_ibfk_2` FOREIGN KEY (`idProfesional`) REFERENCES `profesionales` (`idProfesional`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 /*Data for the table `paramagenda` */
 
@@ -145,9 +147,11 @@ CREATE TABLE `prepagas` (
   `idPrepaga` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idPrepaga`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `prepagas` */
+
+insert  into `prepagas`(`idPrepaga`,`Nombre`) values (1,'PARTICULAR'),(2,'OSDE'),(3,'PAMI');
 
 /*Table structure for table `profesionales` */
 
@@ -207,6 +211,33 @@ CREATE TABLE `usuarios` (
 /*Data for the table `usuarios` */
 
 insert  into `usuarios`(`idUsuario`,`Nombre`,`Login`,`Pass`) values (1,'administrador','admin','e10adc3949ba59abbe56e057f20f883e');
+
+/* Procedure structure for procedure `SP_BuscarPaciente` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `SP_BuscarPaciente` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_BuscarPaciente`(pTipo varchar(1), pNro varchar(60), pNombre varchar(60))
+BEGIN
+	if pTipo='D' then
+		SELECT pa.idPaciente, concat(pa.Apellido, ', ', pa.Nombre) Nombre, pr.Nombre Prepaga, pa.NroSocio FROM pacientes pa left join prepagas pr on pa.idPrepaga=pr.idPrepaga WHERE DNI=pNro;
+	end if;
+	if pTipo='S' then
+		SELECT pa.idPaciente, CONCAT(pa.Apellido, ', ', pa.Nombre) Nombre, pr.Nombre Prepaga, pa.NroSocio FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga
+		WHERE NroSocio=pNro;
+	end if;
+	if pTipo='N' then
+		if ifnull(pNombre, '')='' then
+			SELECT pa.idPaciente, CONCAT(pa.Apellido, ', ', pa.Nombre) Nombre, pr.Nombre Prepaga, pa.NroSocio FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga
+			WHERE Apellido LIKE CONCAT('%', pNro, '%');		
+		else
+			SELECT pa.idPaciente, CONCAT(pa.Apellido, ', ', pa.Nombre) Nombre, pr.Nombre Prepaga, pa.NroSocio FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga
+			where Apellido like concat('%', pNro, '%') and pa.Nombre LIKE CONCAT('%', pNombre, '%');
+		end if;
+	end if;
+    END */$$
+DELIMITER ;
 
 /* Procedure structure for procedure `SP_InsertAgenda` */
 
