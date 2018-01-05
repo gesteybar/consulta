@@ -76,3 +76,4 @@ h3 {font-family: oswald;font-size: 1.2em;color:white;text-shadow: 1px 1px 1px bl
 .clsMensaje {width: 90%;height: 200px;margin:100px auto;background-color: white;border-radius: 5px;box-shadow: 5px 5px 15px black}
 .clsMensaje p {color:gray;font-family: Abel; font-size: 1em;margin:auto;text-align: center;}
 .clsMensaje img {width: 64px;height: 64px;margin:20px 50%;}
+.label {border:1px transparent;font-family: Abel;color:#555555;}

@@ -49,6 +49,7 @@
 			<li><a href="profesionales.php">Profesionales</a></li>
 			<li><a href="especialidades.php">Especialidades</a></li>
 			<li><a href="consultorios.php">Consultorios</a></li>
+			<li><a href="pacientes.php">Pacientes</a></li>
 			<li><a href="agenda.php">Agenda</a></li>
 			<li><a href="diaria.php">Agenda diaria</a></li>
 			<li><a href="#">Proyección</a></li>

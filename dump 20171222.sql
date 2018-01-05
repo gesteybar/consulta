@@ -112,11 +112,11 @@ CREATE TABLE `pacientes` (
   `NroSocio` varchar(50) DEFAULT NULL,
   `DNI` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`idPaciente`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `pacientes` */
 
-insert  into `pacientes`(`idPaciente`,`idPrepaga`,`Apellido`,`Nombre`,`FechaNac`,`Celular`,`Mail`,`FechaAlta`,`NroSocio`,`DNI`) values (1,2,'ESTEYBAR','GUSTAVO','1976-08-25','1138986069','gesteybar@arimex.com','2017-12-29','12345678/9',25356574);
+insert  into `pacientes`(`idPaciente`,`idPrepaga`,`Apellido`,`Nombre`,`FechaNac`,`Celular`,`Mail`,`FechaAlta`,`NroSocio`,`DNI`) values (1,2,'ESTEYBAR','GUSTAVO','1976-08-25','1138986069','gesteybar@arimex.com','2017-12-29','12345678/9',25356574),(3,1,'mansur','maria clara','1899-11-30','654654','','2018-01-03','24027210',24027210),(5,0,'Esteybar','Santiago','0000-00-00','','','2018-01-04','',50525794),(6,0,'Delgado','Marcelo','0000-00-00','1166546655','','2018-01-04','',0),(7,0,'rocchi','gaby','0000-00-00','','','2018-01-05','',0);
 
 /*Table structure for table `paramagenda` */
 
@@ -185,16 +185,18 @@ CREATE TABLE `turnos` (
   `DNI` varchar(15) DEFAULT NULL,
   `NroSocio` varchar(50) DEFAULT NULL,
   `Celular` varchar(50) DEFAULT NULL,
+  `ApellidoPac` varchar(50) DEFAULT NULL,
+  `Estado` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`idTurno`),
   KEY `Turnos_index3320` (`idEspecialidad`),
   KEY `Turnos_index3321` (`idProfesional`),
   CONSTRAINT `turnos_ibfk_1` FOREIGN KEY (`idProfesional`) REFERENCES `profesionales` (`idProfesional`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `turnos_ibfk_2` FOREIGN KEY (`idEspecialidad`) REFERENCES `especialidades` (`idEspecialidad`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 /*Data for the table `turnos` */
 
-insert  into `turnos`(`idTurno`,`idPaciente`,`idEspecialidad`,`idProfesional`,`Fecha`,`Hora`,`Paciente`,`DNI`,`NroSocio`,`Celular`) values (1,0,2,1,'2018-01-05','10:00:00','Gus','25356574','','1138986069'),(2,0,2,1,'2018-01-05','10:10:00','Santi',NULL,NULL,NULL);
+insert  into `turnos`(`idTurno`,`idPaciente`,`idEspecialidad`,`idProfesional`,`Fecha`,`Hora`,`Paciente`,`DNI`,`NroSocio`,`Celular`,`ApellidoPac`,`Estado`) values (5,0,5,18,'2018-01-03','16:00:00','gustavo a','','','1150051111','','PENDIENTE'),(6,0,5,6,'2018-01-03','10:00:00','Clara','24027210','','561651663','Mansur','PENDIENTE'),(7,0,5,6,'2018-01-03','11:00:00','Pilar','35142136','','651698466','happn','PENDIENTE'),(8,0,5,6,'2018-01-03','09:00:00','Claudio','21358165','','165165433','Novak','PENDIENTE'),(10,2,5,14,'2018-01-03','17:40:00','gus','25356574','','1138986069','esteybar','PENDIENTE'),(11,3,5,14,'2018-01-03','16:50:00','maria clara','16165','','654654','mansur','PENDIENTE'),(12,3,5,6,'2018-01-03','08:30:00','maria clara','16165','','654654','mansur','PENDIENTE'),(13,1,5,6,'2018-01-04','17:30:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(16,1,2,1,'2018-01-05','10:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','TOMADO'),(18,7,5,10,'2018-01-05','08:00:00','gaby','0','','','rocchi','PENDIENTE');
 
 /*Table structure for table `usuarios` */
 
@@ -220,19 +222,28 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_BuscarPaciente`(pTipo varchar(1), pNro varchar(60), pNombre varchar(60))
 BEGIN
+	IF pTipo='H' THEN
+		SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail 
+		FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga WHERE idPaciente=pNro;
+	END IF;
+	
 	if pTipo='D' then
-		SELECT pa.idPaciente, concat(pa.Apellido, ', ', pa.Nombre) Nombre, pr.Nombre Prepaga, pa.NroSocio FROM pacientes pa left join prepagas pr on pa.idPrepaga=pr.idPrepaga WHERE DNI=pNro;
+		SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail 
+		FROM pacientes pa left join prepagas pr on pa.idPrepaga=pr.idPrepaga WHERE DNI=pNro;
 	end if;
 	if pTipo='S' then
-		SELECT pa.idPaciente, CONCAT(pa.Apellido, ', ', pa.Nombre) Nombre, pr.Nombre Prepaga, pa.NroSocio FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga
-		WHERE NroSocio=pNro;
+		SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail 
+		FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga
+		WHERE NroSocio=pNro and pa.idPrepaga=pNombre;
 	end if;
 	if pTipo='N' then
 		if ifnull(pNombre, '')='' then
-			SELECT pa.idPaciente, CONCAT(pa.Apellido, ', ', pa.Nombre) Nombre, pr.Nombre Prepaga, pa.NroSocio FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga
+			SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail 
+			FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga
 			WHERE Apellido LIKE CONCAT('%', pNro, '%');		
 		else
-			SELECT pa.idPaciente, CONCAT(pa.Apellido, ', ', pa.Nombre) Nombre, pr.Nombre Prepaga, pa.NroSocio FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga
+			SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail 
+			FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga
 			where Apellido like concat('%', pNro, '%') and pa.Nombre LIKE CONCAT('%', pNombre, '%');
 		end if;
 	end if;
@@ -290,6 +301,24 @@ BEGIN
     END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `SP_InsertPaciente` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertPaciente` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertPaciente`(pidPaciente int, pidPrepaga int, pApellido varchar(50), pNombre varchar(50), pFechaNac varchar(12), pCelular varchar(50), pMail varchar(100), pNroSocio varchar(30), pDNI varchar(20))
+BEGIN
+	if exists(select 1 from pacientes where idPaciente=pidPaciente) then
+		update pacientes set Apellido=pApellido, Nombre=pNombre, idPrepaga=pidPrepaga,FechaNac= pFechaNac, Celular=pCelular, Mail=pMail, NroSocio=pNroSocio, DNI=pDNI
+		where idPaciente=pidPaciente;
+	else
+		insert into pacientes (idPrepaga, Apellido, Nombre, FechaNac, Celular, Mail, FechaAlta, NroSocio, DNI) values (
+		pidPrepaga, pApellido, pNombre, pFechaNac, pCelular, pMail, now(), pNroSocio, pDNI);
+	end if;
+    END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `SP_InsertProf` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertProf` */;
@@ -304,6 +333,37 @@ BEGIN
 		INSERT INTO profesionales (Nombre, Matricula, FechaVenc, DocCompleta) VALUES (pNombre, pMatricula, pFechaVenc, pDocComp);
 	END IF;
 		
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SP_InsertTurno` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertTurno` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertTurno`(pTurno int, pidPaciente int, pidEspec int, pidProf int, pFecha varchar(12), pHora varchar(10), 
+					pNombre varchar(100), pApellido varchar(100), pDNI varchar(20), pSocio varchar(30), pCelular varchar(50), pEstado varchar(40))
+BEGIN
+	declare vEspec int;
+	
+	if pidEspec=0 then
+		select idEspecialidad into vEspec from agenda where Fecha=pFecha and idProfesional=pidProf limit 1;
+	else
+		set vEspec=pidEspec;
+	end if;
+	
+	if exists(select 1 from pacientes where idPaciente=pidPaciente) then
+		select Nombre, Apellido, DNI, NroSocio, Celular into pNombre, pApellido, pDNI, pSocio, pCelular from pacientes where idPaciente=pidPaciente;
+	end if;
+	
+	if exists(select 1 from Turnos where idTurno=pTurno) then
+		delete from turnos where idTurno=pTurno;
+	end if;
+	
+	insert into turnos (idPaciente, idEspecialidad, idProfesional, Fecha, Hora, Paciente, ApellidoPac, DNI, NroSocio, Celular, Estado) values (
+			pidPaciente, vEspec, pidProf, pFecha, pHora, pNombre, pApellido, pDNI, pSocio, pCelular, pEstado);
+			
     END */$$
 DELIMITER ;
 
@@ -344,7 +404,7 @@ BEGIN
 	declare vI2 int;
 	
 	drop table if exists tmpturnos;
-	create temporary table tmpturnos (idTurno int, Hora varchar(10), idPaciente int, Paciente varchar(100), idEspecialidad int, Especialidad varchar(50), DNI int, Celular varchar(50));
+	create temporary table tmpturnos (idTurno int, Hora varchar(10), idPaciente int, Paciente varchar(100), idEspecialidad int, Especialidad varchar(50), DNI int, Celular varchar(50), Estado varchar(40));
 	
 	select min(Turno), max(Turno) into vI1, vI2 from agenda  WHERE idProfesional=pProf AND Fecha=pFecha;
 	
@@ -361,11 +421,11 @@ BEGIN
 			set vHoraF=DATE_FORMAT(DATE_ADD(vFechaI, INTERVAL vModulo MINUTE), '%H:%i:%s');
 			
 			if exists(select 1 from turnos where  idProfesional=pProf AND Hora >= vHoraI AND Hora < vHoraF) then
-				insert into tmpTurnos (
-				select idTurno, Hora, idPaciente, Paciente, idEspecialidad, '', DNI, Celular from Turnos where idProfesional=pProf
+				insert into tmpturnos (
+				select idTurno, Hora, idPaciente, concat(Paciente,' ', ApellidoPac) Paciente, idEspecialidad, '', DNI, Celular, Estado from Turnos where idProfesional=pProf
 				and Hora between vHoraI and vHoraF);
 			else 
-				insert into tmpTurnos values (null,vHoraI, null,null,null,null,null,null);
+				insert into tmpTurnos values (null,vHoraI, null,null,null,null,null,null, 'DISPONIBLE');
 			end if;
 			
 			set vFechaI=date_add(vFechaI, interval vModulo minute);

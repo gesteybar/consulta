@@ -155,17 +155,43 @@ switch ($consulta) {
 
 		break;
 	case 'cargarProfesionales':
-		$cadena="select idProfesional, Nombre from profesionales";
+		$cadena="select idProfesional, Nombre from profesionales order by 2";
 
 		echo query($cadena, "Q", null);
 
 		break;
 	case 'cargarEspecialidades':
-		$cadena="select idEspecialidad, Nombre from especialidades";
+		$cadena="select idEspecialidad, Nombre from especialidades order by 2";
 
 		echo query($cadena, "Q", null);
 
 		break;		
+	case 'cargarPacientes':
+		if (sizeof($_GET)>1) {
+			
+			$nom=$_GET['nom'];
+			$ape=$_GET['ape'];
+			$prep=$_GET['prep'];
+			$dni=$_GET['dni'];
+			$hc=$_GET['hc'];
+			if ($nom!='' || $ape!='') 
+				$cadena="CALL SP_BuscarPaciente('N', '$ape', '$nom');";
+
+			if ($prep!='' && $dni!='')
+				$cadena="CALL SP_BuscarPaciente('S', '$dni', '$prep');";
+
+			if ($hc!='')
+				$cadena="CALL SP_BuscarPaciente('H', '$hc', NULL);";
+
+		} else {
+			
+			$cadena="SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail from pacientes pa inner join prepagas pr on pa.idPrepaga=pr.idPrepaga where FechaAlta >=date_add(now(), INTERVAL -30 DAY) order by 2";
+		}
+
+
+		echo query($cadena, "Q", null);
+
+		break;
 	case 'ingresarModulo':
 		$periodo=$_GET['periodo'];
 		$fecha=$_GET['fecha'];
@@ -220,7 +246,44 @@ switch ($consulta) {
 
 		echo query($cadena, "Q", null);
 		break;
+	case 'ingresarTurno':
+		$turno=($_GET['turno']=='' ? '0': $_GET['turno']);
+		$pac=($_GET['pac']=='' ? '0': $_GET['pac']);
+		$nom=$_GET['nom'];
+		$ape=$_GET['ape'];
+		$cel=$_GET['cel'];
+		$mail=$_GET['mail'];
+		$fecha=$_GET['fecha'];
+		$hora=$_GET['hora'];
+		$espec=$_GET['espec'];
+		$prof=$_GET['prof'];
+		$dni=$_GET['dni'];
+		$socio=$_GET['socio'];
 
+		$cadena="call SP_InsertTurno ($turno, $pac, $espec, $prof, '$fecha', '$hora', '$nom', '$ape', '$dni', '$socio', '$cel', 'PENDIENTE');";
+
+		echo query($cadena, "E", null);
+		break;
+	case 'ingresarPaciente':
+		$id=($_GET['id'] == '' ? '0' : $_GET['id']);
+		$prep=($_GET['prep'] == '' ? '0' : $_GET['prep']);
+		$nom=$_GET['nom'];
+		$ape=$_GET['ape'];
+		$dni=$_GET['dni'];
+		$cel=$_GET['cel'];
+		$fecNac='';
+		$mail='';
+		$socio='';
+		
+		$cadena="call SP_InsertPaciente ($id, $prep, '$ape','$nom', '$fecNac', '$cel', '$mail', '$socio', '$dni')";
+		$db=GetConnection();
+		$resp=query($cadena, "E", $db);
+
+		if ($resp=='ok') {
+			$lastID=mysqli_insert_id($db);
+			
+		}
+		break;
 }
 
 

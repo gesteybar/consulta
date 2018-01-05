@@ -138,7 +138,7 @@ function AgregarBotonTabla(tabla, col, imagen, funcion, refcol,prefijo, clase,co
 		if (col<0) {
 			for (var j = 0; j < tr[i].cells.length; j++) {
 				
-				tr[i].cells[j].innerHTML ='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+tr[i].cells[j].innerHTML+'\', this);">'+tr[i].cells[j].innerHTML+'</a>';
+				tr[i].cells[j].innerHTML ='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+tr[i].cells[refcol].innerText+'\', this);">'+tr[i].cells[j].innerHTML+'</a>';
 				
 			}
 		} else {
@@ -607,6 +607,7 @@ function DateTime() {
               esmu: this.sym.d.mm + "/" +this.sym.d.dd + "/" +this.sym.d.yyyy + " " + this.sym.t.hh + ":" + this.sym.t.mm + ":" + this.sym.t.ss,
               esmuDate: this.sym.d.mm + "/" +this.sym.d.dd + "/" +this.sym.d.yyyy,
               esmuDateSpanish: this.sym.d.dd +"/"+ this.sym.d.mm + "/"  +this.sym.d.yyyy+ " " + this.sym.t.hhh + ":" + this.sym.t.mm + ":" + this.sym.t.ss,
+              fechaArg: this.sym.d.dd +"/"+ this.sym.d.mm + "/"  +this.sym.d.yyyy,
               /*iso1: "",
               iso2: "",*/
               Totvs: this.sym.d.yyyy + this.sym.d.mm + this.sym.d.dd,

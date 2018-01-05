@@ -1,0 +1,13 @@
+#wrapper1 {width: 20vw;float:left;min-height: 50vh;}
+#abm {width:75vw;float: left;margin-left: 20px;min-height: 50vh;
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 );}
+#tblConsultorios {width: 20vw;}
+.tabla1 a {font-family: Abel;text-decoration:none; color:black;color:#444444;font-size: 1em;}
+.tabla1 a:hover {color:orange;}
+#tblABM {border-collapse: collapse;font-family: Abel}
+#abm input, select, textarea {border:1px solid #dddddd;border-radius: 3px;padding: 5px 8px; font-family: Abel}
+#frmFiltrar {width: 50vw}
