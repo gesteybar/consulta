@@ -35,11 +35,11 @@ CREATE TABLE `agenda` (
   CONSTRAINT `agenda_ibfk_1` FOREIGN KEY (`idProfesional`) REFERENCES `profesionales` (`idProfesional`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `agenda_ibfk_2` FOREIGN KEY (`idConsultorio`) REFERENCES `consultorios` (`idConsultorio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `agenda_ibfk_3` FOREIGN KEY (`idEspecialidad`) REFERENCES `especialidades` (`idEspecialidad`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13493 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13664 DEFAULT CHARSET=latin1;
 
 /*Data for the table `agenda` */
 
-insert  into `agenda`(`idAgenda`,`idEspecialidad`,`idConsultorio`,`idProfesional`,`Turno`,`Fecha`,`Periodo`,`HoraInicio`,`HoraFin`) values (1,5,1,10,1,'2017-11-01','11/2017','08:00:00','13:00:00'),(2,5,1,7,1,'2017-11-02','11/2017','08:00:00','13:00:00'),(3,5,1,16,2,'2017-11-03','11/2017','16:00:00','20:00:00'),(4,5,1,8,1,'2017-11-04','11/2017','08:00:00','13:00:00'),(5,5,1,15,2,'2017-11-04','11/2017','16:00:00','20:00:00'),(6,5,1,13,1,'2017-11-06','11/2017','08:00:00','13:00:00'),(7,5,1,13,2,'2017-11-06','11/2017','16:00:00','20:00:00'),(8,5,1,5,1,'2017-11-07','11/2017','08:00:00','13:00:00'),(9,5,1,4,2,'2017-11-07','11/2017','16:00:00','20:00:00'),(10,5,1,13,1,'2017-11-08','11/2017','08:00:00','13:00:00'),(11,5,1,9,2,'2017-11-08','11/2017','16:00:00','20:00:00'),(12,5,1,17,1,'2017-11-09','11/2017','08:00:00','13:00:00'),(13,5,1,12,2,'2017-11-09','11/2017','16:00:00','20:00:00'),(14,5,1,18,1,'2017-11-10','11/2017','08:00:00','13:00:00'),(15,5,1,18,2,'2017-11-10','11/2017','16:00:00','20:00:00'),(16,5,1,5,2,'2018-01-01','01/2018','16:00:00','20:00:00'),(17,5,1,3,2,'2018-01-02','01/2018','16:00:00','20:00:00'),(18,5,1,16,1,'2018-01-03','01/2018','08:00:00','13:00:00'),(19,5,1,16,2,'2018-01-03','01/2018','16:00:00','20:00:00'),(20,5,1,3,1,'2018-01-04','01/2018','08:00:00','13:00:00'),(21,5,1,11,2,'2018-01-04','01/2018','16:00:00','20:00:00'),(22,5,1,10,1,'2018-01-05','01/2018','08:00:00','13:00:00'),(23,5,2,16,1,'2018-01-01','01/2018','08:00:00','13:00:00'),(24,5,2,16,2,'2018-01-01','01/2018','16:00:00','20:00:00'),(25,5,2,2,2,'2018-01-02','01/2018','16:00:00','20:00:00'),(26,5,2,18,2,'2018-01-03','01/2018','16:00:00','20:00:00'),(27,5,2,13,1,'2018-01-04','01/2018','08:00:00','13:00:00'),(28,5,2,6,2,'2018-01-04','01/2018','16:00:00','20:00:00'),(29,5,2,18,2,'2018-01-05','01/2018','16:00:00','20:00:00'),(30,5,3,12,2,'2018-01-02','01/2018','16:00:00','20:00:00'),(31,5,3,12,2,'2018-01-04','01/2018','16:00:00','20:00:00'),(32,2,4,1,2,'2018-01-01','01/2018','16:00:00','20:00:00'),(33,5,4,15,1,'2018-01-02','01/2018','08:00:00','13:00:00'),(34,5,4,15,2,'2018-01-02','01/2018','16:00:00','20:00:00'),(35,5,4,7,2,'2018-01-04','01/2018','16:00:00','20:00:00'),(36,5,4,8,1,'2018-01-05','01/2018','08:00:00','13:00:00'),(37,2,4,1,2,'2018-01-05','01/2018','08:00:00','20:00:00'),(38,5,5,12,2,'2018-01-02','01/2018','16:00:00','20:00:00'),(39,5,5,6,1,'2018-01-03','01/2018','08:00:00','13:00:00'),(40,5,5,14,2,'2018-01-03','01/2018','16:00:00','20:00:00'),(41,5,5,12,2,'2018-01-04','01/2018','16:00:00','20:00:00'),(42,5,5,4,2,'2018-01-05','01/2018','16:00:00','20:00:00'),(43,5,5,19,1,'2018-01-01','01/2018','08:00:00','13:00:00'),(44,5,5,20,1,'2018-01-05','01/2018','08:00:00','13:00:00'),(13387,5,1,5,2,'2018-01-08','01/2018','16:00:00','20:00:00'),(13388,5,2,16,1,'2018-01-08','01/2018','08:00:00','13:00:00'),(13389,5,2,16,2,'2018-01-08','01/2018','16:00:00','20:00:00'),(13390,2,4,1,2,'2018-01-08','01/2018','16:00:00','20:00:00'),(13391,5,5,19,1,'2018-01-08','01/2018','08:00:00','13:00:00'),(13394,5,1,3,2,'2018-01-09','01/2018','16:00:00','20:00:00'),(13395,5,2,2,2,'2018-01-09','01/2018','16:00:00','20:00:00'),(13396,5,3,12,2,'2018-01-09','01/2018','16:00:00','20:00:00'),(13397,5,4,15,1,'2018-01-09','01/2018','08:00:00','13:00:00'),(13398,5,4,15,2,'2018-01-09','01/2018','16:00:00','20:00:00'),(13399,5,5,12,2,'2018-01-09','01/2018','16:00:00','20:00:00'),(13401,5,1,16,1,'2018-01-10','01/2018','08:00:00','13:00:00'),(13402,5,1,16,2,'2018-01-10','01/2018','16:00:00','20:00:00'),(13403,5,2,18,2,'2018-01-10','01/2018','16:00:00','20:00:00'),(13404,5,5,6,1,'2018-01-10','01/2018','08:00:00','13:00:00'),(13405,5,5,14,2,'2018-01-10','01/2018','16:00:00','20:00:00'),(13408,5,1,3,1,'2018-01-11','01/2018','08:00:00','13:00:00'),(13409,5,1,11,2,'2018-01-11','01/2018','16:00:00','20:00:00'),(13410,5,2,13,1,'2018-01-11','01/2018','08:00:00','13:00:00'),(13411,5,2,6,2,'2018-01-11','01/2018','16:00:00','20:00:00'),(13412,5,3,12,2,'2018-01-11','01/2018','16:00:00','20:00:00'),(13413,5,4,7,2,'2018-01-11','01/2018','16:00:00','20:00:00'),(13414,5,5,12,2,'2018-01-11','01/2018','16:00:00','20:00:00'),(13415,5,1,10,1,'2018-01-12','01/2018','08:00:00','13:00:00'),(13416,5,2,18,2,'2018-01-12','01/2018','16:00:00','20:00:00'),(13417,5,4,8,1,'2018-01-12','01/2018','08:00:00','13:00:00'),(13418,2,4,1,2,'2018-01-12','01/2018','16:00:00','20:00:00'),(13419,5,5,4,2,'2018-01-12','01/2018','16:00:00','20:00:00'),(13420,5,5,20,1,'2018-01-12','01/2018','08:00:00','13:00:00'),(13457,5,1,5,2,'2018-01-15','01/2018','16:00:00','20:00:00'),(13458,5,2,16,1,'2018-01-15','01/2018','08:00:00','13:00:00'),(13459,5,2,16,2,'2018-01-15','01/2018','16:00:00','20:00:00'),(13460,2,4,1,2,'2018-01-15','01/2018','16:00:00','20:00:00'),(13461,5,5,19,1,'2018-01-15','01/2018','08:00:00','13:00:00'),(13464,5,1,3,2,'2018-01-16','01/2018','16:00:00','20:00:00'),(13465,5,2,2,2,'2018-01-16','01/2018','16:00:00','20:00:00'),(13466,5,3,12,2,'2018-01-16','01/2018','16:00:00','20:00:00'),(13467,5,4,15,1,'2018-01-16','01/2018','08:00:00','13:00:00'),(13468,5,4,15,2,'2018-01-16','01/2018','16:00:00','20:00:00'),(13469,5,5,12,2,'2018-01-16','01/2018','16:00:00','20:00:00'),(13471,5,1,16,1,'2018-01-17','01/2018','08:00:00','13:00:00'),(13472,5,1,16,2,'2018-01-17','01/2018','16:00:00','20:00:00'),(13473,5,2,18,2,'2018-01-17','01/2018','16:00:00','20:00:00'),(13474,5,5,6,1,'2018-01-17','01/2018','08:00:00','13:00:00'),(13475,5,5,14,2,'2018-01-17','01/2018','16:00:00','20:00:00'),(13478,5,1,3,1,'2018-01-18','01/2018','08:00:00','13:00:00'),(13479,5,1,11,2,'2018-01-18','01/2018','16:00:00','20:00:00'),(13480,5,2,13,1,'2018-01-18','01/2018','08:00:00','13:00:00'),(13481,5,2,6,2,'2018-01-18','01/2018','16:00:00','20:00:00'),(13482,5,3,12,2,'2018-01-18','01/2018','16:00:00','20:00:00'),(13483,5,4,7,2,'2018-01-18','01/2018','16:00:00','20:00:00'),(13484,5,5,12,2,'2018-01-18','01/2018','16:00:00','20:00:00'),(13485,5,1,10,1,'2018-01-19','01/2018','08:00:00','13:00:00'),(13486,5,2,18,2,'2018-01-19','01/2018','16:00:00','20:00:00'),(13487,5,4,8,1,'2018-01-19','01/2018','08:00:00','13:00:00'),(13488,2,4,1,2,'2018-01-19','01/2018','16:00:00','20:00:00'),(13489,5,5,4,2,'2018-01-19','01/2018','16:00:00','20:00:00'),(13490,5,5,20,1,'2018-01-19','01/2018','08:00:00','13:00:00'),(13492,2,4,1,2,'2018-02-02','02/2018','16:00:00','20:00:00');
+insert  into `agenda`(`idAgenda`,`idEspecialidad`,`idConsultorio`,`idProfesional`,`Turno`,`Fecha`,`Periodo`,`HoraInicio`,`HoraFin`) values (1,5,1,10,1,'2017-11-01','11/2017','08:00:00','13:00:00'),(2,5,1,7,1,'2017-11-02','11/2017','08:00:00','13:00:00'),(3,5,1,16,2,'2017-11-03','11/2017','16:00:00','20:00:00'),(4,5,1,8,1,'2017-11-04','11/2017','08:00:00','13:00:00'),(5,5,1,15,2,'2017-11-04','11/2017','16:00:00','20:00:00'),(16,5,1,5,2,'2018-01-01','01/2018','16:00:00','20:00:00'),(17,5,1,3,2,'2018-01-02','01/2018','16:00:00','20:00:00'),(18,5,1,16,1,'2018-01-03','01/2018','08:00:00','13:00:00'),(19,5,1,16,2,'2018-01-03','01/2018','16:00:00','20:00:00'),(20,5,1,3,1,'2018-01-04','01/2018','08:00:00','13:00:00'),(21,5,1,11,2,'2018-01-04','01/2018','16:00:00','20:00:00'),(22,5,1,10,1,'2018-01-05','01/2018','08:00:00','13:00:00'),(23,5,2,16,1,'2018-01-01','01/2018','08:00:00','13:00:00'),(24,5,2,16,2,'2018-01-01','01/2018','16:00:00','20:00:00'),(25,5,2,2,2,'2018-01-02','01/2018','16:00:00','20:00:00'),(26,5,2,18,2,'2018-01-03','01/2018','16:00:00','20:00:00'),(27,5,2,13,1,'2018-01-04','01/2018','08:00:00','13:00:00'),(28,5,2,6,2,'2018-01-04','01/2018','16:00:00','20:00:00'),(29,5,2,18,2,'2018-01-05','01/2018','16:00:00','20:00:00'),(30,5,3,12,2,'2018-01-02','01/2018','16:00:00','20:00:00'),(31,5,3,12,2,'2018-01-04','01/2018','16:00:00','20:00:00'),(32,2,4,1,2,'2018-01-01','01/2018','16:00:00','20:00:00'),(33,5,4,15,1,'2018-01-02','01/2018','08:00:00','13:00:00'),(34,5,4,15,2,'2018-01-02','01/2018','16:00:00','20:00:00'),(35,5,4,7,2,'2018-01-04','01/2018','16:00:00','20:00:00'),(36,5,4,8,1,'2018-01-05','01/2018','08:00:00','13:00:00'),(37,2,4,1,2,'2018-01-05','01/2018','08:00:00','20:00:00'),(39,5,5,6,1,'2018-01-03','01/2018','08:00:00','13:00:00'),(40,5,5,14,2,'2018-01-03','01/2018','16:00:00','20:00:00'),(41,5,5,12,2,'2018-01-04','01/2018','16:00:00','20:00:00'),(42,5,5,4,2,'2018-01-05','01/2018','16:00:00','20:00:00'),(43,5,5,19,1,'2018-01-01','01/2018','08:00:00','13:00:00'),(44,5,5,20,1,'2018-01-05','01/2018','08:00:00','13:00:00'),(13387,5,1,5,2,'2018-01-08','01/2018','16:00:00','20:00:00'),(13388,5,2,16,1,'2018-01-08','01/2018','08:00:00','13:00:00'),(13389,5,2,16,2,'2018-01-08','01/2018','16:00:00','20:00:00'),(13390,2,4,1,2,'2018-01-08','01/2018','16:00:00','20:00:00'),(13391,5,5,19,1,'2018-01-08','01/2018','08:00:00','13:00:00'),(13394,5,1,3,2,'2018-01-09','01/2018','16:00:00','20:00:00'),(13395,5,2,2,2,'2018-01-09','01/2018','16:00:00','20:00:00'),(13396,5,3,12,2,'2018-01-09','01/2018','16:00:00','20:00:00'),(13397,5,4,15,1,'2018-01-09','01/2018','08:00:00','13:00:00'),(13398,5,4,15,2,'2018-01-09','01/2018','16:00:00','20:00:00'),(13401,5,1,16,1,'2018-01-10','01/2018','08:00:00','13:00:00'),(13402,5,1,16,2,'2018-01-10','01/2018','16:00:00','20:00:00'),(13403,5,2,18,2,'2018-01-10','01/2018','16:00:00','20:00:00'),(13404,5,5,6,1,'2018-01-10','01/2018','08:00:00','13:00:00'),(13405,5,5,14,2,'2018-01-10','01/2018','16:00:00','20:00:00'),(13408,5,1,3,1,'2018-01-11','01/2018','08:00:00','13:00:00'),(13409,5,1,11,2,'2018-01-11','01/2018','16:00:00','20:00:00'),(13410,5,2,13,1,'2018-01-11','01/2018','08:00:00','13:00:00'),(13411,5,2,6,2,'2018-01-11','01/2018','16:00:00','20:00:00'),(13412,5,3,12,2,'2018-01-11','01/2018','16:00:00','20:00:00'),(13413,5,4,7,2,'2018-01-11','01/2018','16:00:00','20:00:00'),(13414,5,5,12,2,'2018-01-11','01/2018','16:00:00','20:00:00'),(13415,5,1,10,1,'2018-01-12','01/2018','08:00:00','13:00:00'),(13416,5,2,18,2,'2018-01-12','01/2018','16:00:00','20:00:00'),(13417,5,4,8,1,'2018-01-12','01/2018','08:00:00','13:00:00'),(13418,2,4,1,2,'2018-01-12','01/2018','16:00:00','20:00:00'),(13419,5,5,4,2,'2018-01-12','01/2018','16:00:00','20:00:00'),(13420,5,5,20,1,'2018-01-12','01/2018','08:00:00','13:00:00'),(13457,5,1,5,2,'2018-01-15','01/2018','16:00:00','20:00:00'),(13458,5,2,16,1,'2018-01-15','01/2018','08:00:00','13:00:00'),(13459,5,2,16,2,'2018-01-15','01/2018','16:00:00','20:00:00'),(13460,2,4,1,2,'2018-01-15','01/2018','16:00:00','20:00:00'),(13461,5,5,19,1,'2018-01-15','01/2018','08:00:00','13:00:00'),(13464,5,1,3,2,'2018-01-16','01/2018','16:00:00','20:00:00'),(13465,5,2,2,2,'2018-01-16','01/2018','16:00:00','20:00:00'),(13466,5,3,12,2,'2018-01-16','01/2018','16:00:00','20:00:00'),(13467,5,4,15,1,'2018-01-16','01/2018','08:00:00','13:00:00'),(13468,5,4,15,2,'2018-01-16','01/2018','16:00:00','20:00:00'),(13471,5,1,16,1,'2018-01-17','01/2018','08:00:00','13:00:00'),(13472,5,1,16,2,'2018-01-17','01/2018','16:00:00','20:00:00'),(13473,5,2,18,2,'2018-01-17','01/2018','16:00:00','20:00:00'),(13474,5,5,6,1,'2018-01-17','01/2018','08:00:00','13:00:00'),(13475,5,5,14,2,'2018-01-17','01/2018','16:00:00','20:00:00'),(13478,5,1,3,1,'2018-01-18','01/2018','08:00:00','13:00:00'),(13479,5,1,11,2,'2018-01-18','01/2018','16:00:00','20:00:00'),(13480,5,2,13,1,'2018-01-18','01/2018','08:00:00','13:00:00'),(13481,5,2,6,2,'2018-01-18','01/2018','16:00:00','20:00:00'),(13482,5,3,12,2,'2018-01-18','01/2018','16:00:00','20:00:00'),(13483,5,4,7,2,'2018-01-18','01/2018','16:00:00','20:00:00'),(13484,5,5,12,2,'2018-01-18','01/2018','16:00:00','20:00:00'),(13485,5,1,10,1,'2018-01-19','01/2018','08:00:00','13:00:00'),(13486,5,2,18,2,'2018-01-19','01/2018','16:00:00','20:00:00'),(13487,5,4,8,1,'2018-01-19','01/2018','08:00:00','13:00:00'),(13488,2,4,1,2,'2018-01-19','01/2018','16:00:00','20:00:00'),(13489,5,5,4,2,'2018-01-19','01/2018','16:00:00','20:00:00'),(13490,5,5,20,1,'2018-01-19','01/2018','08:00:00','13:00:00'),(13491,5,1,5,2,'2018-01-22','01/2018',NULL,NULL),(13492,5,2,16,1,'2018-01-22','01/2018',NULL,NULL),(13493,5,2,16,2,'2018-01-22','01/2018',NULL,NULL),(13494,2,4,1,2,'2018-01-22','01/2018',NULL,NULL),(13495,5,5,19,1,'2018-01-22','01/2018',NULL,NULL),(13498,5,1,3,2,'2018-01-23','01/2018',NULL,NULL),(13499,5,2,2,2,'2018-01-23','01/2018',NULL,NULL),(13500,5,3,12,2,'2018-01-23','01/2018',NULL,NULL),(13501,5,4,15,1,'2018-01-23','01/2018',NULL,NULL),(13502,5,4,15,2,'2018-01-23','01/2018',NULL,NULL),(13505,5,1,16,1,'2018-01-24','01/2018',NULL,NULL),(13506,5,1,16,2,'2018-01-24','01/2018',NULL,NULL),(13507,5,2,18,2,'2018-01-24','01/2018',NULL,NULL),(13508,5,5,6,1,'2018-01-24','01/2018',NULL,NULL),(13509,5,5,14,2,'2018-01-24','01/2018',NULL,NULL),(13512,5,1,3,1,'2018-01-25','01/2018',NULL,NULL),(13513,5,1,11,2,'2018-01-25','01/2018',NULL,NULL),(13514,5,2,13,1,'2018-01-25','01/2018',NULL,NULL),(13515,5,2,6,2,'2018-01-25','01/2018',NULL,NULL),(13516,5,3,12,2,'2018-01-25','01/2018',NULL,NULL),(13517,5,4,7,2,'2018-01-25','01/2018',NULL,NULL),(13518,5,5,12,2,'2018-01-25','01/2018',NULL,NULL),(13519,5,1,10,1,'2018-01-26','01/2018',NULL,NULL),(13520,5,2,18,2,'2018-01-26','01/2018',NULL,NULL),(13521,5,4,8,1,'2018-01-26','01/2018',NULL,NULL),(13522,2,4,1,2,'2018-01-26','01/2018',NULL,NULL),(13523,5,5,4,2,'2018-01-26','01/2018',NULL,NULL),(13524,5,5,20,1,'2018-01-26','01/2018',NULL,NULL),(13541,5,1,10,1,'2017-11-08','11/2017',NULL,NULL),(13542,5,1,7,1,'2017-11-09','11/2017',NULL,NULL),(13543,5,1,16,2,'2017-11-10','11/2017',NULL,NULL),(13544,5,1,8,1,'2017-11-11','11/2017',NULL,NULL),(13545,5,1,15,2,'2017-11-11','11/2017',NULL,NULL),(13547,5,1,5,1,'2017-11-07','11/2017',NULL,NULL),(13548,5,1,4,2,'2017-11-07','11/2017',NULL,NULL),(13549,5,1,5,1,'2017-11-14','11/2017',NULL,NULL),(13550,5,1,4,2,'2017-11-14','11/2017',NULL,NULL),(13552,5,1,10,1,'2017-11-15','11/2017',NULL,NULL),(13553,5,1,7,1,'2017-11-16','11/2017',NULL,NULL),(13554,5,1,16,2,'2017-11-17','11/2017',NULL,NULL),(13555,5,1,8,1,'2017-11-18','11/2017',NULL,NULL),(13556,5,1,15,2,'2017-11-18','11/2017',NULL,NULL),(13558,5,1,5,1,'2017-11-21','11/2017',NULL,NULL),(13559,5,1,4,2,'2017-11-21','11/2017',NULL,NULL),(13561,5,1,10,1,'2017-11-22','11/2017',NULL,NULL),(13562,5,1,7,1,'2017-11-23','11/2017',NULL,NULL),(13563,5,1,16,2,'2017-11-24','11/2017',NULL,NULL),(13564,5,1,8,1,'2017-11-25','11/2017',NULL,NULL),(13565,5,1,15,2,'2017-11-25','11/2017',NULL,NULL),(13567,5,1,5,1,'2017-11-28','11/2017',NULL,NULL),(13568,5,1,4,2,'2017-11-28','11/2017',NULL,NULL),(13570,5,1,10,1,'2017-11-29','11/2017',NULL,NULL),(13571,5,1,7,1,'2017-11-30','11/2017',NULL,NULL),(13572,5,1,16,2,'2017-12-01','12/2017',NULL,NULL),(13573,5,1,8,1,'2017-12-02','12/2017',NULL,NULL),(13574,5,1,15,2,'2017-12-02','12/2017',NULL,NULL),(13576,5,1,5,2,'2018-01-29','01/2018',NULL,NULL),(13577,5,2,16,1,'2018-01-29','01/2018',NULL,NULL),(13578,5,2,16,2,'2018-01-29','01/2018',NULL,NULL),(13579,2,4,1,2,'2018-01-29','01/2018',NULL,NULL),(13580,5,5,19,1,'2018-01-29','01/2018',NULL,NULL),(13583,5,1,3,2,'2018-01-30','01/2018',NULL,NULL),(13584,5,2,2,2,'2018-01-30','01/2018',NULL,NULL),(13585,5,3,12,2,'2018-01-30','01/2018',NULL,NULL),(13586,5,4,15,1,'2018-01-30','01/2018',NULL,NULL),(13587,5,4,15,2,'2018-01-30','01/2018',NULL,NULL),(13590,5,1,16,1,'2018-01-31','01/2018',NULL,NULL),(13591,5,1,16,2,'2018-01-31','01/2018',NULL,NULL),(13592,5,2,18,2,'2018-01-31','01/2018',NULL,NULL),(13593,5,5,6,1,'2018-01-31','01/2018',NULL,NULL),(13594,5,5,14,2,'2018-01-31','01/2018',NULL,NULL),(13628,1,4,1,2,'2018-02-01','02/2018',NULL,NULL),(13629,1,4,1,1,'2018-02-01','02/2018',NULL,NULL),(13631,1,4,1,2,'2018-02-04','02/2018',NULL,NULL),(13632,1,1,3,1,'2018-02-05','02/2018',NULL,NULL),(13633,1,2,10,1,'2018-02-06','02/2018',NULL,NULL),(13634,1,1,7,1,'2018-02-07','02/2018',NULL,NULL),(13635,1,1,7,2,'2018-02-07','02/2018',NULL,NULL),(13636,1,3,3,2,'2018-02-07','02/2018',NULL,NULL),(13637,1,4,1,2,'2018-02-08','02/2018',NULL,NULL),(13638,1,4,1,1,'2018-02-08','02/2018',NULL,NULL),(13640,1,4,1,2,'2018-02-11','02/2018',NULL,NULL),(13641,1,1,3,1,'2018-02-12','02/2018',NULL,NULL),(13642,1,2,10,1,'2018-02-13','02/2018',NULL,NULL),(13643,1,1,7,1,'2018-02-14','02/2018',NULL,NULL),(13644,1,1,7,2,'2018-02-14','02/2018',NULL,NULL),(13645,1,3,3,2,'2018-02-14','02/2018',NULL,NULL),(13646,1,4,1,2,'2018-02-15','02/2018',NULL,NULL),(13647,1,4,1,1,'2018-02-15','02/2018',NULL,NULL),(13649,1,4,1,2,'2018-02-18','02/2018',NULL,NULL),(13650,1,1,3,1,'2018-02-19','02/2018',NULL,NULL),(13651,1,2,10,1,'2018-02-20','02/2018',NULL,NULL),(13652,1,1,7,1,'2018-02-21','02/2018',NULL,NULL),(13653,1,1,7,2,'2018-02-21','02/2018',NULL,NULL),(13654,1,3,3,2,'2018-02-21','02/2018',NULL,NULL),(13655,1,4,1,2,'2018-02-22','02/2018',NULL,NULL),(13656,1,4,1,1,'2018-02-22','02/2018',NULL,NULL),(13658,1,4,1,2,'2018-02-25','02/2018',NULL,NULL),(13659,1,1,3,1,'2018-02-26','02/2018',NULL,NULL),(13660,1,2,10,1,'2018-02-27','02/2018',NULL,NULL),(13661,1,1,7,1,'2018-02-28','02/2018',NULL,NULL),(13662,1,1,7,2,'2018-02-28','02/2018',NULL,NULL),(13663,1,3,3,2,'2018-02-28','02/2018',NULL,NULL);
 
 /*Table structure for table `alquiler` */
 
@@ -94,7 +94,22 @@ CREATE TABLE `especialidades` (
 
 /*Data for the table `especialidades` */
 
-insert  into `especialidades`(`idEspecialidad`,`Nombre`,`CostoMod`) values (2,'Psicología',1250),(3,'Pediatría',NULL),(4,'Ginecolgía',NULL),(5,'Cardiología',NULL),(6,'Oftalmología',NULL),(7,'Otorrinolaringología',NULL),(8,'Musicoterapia',NULL),(9,'Psiquiatría',NULL),(10,'Kinesiología',NULL),(11,'Podología',NULL),(12,'Nutrición',NULL),(13,'Psicopedagogía',NULL),(14,'Cirugía',NULL);
+insert  into `especialidades`(`idEspecialidad`,`Nombre`,`CostoMod`) values (1,'General',NULL),(2,'Psicología',1250),(3,'Pediatría',NULL),(4,'Ginecolgía',NULL),(5,'Cardiología',NULL),(6,'Oftalmología',NULL),(7,'Otorrinolaringología',NULL),(8,'Musicoterapia',NULL),(9,'Psiquiatría',NULL),(10,'Kinesiología',NULL),(11,'Podología',NULL),(12,'Nutrición',NULL),(13,'Psicopedagogía',NULL),(14,'Cirugía',NULL);
+
+/*Table structure for table `modulos` */
+
+DROP TABLE IF EXISTS `modulos`;
+
+CREATE TABLE `modulos` (
+  `idModulo` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(50) DEFAULT NULL,
+  `Pagina` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idModulo`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+/*Data for the table `modulos` */
+
+insert  into `modulos`(`idModulo`,`Nombre`,`Pagina`) values (1,'Pacientes','pacientes.php'),(2,'Profesionales','profesionales.php'),(3,'Especialidades','especialidades.php'),(4,'Consultorios','consultorios.php'),(5,'Param Agenda','agenda.php'),(6,'Agenda diaria','diaria.php'),(7,'Proyecciones','proyeccion.php'),(8,'Reportes','reportes.php'),(9,'Prepagas','prepagas.php'),(10,'Usuarios','usuarios.php');
 
 /*Table structure for table `pacientes` */
 
@@ -112,11 +127,11 @@ CREATE TABLE `pacientes` (
   `NroSocio` varchar(50) DEFAULT NULL,
   `DNI` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`idPaciente`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `pacientes` */
 
-insert  into `pacientes`(`idPaciente`,`idPrepaga`,`Apellido`,`Nombre`,`FechaNac`,`Celular`,`Mail`,`FechaAlta`,`NroSocio`,`DNI`) values (1,2,'ESTEYBAR','GUSTAVO','1976-08-25','1138986069','gesteybar@arimex.com','2017-12-29','12345678/9',25356574),(3,1,'mansur','maria clara','1899-11-30','654654','','2018-01-03','24027210',24027210),(5,0,'Esteybar','Santiago','0000-00-00','','','2018-01-04','',50525794),(6,0,'Delgado','Marcelo','0000-00-00','1166546655','','2018-01-04','',0),(7,0,'rocchi','gaby','0000-00-00','','','2018-01-05','',0);
+insert  into `pacientes`(`idPaciente`,`idPrepaga`,`Apellido`,`Nombre`,`FechaNac`,`Celular`,`Mail`,`FechaAlta`,`NroSocio`,`DNI`) values (1,2,'ESTEYBAR','GUSTAVO','1976-08-25','1138986069','gesteybar@arimex.com','2017-12-29','12345678/9',25356574),(3,1,'mansur','maria clara','1899-11-30','654654','','2018-01-03','24027210',24027210),(5,0,'Esteybar','Santiago','0000-00-00','','','2018-01-04','',50525794),(6,0,'Delgado','Marcelo','0000-00-00','1166546655','','2018-01-04','',0),(7,0,'rocchi','gaby','0000-00-00','','','2018-01-05','',0),(8,0,'novak','claudio','0000-00-00','6584621','','2018-01-12','',33333333);
 
 /*Table structure for table `paramagenda` */
 
@@ -139,6 +154,23 @@ CREATE TABLE `paramagenda` (
 
 insert  into `paramagenda`(`idParamAgenda`,`idProfesional`,`idEspecialidad`,`Modulo`,`Sobreturnos`) values (1,1,2,20,0),(3,3,4,30,2),(5,10,5,35,1),(6,7,5,15,1),(7,16,5,10,1),(8,8,5,20,1),(9,15,5,12,1),(10,13,5,10,1),(11,5,5,25,1),(12,4,5,20,1),(13,9,5,30,1),(14,17,5,40,1),(15,12,5,50,1),(16,18,5,25,1),(17,11,5,30,1),(18,2,5,12,1),(19,6,5,15,1),(20,14,5,10,1),(21,19,5,5,1),(22,20,5,35,1);
 
+/*Table structure for table `permisos` */
+
+DROP TABLE IF EXISTS `permisos`;
+
+CREATE TABLE `permisos` (
+  `idPermiso` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idUsuario` int(10) unsigned NOT NULL,
+  `idModulo` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`idPermiso`),
+  CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`idModulo`) REFERENCES `modulos` (`idModulo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `permisos_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+/*Data for the table `permisos` */
+
+insert  into `permisos`(`idPermiso`,`idUsuario`,`idModulo`) values (1,1,1),(2,1,8),(3,1,5),(4,1,2),(5,1,3),(6,1,4),(7,1,6),(8,1,7),(9,1,9);
+
 /*Table structure for table `prepagas` */
 
 DROP TABLE IF EXISTS `prepagas`;
@@ -153,6 +185,25 @@ CREATE TABLE `prepagas` (
 
 insert  into `prepagas`(`idPrepaga`,`Nombre`) values (1,'PARTICULAR'),(2,'OSDE'),(3,'PAMI');
 
+/*Table structure for table `profatiende` */
+
+DROP TABLE IF EXISTS `profatiende`;
+
+CREATE TABLE `profatiende` (
+  `idProfAtiende` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idProfesional` int(10) unsigned NOT NULL,
+  `idConsultorio` int(10) unsigned NOT NULL,
+  `Dia` int(10) unsigned DEFAULT NULL,
+  `Modulo` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`idProfAtiende`),
+  CONSTRAINT `profatiende_ibfk_1` FOREIGN KEY (`idProfesional`) REFERENCES `profesionales` (`idProfesional`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `profatiende_ibfk_2` FOREIGN KEY (`idConsultorio`) REFERENCES `consultorios` (`idConsultorio`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+/*Data for the table `profatiende` */
+
+insert  into `profatiende`(`idProfAtiende`,`idProfesional`,`idConsultorio`,`Dia`,`Modulo`) values (1,1,4,1,2),(3,1,4,5,2),(4,1,4,5,1),(5,10,2,3,1),(6,7,1,4,1),(7,7,1,4,2),(8,3,1,2,1),(9,3,3,4,2);
+
 /*Table structure for table `profesionales` */
 
 DROP TABLE IF EXISTS `profesionales`;
@@ -163,12 +214,33 @@ CREATE TABLE `profesionales` (
   `Matricula` varchar(10) DEFAULT NULL,
   `FechaVenc` date DEFAULT NULL,
   `DocCompleta` int(11) DEFAULT NULL,
+  `Estado` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`idProfesional`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 /*Data for the table `profesionales` */
 
-insert  into `profesionales`(`idProfesional`,`Nombre`,`Matricula`,`FechaVenc`,`DocCompleta`) values (1,'maria clara mansur','16513','2010-01-01',1),(2,'Nusshold',NULL,NULL,NULL),(3,'Cuello',NULL,NULL,NULL),(4,'Torres',NULL,NULL,NULL),(5,'Longas',NULL,NULL,NULL),(6,'Pereira',NULL,NULL,NULL),(7,'Bucci',NULL,NULL,NULL),(8,'Cousido',NULL,NULL,NULL),(9,'Trimarco',NULL,NULL,NULL),(10,'Barreiro',NULL,NULL,NULL),(11,'Castiglione',NULL,NULL,NULL),(12,'Zampedri',NULL,NULL,NULL),(13,'Nieto',NULL,NULL,NULL),(14,'Enjuto',NULL,NULL,NULL),(15,'Pecchia',NULL,NULL,NULL),(16,'Flitt',NULL,NULL,NULL),(17,'Troilo',NULL,NULL,NULL),(18,'Wybert',NULL,NULL,NULL),(19,'Ramos','','1899-11-30',0),(20,'Ocupacional','','1899-11-30',0);
+insert  into `profesionales`(`idProfesional`,`Nombre`,`Matricula`,`FechaVenc`,`DocCompleta`,`Estado`) values (1,'maria clara mansur','16513','2010-01-01',1,'ACTIVO'),(2,'Nusshold',NULL,NULL,NULL,'ACTIVO'),(3,'Cuello',NULL,NULL,NULL,'ACTIVO'),(4,'Torres',NULL,NULL,NULL,'ACTIVO'),(5,'Longas',NULL,NULL,NULL,'ACTIVO'),(6,'Pereira',NULL,NULL,NULL,'ACTIVO'),(7,'Bucci',NULL,NULL,NULL,'ACTIVO'),(8,'Cousido',NULL,NULL,NULL,'ACTIVO'),(9,'Trimarco',NULL,NULL,NULL,'ACTIVO'),(10,'Barreiro',NULL,NULL,NULL,'ACTIVO'),(11,'Castiglione',NULL,NULL,NULL,'ACTIVO'),(12,'Zampedri',NULL,NULL,NULL,'ACTIVO'),(13,'Nieto',NULL,NULL,NULL,'ACTIVO'),(14,'Enjuto',NULL,NULL,NULL,'ACTIVO'),(15,'Pecchia',NULL,NULL,NULL,'ACTIVO'),(16,'Flitt',NULL,NULL,NULL,'ACTIVO'),(17,'Troilo',NULL,NULL,NULL,'ACTIVO'),(18,'Wybert',NULL,NULL,NULL,'ACTIVO'),(19,'Ramos','','1899-11-30',0,'ACTIVO'),(20,'Ocupacional','','1899-11-30',0,'ACTIVO');
+
+/*Table structure for table `reportes` */
+
+DROP TABLE IF EXISTS `reportes`;
+
+CREATE TABLE `reportes` (
+  `idReporte` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idModulo` int(10) unsigned NOT NULL,
+  `Nombre` varchar(50) DEFAULT NULL,
+  `Leyenda` varchar(1000) DEFAULT NULL,
+  `Ruta` varchar(400) DEFAULT NULL,
+  `Grupo` varchar(50) DEFAULT NULL,
+  `Script` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idReporte`),
+  CONSTRAINT `reportes_ibfk_1` FOREIGN KEY (`idModulo`) REFERENCES `modulos` (`idModulo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `reportes` */
+
+insert  into `reportes`(`idReporte`,`idModulo`,`Nombre`,`Leyenda`,`Ruta`,`Grupo`,`Script`) values (1,8,'Agendas diarias','Listado de agendas por consultorio y fecha','./reportes/agendaDiaria.php','AGENDAS',NULL);
 
 /*Table structure for table `turnos` */
 
@@ -192,11 +264,11 @@ CREATE TABLE `turnos` (
   KEY `Turnos_index3321` (`idProfesional`),
   CONSTRAINT `turnos_ibfk_1` FOREIGN KEY (`idProfesional`) REFERENCES `profesionales` (`idProfesional`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `turnos_ibfk_2` FOREIGN KEY (`idEspecialidad`) REFERENCES `especialidades` (`idEspecialidad`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 /*Data for the table `turnos` */
 
-insert  into `turnos`(`idTurno`,`idPaciente`,`idEspecialidad`,`idProfesional`,`Fecha`,`Hora`,`Paciente`,`DNI`,`NroSocio`,`Celular`,`ApellidoPac`,`Estado`) values (5,0,5,18,'2018-01-03','16:00:00','gustavo a','','','1150051111','','PENDIENTE'),(6,0,5,6,'2018-01-03','10:00:00','Clara','24027210','','561651663','Mansur','PENDIENTE'),(7,0,5,6,'2018-01-03','11:00:00','Pilar','35142136','','651698466','happn','PENDIENTE'),(8,0,5,6,'2018-01-03','09:00:00','Claudio','21358165','','165165433','Novak','PENDIENTE'),(10,2,5,14,'2018-01-03','17:40:00','gus','25356574','','1138986069','esteybar','PENDIENTE'),(11,3,5,14,'2018-01-03','16:50:00','maria clara','16165','','654654','mansur','PENDIENTE'),(12,3,5,6,'2018-01-03','08:30:00','maria clara','16165','','654654','mansur','PENDIENTE'),(13,1,5,6,'2018-01-04','17:30:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(16,1,2,1,'2018-01-05','10:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','TOMADO'),(18,7,5,10,'2018-01-05','08:00:00','gaby','0','','','rocchi','PENDIENTE');
+insert  into `turnos`(`idTurno`,`idPaciente`,`idEspecialidad`,`idProfesional`,`Fecha`,`Hora`,`Paciente`,`DNI`,`NroSocio`,`Celular`,`ApellidoPac`,`Estado`) values (5,0,5,18,'2018-01-03','16:00:00','gustavo a','','','1150051111','','PENDIENTE'),(6,0,5,6,'2018-01-03','10:00:00','Clara','24027210','','561651663','Mansur','PENDIENTE'),(7,0,5,6,'2018-01-03','11:00:00','Pilar','35142136','','651698466','happn','PENDIENTE'),(8,0,5,6,'2018-01-03','09:00:00','Claudio','21358165','','165165433','Novak','PENDIENTE'),(10,2,5,14,'2018-01-03','17:40:00','gus','25356574','','1138986069','esteybar','PENDIENTE'),(11,3,5,14,'2018-01-03','16:50:00','maria clara','16165','','654654','mansur','PENDIENTE'),(12,3,5,6,'2018-01-03','08:30:00','maria clara','16165','','654654','mansur','PENDIENTE'),(13,1,5,6,'2018-01-04','17:30:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(16,1,2,1,'2018-01-05','10:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','TOMADO'),(18,7,5,10,'2018-01-05','08:00:00','gaby','0','','','rocchi','PENDIENTE'),(19,3,5,2,'2018-01-09','16:00:00','maria clara','24027210','24027210','654654','mansur','PENDIENTE'),(20,1,5,2,'2018-01-09','16:36:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(21,6,5,2,'2018-01-09','17:12:00','Marcelo','0','','1166546655','Delgado','PENDIENTE'),(22,7,5,2,'2018-01-09','17:48:00','gaby','0','','','rocchi','PENDIENTE'),(23,5,5,2,'2018-01-09','18:12:00','Santiago','50525794','','','Esteybar','PENDIENTE'),(24,1,5,3,'2018-01-09','16:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(25,5,5,3,'2018-01-09','19:00:00','Santiago','50525794','','','Esteybar','PENDIENTE'),(26,3,5,12,'2018-01-09','16:00:00','maria clara','24027210','24027210','654654','mansur','PENDIENTE'),(27,6,5,12,'2018-01-09','17:40:00','Marcelo','0','','1166546655','Delgado','PENDIENTE'),(28,0,2,1,'2018-01-12','16:00:00','claudio','33333333','','6584621','novak','PENDIENTE');
 
 /*Table structure for table `usuarios` */
 
@@ -213,6 +285,35 @@ CREATE TABLE `usuarios` (
 /*Data for the table `usuarios` */
 
 insert  into `usuarios`(`idUsuario`,`Nombre`,`Login`,`Pass`) values (1,'administrador','admin','e10adc3949ba59abbe56e057f20f883e');
+
+/* Procedure structure for procedure `SP_AbrirPeriodo` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `SP_AbrirPeriodo` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_AbrirPeriodo`(pPeriodo varchar(10))
+BEGIN
+	declare vInicio date;
+	declare vFin date;
+	declare vFecha date;
+	declare vDia int;
+	
+	set vInicio=STR_TO_DATE(CONCAT('01/',pPeriodo), '%d/%m/%Y');
+	set vFin=last_day(vInicio);
+	set vFecha=vInicio;
+	while (vFecha<=vFin) do
+		set vDia=dayofweek(vFecha);
+		
+		insert into agenda (idEspecialidad, idConsultorio, idProfesional, Turno, Fecha, Periodo) 
+		(SELECT 1, pa.idConsultorio, pa.idProfesional, pa.Modulo, vFecha, pPeriodo 
+		FROM profatiende pa
+		WHERE pa.Dia=vDia);
+		
+		set vFecha=date_add(vFecha, interval 1 day);
+	end while;
+    END */$$
+DELIMITER ;
 
 /* Procedure structure for procedure `SP_BuscarPaciente` */
 
@@ -264,6 +365,21 @@ BEGIN
 	
 	insert into agenda (idEspecialidad, idConsultorio, idProfesional, Turno, Fecha, Periodo) values (
 		pEsp, pCons, pProf, pMod, str_to_date(pFecha,'%d/%m/%Y'),pPeriodo);
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SP_InsertAtencion` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertAtencion` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertAtencion`(pidProf int, pDia int, pidCons int, pMod int)
+BEGIN
+	if not exists(select 1 from profatiende where idProfesional=pidProf and Dia=pDia and idConsultorio=pidCons and Modulo=pMod) then
+		insert into profatiende (idProfesional, idConsultorio, Dia, Modulo) values (
+		pidProf, pidCons, pDia, pMod);
+	end if;
     END */$$
 DELIMITER ;
 
@@ -336,6 +452,26 @@ BEGIN
     END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `SP_InsertUser` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertUser` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertUser`(pid integer, pNombre varchar(100), pLogin varchar(30), pPass varchar(32))
+BEGIN
+	if exists(select 1 from usuarios where idUsuario=pid) then
+		update usuarios set Nombre=pNombre, Login=pLogin where idUsuario=pid;
+		if pPass is not null then
+			update Usuarios set Pass=pPass where idUsuario=pid;
+		end if;
+	else
+		insert into Usuarios (Nombre, Login, Pass) values (pNombre, pLogin, pPass);
+	end if;
+		
+    END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `SP_InsertTurno` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertTurno` */;
@@ -364,26 +500,6 @@ BEGIN
 	insert into turnos (idPaciente, idEspecialidad, idProfesional, Fecha, Hora, Paciente, ApellidoPac, DNI, NroSocio, Celular, Estado) values (
 			pidPaciente, vEspec, pidProf, pFecha, pHora, pNombre, pApellido, pDNI, pSocio, pCelular, pEstado);
 			
-    END */$$
-DELIMITER ;
-
-/* Procedure structure for procedure `SP_InsertUser` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertUser` */;
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertUser`(pid integer, pNombre varchar(100), pLogin varchar(30), pPass varchar(32))
-BEGIN
-	if exists(select 1 from usuarios where idUsuario=pid) then
-		update usuarios set Nombre=pNombre, Login=pLogin where idUsuario=pid;
-		if pPass is not null then
-			update Usuarios set Pass=pPass where idUsuario=pid;
-		end if;
-	else
-		insert into Usuarios (Nombre, Login, Pass) values (pNombre, pLogin, pPass);
-	end if;
-		
     END */$$
 DELIMITER ;
 
@@ -422,7 +538,8 @@ BEGIN
 			
 			if exists(select 1 from turnos where  idProfesional=pProf AND Hora >= vHoraI AND Hora < vHoraF) then
 				insert into tmpturnos (
-				select idTurno, Hora, idPaciente, concat(Paciente,' ', ApellidoPac) Paciente, idEspecialidad, '', DNI, Celular, Estado from Turnos where idProfesional=pProf
+				select idTurno, Hora, idPaciente, concat(Paciente,' ', ApellidoPac) Paciente, idEspecialidad, '', DNI, Celular, Estado from Turnos 
+				where idProfesional=pProf and Fecha=pFecha 
 				and Hora between vHoraI and vHoraF);
 			else 
 				insert into tmpTurnos values (null,vHoraI, null,null,null,null,null,null, 'DISPONIBLE');

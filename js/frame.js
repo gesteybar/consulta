@@ -96,26 +96,26 @@ function JsonToTable(arr, tabla, headers) {
  // Need to do union of keys from all records as some records may not contain
  // all records
  function addAllColumnHeaders(arr, table, headers) {
-     var columnSet = []
-         
-     for (var i=0, l=arr.length; i < l; i++) {
-     	var tr = _tr_.cloneNode(false);
-         for (var key in arr[i]) {
-             if (arr[i].hasOwnProperty(key) && columnSet.indexOf(key)===-1) {
-                 columnSet.push(key);
-                 if (headers) {
-                 	 
-	                 var th = _th_.cloneNode(false);
-	                 th.appendChild(document.createTextNode(key));
-	                 tr.appendChild(th);
-	             }
-             }
-         }
-	     if (headers)
-	     	table.appendChild(tr);
-     }
+    var columnSet = []
+	var tr = _tr_.cloneNode(false);         
+	for (var i=0, l=arr.length; i < l; i++) {
+		
+	 for (var key in arr[i]) {
+	     if (arr[i].hasOwnProperty(key) && columnSet.indexOf(key)===-1) {
+	         columnSet.push(key);
+	         if (headers) {
+	         	 
+	             var th = _th_.cloneNode(false);
+	             th.appendChild(document.createTextNode(key));
+	             tr.appendChild(th);
+	         }
+	     }
+	 }
+	 if (headers)
+	 	table.appendChild(tr);
+	}
 
-     return columnSet;
+ return columnSet;
  }
 
 function AgregarBotonTabla(tabla, col, imagen, funcion, refcol,prefijo, clase,condicion, colcond, title) {
@@ -155,6 +155,31 @@ function AgregarBotonTabla(tabla, col, imagen, funcion, refcol,prefijo, clase,co
 				}
 		}
 	}
+}
+
+function AgruparTabla (tabla, col, firstRow, condicion, colCond) {
+	var tbl=document.getElementById(tabla);
+	var tr=tbl.getElementsByTagName("tr");
+
+	if (firstRow==undefined || firstRow==null || firstRow=='') {
+		firstRow=0;
+	}
+
+	if (colCond==undefined || colCond=='') colCond=0;
+
+	var ant="";
+	for (var i = firstRow; i < tr.length; i++) {
+		if (ant!=tr[i].cells[col].innerText) {
+			ant=tr[i].cells[col].innerText;
+			
+			var th=document.createElement('th');
+			th.colSpan=tbl.rows[0].cells.length;
+			th.innerText=tr[i].cells[col].innerText;
+			var trg=tbl.insertRow(i);
+			trg.appendChild(th);
+		}
+	}
+
 }
 
 function AgregarFila(tabla, enFila, idTr, params) {
@@ -831,5 +856,14 @@ var body=document.getElementsByTagName('body')[0];
 		fondo.parentNode.removeChild(fondo);	
 		$("#divLoading").hide();
 		$("#divMensaje").hide();
+	}
+}
+function logoff() {
+	oAjax.request="logoff";
+	oAjax.send(resp);
+
+	function resp(data) {
+		location.href="./index.php";
+		
 	}
 }

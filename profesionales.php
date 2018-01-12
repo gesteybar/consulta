@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/profesionales.css">
 	<link rel="shortcut icon" type="image/x-icon" href="./imagenes/logo.ico">
 	<script type="text/javascript" src="./js/frame.js"></script>
+	<script type="text/javascript" src="./js/permisos.js"></script>
 	<script src="./js/jquery-1.10.2.js"></script>
 	<script src="./js/jquery-ui-1.10.4.custom.min.js"></script>  	
 	<script type="text/javascript">
@@ -52,6 +53,7 @@
 			setValue('txtVenc', obj[0].FechaVenc);
 			setValue('cboDocComp', obj[0].DocCompleta);
 			cargarEspec();
+			diasAtencion();
 			$("#abm").show();
 			$("#cmdBorrar").show();
 
@@ -106,6 +108,7 @@
 	}
 	function cargarEspec() {
 		var prof=getValue('txtID');
+		oAjax.async=false;
 		oAjax.request="customQuery&query=select a.idParamAgenda, e.idEspecialidad, e.Nombre, a.Modulo, a.Sobreturnos from Especialidades e inner join paramagenda a on e.idEspecialidad=a.idEspecialidad and a.idProfesional="+prof+" order by 2&tipo=Q";
 		oAjax.send(resp);
 
@@ -136,7 +139,8 @@
 	}
 	function showAddEspec(ventana) {
 		var padre=document.getElementById(ventana).parentNode;
-		$(padre).show();		
+		$(padre).show();	
+		$("#"+ventana)	.show();
 		var prof=getValue('txtID');
 		LlenarComboSQL('cboEspec', 'select idEspecialidad, Nombre from Especialidades where idEspecialidad not in (select idEspecialidad from paramagenda where idProfesional='+prof+')', false );
 
@@ -165,11 +169,75 @@
 		}
 
 	}
+	function diasAtencion(id) {
+		if (id==undefined || id=='')
+			id=getValue('txtID');
+
+		oAjax.request="diasAtencion&prof="+id;
+		oAjax.send(resp);
+
+		function resp(data) {
+			if (data.responseText.length<3) {
+				setValue('tbodyAtiende', '');
+				return false;
+			}
+			var obj=JSON.parse(data.responseText);
+			JsonToTable(obj, 'tbodyAtiende', false);
+			
+			OcultarColumnaTabla('tbodyAtiende',0);
+			OcultarColumnaTabla('tbodyAtiende',1);
+			OcultarColumnaTabla('tbodyAtiende',3);
+			OcultarColumnaTabla('tbodyAtiende',5);
+			AgregarBotonTabla('tbodyAtiende', 2, 'redalert.png', 'borrarAtiende', 0, true);
+		}
+
+	}
+
+	function borrarAtiende(id) {
+		oAjax.request="customQuery&query=delete from profatiende where idProfAtiende="+id+"&tipo=E";
+		oAjax.send(resp);
+
+		function resp(data) {
+			if (data.responseText!='ok') {
+				alert(data.responseText);
+				return false;
+			}
+			diasAtencion();
+
+		}		
+	}
+
+	function showAddAtiende() {
+		var padre=document.getElementById('frmNuevaAtiende').parentNode;
+		$(padre).show();		
+		$("#frmNuevaAtiende").show();
+
+	}
+
+	function ingresarAtencion() {
+		var dia=getValue('cboAtDia');
+		var mod=getValue('cboAtModulo');
+		var cons=getValue('cboAtCons');
+		var prof=getValue('txtID');
+
+		oAjax.request="ingresarAtencion&prof="+prof+"&mod="+mod+"&dia="+dia+"&cons="+cons;
+		oAjax.send(resp);
+
+		function resp(data) {
+			if (data.responseText!='ok') {
+				alert(data.responseText);
+				return false;
+			}
+			diasAtencion();
+			cerrar('frmNuevaAtiende');
+
+		}		
+	}
 	</script>
 </head>
 <body>
 	<div class="fondonegro" style="display:none;">
-		<div id="frmNuevaEspec" class="ventana">
+		<div id="frmNuevaEspec" class="ventana" style="display:none">
 			<h2>Agregar especialidad</h2>
 			<table id="tblNEspec">
 				<tr>
@@ -193,8 +261,45 @@
 				</tr>
 			</table>
 		</div>
+		<div id="frmNuevaAtiende" class="ventana" style="display:none">
+			<h2>Agregar día de atención</h2>
+			<table id="tblNAtencion">
+				<tr>
+					<td>Día de atención:</td>
+					<td><select id="cboAtDia">
+						<option value="1">Lunes</option>
+						<option value="2">Martes</option>
+						<option value="3">Miércoles</option>
+						<option value="4">Jueves</option>
+						<option value="5">Viernes</option>
+						<option value="6">Sábado</option>
+						<option value="7">Domingo</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Módulo:</td>
+					<td><select id="cboAtModulo"><option value="1">Mañana</option><option value ="2">Tarde</option></select></td>
+				</tr>
+				<tr>
+					<td>Consultorio:</td>
+					<td><select id="cboAtCons"></select></td>
+					<script type="text/javascript">
+						LlenarComboSQL('cboAtCons', 'select idConsultorio, Nombre from consultorios order by 2', false);
+					</script>
+				</tr>
+
+				<tr>
+					<td colspan="2" align="center">
+						<button class="botonok" type="button" onclick="ingresarAtencion();">Aceptar</button>
+						<button class="botoncancel" type="button" onclick="cerrar('frmNuevaAtiende');">Cancelar</button>
+					</td>
+				</tr>
+			</table>
+		</div>
 
 	</div>
+	<? include('header.php'); ?>
 	<h3>Profesionales</h3>
 	<div id="wrapper1">
 		<button class="botonok" onclick="nuevoDato();">Agregar</button>
@@ -246,6 +351,14 @@
 			</thead>
 
 			<tbody id="tbodyEspec"></tbody>
+		</table>
+		<table id="tblAtiende">
+			<thead>
+				<col width="40%"><col width="30%"><col width="30%">
+				<tr><th colspan="10">Días de atención</th></tr>
+				<tr><th>Dia</th><th>Consultorio</th><th>Turno</th><th><a href="javascript:vodi(0);" onclick="showAddAtiende();"><img src="./imagenes/nueva.png" width="24"></a></th></tr>
+			</thead>
+			<tbody id="tbodyAtiende"></tbody>
 		</table>
 	</div>
 	<script>cargarDatos();</script>

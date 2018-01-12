@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/pacientes.css">
 	<link rel="shortcut icon" type="image/x-icon" href="./imagenes/logo.ico">
 	<script type="text/javascript" src="./js/frame.js"></script>
+	<script type="text/javascript" src="./js/permisos.js"></script>
 	<script src="./js/jquery-1.10.2.js"></script>
 	<script src="./js/jquery-ui-1.10.4.custom.min.js"></script>  	
 	<script type="text/javascript">
@@ -180,7 +181,7 @@
 		</div>
 	</div>
 
-
+<? include('header.php'); ?>
 	<h3>Pacientes</h3>
 	<div id="wrapper1">
 		<button class="botonok" onclick="nuevoDato();">Agregar</button>

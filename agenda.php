@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/agenda.css">
 	<link rel="shortcut icon" type="image/x-icon" href="./imagenes/logo.ico">
 	<script type="text/javascript" src="./js/frame.js"></script>
+	<script type="text/javascript" src="./js/permisos.js"></script>
 	<script src="./js/jquery-1.10.2.js"></script>
 	<script src="./js/jquery-ui-1.10.4.custom.min.js"></script>  	
 	<script type="text/javascript">
@@ -44,7 +45,7 @@
 			var tr=document.createElement('tr');
 			for (var j = 0; j < 8; j++) {
 				var td=document.createElement('td');
-				td.id="td"+dia;
+				td.id="td0";
 				if (j>0) {
 					
 					if (dia<dias) 
@@ -55,6 +56,7 @@
 						var a =document.createElement('a');
 						a.id="a"+dia;
 						a.innerHTML=dia;
+						td.id="td"+dia;
 						td.appendChild(a);	
 
 						var mod1=document.createElement('a');
@@ -126,6 +128,28 @@
 		}
 		
 	}
+	function disponibilizar() {
+		var fecha= getValue('txtFecha');
+		var mod=getValue('cboModulo');
+		var cons=getValue('cboConsultorio');
+
+		var link=document.getElementById(getValue('hidMod'));
+
+		oAjax.request="disponibilizar&fecha="+fecha+"&mod="+mod+"&cons="+cons;
+		oAjax.send(resp);
+
+		function resp(data) {
+			if (data.responseText!="ok") {
+				alert("Error: "+data.responseText);
+				return false;
+			}
+
+			cargarGrilla(getValue('hidPeriodo'));
+			cerrar('frmAgregarProf');
+
+		}
+
+	}
 	function cargarPeriodos() {
 		oAjax.request="customQuery&query=select distinct Periodo from agenda order by Fecha desc&tipo=Q";
 		oAjax.send(resp);
@@ -147,8 +171,23 @@
 	}
 	function ingresarPeriodo() {
 		var periodo=getValue('txtNuevoPeriodo');
-		AgregarFila('tbodyCons', 0, periodo, [periodo]);
-		AgregarBotonTabla('tbodyCons', 0, '', 'cargarGrilla',0,'','',periodo, 0);
+		
+		if (base!='' && base !=undefined) {
+			oAjax.async=false;
+			oAjax.request="copiarPeriodo&base="+base+"&periodo="+periodo;
+			oAjax.send(resp);
+			function resp(data) {
+				if (data.responseText!='ok') {
+					alert('Error: '+data.responseText)
+					return false;
+				}
+				cargarPeriodos();
+				setValue('hidPeriodo', periodo);
+			}
+		} else {
+			AgregarFila('tbodyCons', 0, periodo, [periodo]);
+			AgregarBotonTabla('tbodyCons', 0, '', 'cargarGrilla',0,'','',periodo, 0);
+		}
 		cerrar('frmNuevoPeriodo');
 		cargarGrilla(periodo);
 	}
@@ -189,14 +228,35 @@
 		}
 
 	}
-	function copiarAgenda() {
+	function copiarSemana() {
+		var periodo=getValue('hidPeriodo');
+		var dia=getValue('hidDoc');
+		var fecha= pad(dia+"/"+periodo,10, '0');		
+		var f=new DateTime(); f.init(fecha, 'dmy');
+		oAjax.request="customQuery&query=call SP_ReplicarAgenda('"+f.formats.compound.mySQL+"','SEM')&tipo=E";
+		oAjax.send(resp);
 
+		function resp(data) {
+			if (data.responseText!="ok") {
+				alert("Error: "+data.responseText);
+				return false;
+			}
+
+			cargarGrilla(periodo);
+		}
 	}
 </script>
 <script type="text/javascript">
 
 	function showMenu(id,obj) {
-		setValue('hidDoc', id);
+		var d="0";
+		var i=0;
+		while (d=="0") {
+			d=obj.parentNode.parentNode.cells[i].id.substring(2);
+			i+=1;
+		}
+
+		setValue('hidDoc', d);
 		var rect = obj.getBoundingClientRect();
 		//alert(rect.left);
 		var div=document.getElementById('ctxMenu');
@@ -223,13 +283,17 @@
 	</script>
 </head>
 <body>
-	<div class="fondonegro" style="//display:none;">
+	<div class="fondonegro" style="display:none;">
 		<div id="frmNuevoPeriodo" class="ventana">
 			<h2>Nuevo período</h2>
 			<table id="tblNPer">
 				<tr>
 					<td>Período a crear:</td>
-					<td><input type="text" id="txtNuevoPeriodo" placeholder="MM/AAAA" value="11/2017"></td>
+					<td><input type="text" id="txtNuevoPeriodo" placeholder="MM/AAAA" value=""></td>
+				</tr>
+				<tr>
+					<td>Tomar como base:</td>
+					<td><input type="text" id="txtPeriodoBase" placeholder="MM/AAAA" value=""></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
@@ -240,7 +304,7 @@
 			</table>
 		</div>
 	</div>
-	<div class="fondonegro" style="//display:none;">
+	<div class="fondonegro" style="display:none;">
 		<div id="frmAgregarProf" class="ventana">
 			<h2>Agregar profesional a agenda</h2>
 			<input type="hidden" id="hidMod">
@@ -266,6 +330,7 @@
 				<tr>
 					<td colspan="2" align="center">
 						<button class="botonok" type="button" onclick="cargarProf();">Aceptar</button>
+						<button class="botonok" type="button" onclick="disponibilizar();">Borrar</button>
 						<button class="botoncancel" type="button" onclick="cerrar('frmAgregarProf');">Cancelar</button>
 					</td>
 				</tr>
@@ -275,12 +340,13 @@
 	<div class="contextMenu" id="ctxMenu" style="display:none;">
 		<input type="hidden" id="hidDoc">
 		<ul>
-			<li><a href="javascript:void(0);" onclick="evaluar('A')">Copiar semana</a></li>
+			<li><a href="javascript:void(0);" onclick="copiarSemana(this)">Copiar semana</a></li>
 			<li><a href="javascript:void(0);" onclick="evaluar('R')">Rechazar</a></li>
 			<li><a href="javascript:void(0);" onclick="$('#ventana1').show();setValue('spanTituloVer',getValue('txtArchivo'));">Reenviar para aprobar</a></li>
 			<li><a href="javascript:void(0);" onclick="">Subir correcciones y aprobar</a></li>
 		</ul>
 	</div>	
+	<? include('header.php'); ?>
 	<h3>Agenda</h3>
 	<div id="wrapper1">
 		<button class="botonok" onclick="mostrarNuevo('frmNuevoPeriodo');">Abrir nuevo Período</button>

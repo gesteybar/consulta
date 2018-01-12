@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/consultorios.css">
 	<link rel="shortcut icon" type="image/x-icon" href="./imagenes/logo.ico">
 	<script type="text/javascript" src="./js/frame.js"></script>
+	<script type="text/javascript" src="./js/permisos.js"></script>
 	<script src="./js/jquery-1.10.2.js"></script>
 	<script src="./js/jquery-ui-1.10.4.custom.min.js"></script>  	
 	<script type="text/javascript">
@@ -99,6 +100,7 @@
 	</script>
 </head>
 <body>
+<? include('header.php'); ?>
 	<h3>Consultorios</h3>
 	<div id="wrapper1">
 		<button class="botonok" onclick="nuevoDato();">Agregar</button>

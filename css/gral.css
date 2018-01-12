@@ -12,17 +12,30 @@
 	font-family:Abel;
 	src:url("../fonts/Abel-Regular.ttf");
 }
-@font-face {
+/*@font-face {
 	font-family:Cabin;
 	src:url("../fonts/Cabin-Regular.ttf");
-}
-@font-face {
+}*/
+/*@font-face {
 	font-family:Nunito;
 	src:url("../fonts/Nunito-Regular.ttf");
-}
-@font-face {font-family:Dosis;src:url("../fonts/Dosis-Regular.ttf");}
+}*/
+/*@font-face {font-family:Dosis;src:url("../fonts/Dosis-Regular.ttf");}
 @font-face {font-family:Dosis-light;src:url("../fonts/Dosis-Light.ttf");}
-@font-face {font-family:Dosis-bold;src:url("../fonts/Dosis-Bold.ttf");}
+@font-face {font-family:Dosis-bold;src:url("../fonts/Dosis-Bold.ttf");}*/
+@font-face {font-family: Baumans;src:url("../fonts/Baumans-Regular.ttf");}
+@font-face {font-family: AudioWide;src:url("../fonts/Audiowide-Regular.ttf");}
+body {padding: 0;}
+#divMain {
+	position: absolute;top:0;left:0;width: 100vw;height: 100vh;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fffcfc+0,fff4f4+37,c8d7dc+100 */
+background: #fffcfc; /* Old browsers */
+background: -moz-linear-gradient(top, #fffcfc 0%, #fff4f4 37%, #c8d7dc 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #fffcfc 0%,#fff4f4 37%,#c8d7dc 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #fffcfc 0%,#fff4f4 37%,#c8d7dc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffcfc', endColorstr='#c8d7dc',GradientType=0 ); /* IE6-9 */	
+}
+#logo {width: 100px;display: inline-block;}
 .botonok {
 background: #3498db;
 background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
@@ -62,18 +75,47 @@ background: linear-gradient(to bottom, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); 
 color: #ffffff;text-shadow: 1px 1px 1px black;font-size: 1.1em; border-radius: 3px}
 .tabla1 td {background-color: transparent;color: #333333;text-shadow: 1px 1px 1px gray;font-size: 0.9em;padding: 3px}
-
+.tabla2 {border-radius: 4px;font-family: Oswald;padding: 0px;}
+.tabla2 th {background: #f2f5f6; 
+background: -moz-linear-gradient(top, #f2f5f6 0%, #e3eaed 37%, #c8d7dc 100%);
+background: -webkit-linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%);
+background: linear-gradient(to bottom, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); 
+color: #ffffff;text-shadow: 1px 1px 1px black;font-size: 1.1em; border-radius: 3px}
+.tabla2 td {background-color: transparent;color: #333333;text-shadow: 1px 1px 1px gray;font-size: 0.9em;padding: 3px}
 .linkGral {font-family: Abel;text-decoration:none; color:black;}
-h3 {font-family: oswald;font-size: 1.2em;color:white;text-shadow: 1px 1px 1px black;background-color: gray; padding: 8px; font-weight: normal;}
+h3 {font-family: oswald;font-size: 1.2em;color:white;text-shadow: 1px 1px 1px black;background-color:rgb(40,75,100); padding: 8px; font-weight: normal;}
 .contextMenu {background-color: #dddddd;color:#444444;font-family: Abel;border:1px solid gray;box-shadow: 2px 2px 2px black;border-radius: 3px;}
 .contextMenu ul {padding:0;}
 .contextMenu li {list-style: none;margin: 0;border-bottom: 1px solid #bbbbbb}
 .contextMenu li:hover {background-color: #eeeeee; }
 .contextMenu a {background-color: none; color:#444444;text-decoration: none;padding:3px;}
 .contextMenu a:hover {text-decoration: none;}
-.icono {width: 24px;height: 24px;margin:5px 10px;}
+.icono {width: 24px;height: 24px;margin:5px 10px;vertical-align: middle;}
 
 .clsMensaje {width: 90%;height: 200px;margin:100px auto;background-color: white;border-radius: 5px;box-shadow: 5px 5px 15px black}
 .clsMensaje p {color:gray;font-family: Abel; font-size: 1em;margin:auto;text-align: center;}
 .clsMensaje img {width: 64px;height: 64px;margin:20px 50%;}
 .label {border:1px transparent;font-family: Abel;color:#555555;}
+
+#divFiltroRPT {}
+#tblFiltroRPT {font-family: Abel;font-size: 1em;color:#444444;}
+#rptTitulo {font-family: Abel;font-size: 1.1em;color:white;text-shadow: 1px 1px 1px black;background-color: #bbbbbb;padding:5px;}
+#rptDesc {font-family: Abel;font-size: 0.9em;color:#444444}
+
+/***************************************************************************************************************************************/
+/***************************************************INDEX*******************************************************************************/
+#header {position: absolute;top:0;left: 0; margin-left:auto;height: 150px;text-align: center;}
+#tituloLogo {font-family: Baumans;font-size: 3em;color:rgb(40,75,100);display: inline-block;margin:0;}
+#divLogin {position: absolute;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f5f6+0,e3eaed+37,c8d7dc+100;Grey+3D+%234 */
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top, #ffffff 0%, #e3eaed 37%, #c8d7dc 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #ffffff 0%,#e3eaed 37%,#c8d7dc 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #ffffff 0%,#e3eaed 37%,#c8d7dc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#c8d7dc',GradientType=0 ); /* IE6-9 */
+width: 100%;margin-top: 180px;height: 200px;left: 0}
+#tblLogin {margin:20px auto;border-collapse: collapse;font-family: Abel;font-size: 1.2em;color:rgb(40,75,100);}
+#tblLogin input {border:1px solid #dddddd;background-color: transparent;padding: 5px 10px;font-family: Abel; font-size: 1.1em}
+#tblLogin input:focus {border:1px solid gray;background-color: rgba(255,255,255,0.2)} 
+#content {width: 100vw;min-height: 200px;overflow: auto;padding: 10px 0 0 0;}

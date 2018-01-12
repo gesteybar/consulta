@@ -136,17 +136,14 @@ switch ($consulta) {
 		break;
 	case 'acceso':
 		$mod=$_GET['modulo'];
-		$nivel=$_GET['nivel'];
-		$usuario=$_GET['usuario'];
+		
+		$usuario='';
 		if ($usuario=='' || !isset($usuario) || $usuario==null) $usuario=$_SESSION['idUsuario'];
 		$db=GetConnection();
-		$cadena="select m.Pagina, FC_Permisos(".$usuario.",".$mod.") permiso, conv(FC_Permisos(".$usuario.",".$mod."),2,10) valor from Permisos p inner join Modulos m ON p.idModulo=m.idModulo WHERE p.idModulo=".$mod." AND idUsuario=".$usuario;
-		$r=mysqli_query($db, $cadena);
-		$f=mysqli_fetch_assoc($r);
-		if (mysqli_errno($db)>0) 
-			echo '{"respuesta":"'.mysqli_error($db).' - '. $cadena.'"}';
-		else
-			echo '{"respuesta":"'.$f['permiso'].'","decimal":"'.$f['valor'].'","ruta":"'.$f['Pagina'].'"}';
+		$cadena="SELECT Pagina
+				FROM permisos p INNER JOIN modulos m ON p.idModulo=m.idModulo
+				INNER JOIN usuarios u ON p.idUsuario=u.idUsuario where p.idModulo=".$mod." AND p.idUsuario=".$usuario;
+		echo query($cadena, "Q", $db);
 		break;	
 	case 'cargarConsultorios':
 		$cadena="select idConsultorio, Nombre from Consultorios";
@@ -166,6 +163,13 @@ switch ($consulta) {
 		echo query($cadena, "Q", null);
 
 		break;		
+	case 'cargarReportes':
+		$cadena="select idReporte, Nombre from reportes order by 2";
+
+		echo query($cadena, "Q", null);
+
+		break;		
+
 	case 'cargarPacientes':
 		if (sizeof($_GET)>1) {
 			
@@ -206,6 +210,23 @@ switch ($consulta) {
 
 		echo query($cadena, "E", null);
 		break;
+	case 'disponibilizar':
+		$fecha=$_GET['fecha'];
+		$mod=$_GET['mod'];
+		$cons=$_GET['cons'];
+
+		$cadena="delete from agenda where idConsultorio='$cons' and Turno='$mod' and Fecha=str_to_date('$fecha', '%d/%m/%Y')";
+
+		echo query($cadena, "E", null);
+		break;
+	case 'copiarPeriodo':
+		$base=$_GET['base'];
+		$periodo=$_GET['periodo'];
+
+		$cadena="SP_CopiarPeriodo('$base', '$periodo');";
+
+		echo query($cadena, 'E', null);
+		break;
 	case 'leerAgenda':
 		$periodo=$_GET['periodo'];
 		$cons=$_GET['cons'];
@@ -237,6 +258,25 @@ switch ($consulta) {
 				WHERE a.Fecha='$fecha'";
 
 		echo query($cadena, "Q", null);
+		break;
+	case 'diasAtencion':
+		$prof=$_GET['prof'];
+		$cadena="SELECT idProfAtiende, Dia, 
+				CASE Dia WHEN 1 THEN 'Lunes' WHEN 2 THEN 'Martes' WHEN 3 THEN 'Miércoles' WHEN 4 THEN 'Jueves' WHEN 5 THEN 'Viernes' WHEN 6 THEN 'Sabado' WHEN 7 THEN 'Domingo' END DiaSem,
+				pa.idConsultorio, c.Nombre, pa.Modulo, CASE pa.Modulo WHEN 1 THEN 'Mañana' WHEN 2 THEN 'Tarde' END Turno
+				FROM profatiende pa INNER JOIN consultorios c ON pa.idConsultorio=c.idConsultorio 
+				where pa.idProfesional=$prof";
+
+		echo query($cadena, 'Q', null);
+		break;
+	case 'ingresarAtencion':
+		$prof=$_GET['prof'];
+		$cons=$_GET['cons'];
+		$mod=$_GET['mod'];
+		$dia=$_GET['dia'];
+
+		$cadena="call SP_InsertAtencion($prof, $dia, $cons, $mod)";
+		echo query($cadena, "E", null);
 		break;
 	case 'cargarTurnos':
 		$fecha=$_GET['fecha'];
@@ -281,7 +321,9 @@ switch ($consulta) {
 
 		if ($resp=='ok') {
 			$lastID=mysqli_insert_id($db);
-			
+			echo '{"respuesta":"ok", "id":"'.$lastID.'"}';
+		} else {
+			echo '{"respuesta":"'.mysqli_error($db).'"}';
 		}
 		break;
 }

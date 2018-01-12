@@ -15,5 +15,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 #tblEspec td {font-family: Abel;color:#444444;border-right: 1px solid #dddddd}
 #frmNuevaEspec {width: 30vw;}
 
+#frmNuevaAtiende {width: 30vw;}
 #tblNEspec {margin:0 auto; width: 90%;font-family: Abel;}
 #tblNEspec input, select {border:1px solid #dddddd;border-radius: 3px;padding: 5px 8px; font-family: Abel}
+#tblAtiende {float:right; width: 30vw; min-height: 30vh;box-shadow: 2px 2px 12px gray;display: inline-block;margin-left: 20px;
+	border-collapse: collapse;}
+#tblAtiende th {background-color: #2288aa; color: white;font-family: Abel;border-bottom: 1px solid white;}
+#tblAtiende td {font-family: Abel;color:#444444;border-right: 1px solid #dddddd}
+#tblNAtencion {margin:0 auto; width: 90%;font-family: Abel;}
+#tblNAtencion input, select {border:1px solid #dddddd;border-radius: 3px;padding: 5px 8px; font-family: Abel}

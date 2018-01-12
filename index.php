@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/gral.css">
 	<link rel="shortcut icon" type="image/x-icon" href="./imagenes/logo.ico">
 	<script type="text/javascript" src="./js/frame.js"></script>
+	<script type="text/javascript" src="./js/permisos.js"></script>
 	<script type="text/javascript">
 		function login() {
 			var usuario=getValue('txtUsuario');
@@ -28,33 +29,32 @@
 </head>
 <body>
 	<? if (!isset($_SESSION['idUsuario'])) {?>
+	<div id="header">
+		<img src="./imagenes/logo1.png">
+		<p id="tituloLogo">CRECER Consultorios Médicos</p>
+	</div>
 	<div id="divLogin">
 		<table id="tblLogin">
 			<tr>
 				<td>Usuario:</td>
-				<td><input type="text" id="txtUsuario"></td>
+				<td><input type="text" id="txtUsuario" placehoder="Ingrese usuario"></td>
 			</tr>
 			<tr>
 				<td>Password:</td>
 				<td><input type="password" id="txtPass"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><button type="submit" onclick="login();">Ingresar</button></td>
+				<td colspan="2" align="center"><button type="submit" class="botonok" onclick="login();">Ingresar</button></td>
 			</tr>
 		</table>
 	</div>
 	<? } else {?>
-		<ul>
-			<li><a href="#">Home</a></li>
-			<li><a href="profesionales.php">Profesionales</a></li>
-			<li><a href="especialidades.php">Especialidades</a></li>
-			<li><a href="consultorios.php">Consultorios</a></li>
-			<li><a href="pacientes.php">Pacientes</a></li>
-			<li><a href="agenda.php">Agenda</a></li>
-			<li><a href="diaria.php">Agenda diaria</a></li>
-			<li><a href="#">Proyección</a></li>
+	<div id="divMain">
+	<? include('header.php'); ?>
+		<div id="content">
 
-		</ul>		
+		</div>
+	</div>
 	<?}?>
 
 </body>

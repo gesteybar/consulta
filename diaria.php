@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/diaria.css">
 	<link rel="shortcut icon" type="image/x-icon" href="./imagenes/logo.ico">
 	<script type="text/javascript" src="./js/frame.js"></script>
+	<script type="text/javascript" src="./js/permisos.js"></script>
 	<script src="./js/jquery-1.10.2.js"></script>
 	<script src="./js/jquery-ui-1.10.4.custom.min.js"></script>  	
 	<script type="text/javascript">
@@ -26,6 +27,7 @@
 			JsonToTable(obj, 'tbodyProf', false);
 			OcultarColumnaTabla('tbodyProf', 0);
 			AgregarBotonTabla('tbodyProf', 1, '', 'cargarTurnos', 0, false, 'profUnSelected');
+			AgregarBotonTabla('tbodyProf', 1, 'doctor.png', 'cargarTurnos', 0, true, 'icono');
 		}
 	}
 	function cargarTurnos(id, obj) {
@@ -37,9 +39,11 @@
 			var tbl=document.getElementById('tbodyProf');
 			var as=tbl.getElementsByTagName('a');
 			for (var i = 0; i < as.length; i++) {
-				as[i].className="profUnSelected";
+				$(as[i]).removeClass('profSelected');
+				$(as[i]).addClass("profUnSelected");
 			}
-			obj.className='profSelected';
+			$(obj).removeClass('profUnSelected');
+			$(obj).addClass('profSelected');
 		}
 		oAjax.request="cargarTurnos&fecha="+fecha+"&Prof="+prof;
 		oAjax.send(resp);
@@ -107,7 +111,8 @@
 	function pickPaciente(id, obj) {
 		//alert(obj.innerHTML);
 		setValue('hidPaciente', id);
-		setValue('txtNombrePac', obj.parentNode.parentNode.cells[1].innerText+" " +obj.parentNode.parentNode.cells[2].innerText);
+		setValue('txtNombrePac', obj.parentNode.parentNode.cells[2].innerText);
+		setValue('txtApellidoPac', obj.parentNode.parentNode.cells[1].innerText);
 		setValue('txtCelularPac', obj.parentNode.parentNode.cells[5].innerText);
 		setValue('txtDNIPac', obj.parentNode.parentNode.cells[4].innerText);
 		$('#frmListaPacientes').hide();
@@ -162,13 +167,24 @@
 		oAjax.send(resp);
 
 		function resp(data) {
-			if (data.responseText!='ok') {
-				alert(data.responseText);
+			if (data.responseText.length<3) {
+				alert('dato vacío');
 				return false;
 			}
+			var obj=JSON.parse(data.responseText);
+			if (obj.respuesta!='ok') {
+				alert(obj.respuesta);
+				return false;
+			}
+
 			//cerrar('frmNuevoTurno');
 			//cargarTurnos(getValue('hidProf'), null);
-			
+			setValue('hidPaciente', obj.id);
+			setValue('txtNombrePac', nom);
+			setValue('txtApellidoPac', ape);
+			setValue('txtCelularPac', cel);
+			setValue('txtDNIPac', dni);
+			$('#frmNuevoPaciente').hide();			
 		}		
 	}
 	function anularTurno(id) {
@@ -257,7 +273,7 @@
 						<input type="hidden" id="hidPaciente">
 					
 					
-						<select id="cboDoc"><option value="N">Nombre</option><option value="D">DNI</option><option value="S">Socio</option></select>
+						<select id="cboDoc"><option value="N">Nombre</option><option value="D">DNI</option><option value="S">Socio</option><option value="H">Hist. Clínica</option></select>
 						<input id="txtDNI" type="text">
 						<button id="cmdBuscarPaciente" type="button" class="botonok" onclick="buscarPaciente();"><img src="./imagenes/lupa.png"></button>
 						<button id="cmdNuevoPaciente" type="button" class="botonok" onclick="altaPaciente();"><img src="./imagenes/nueva.png" width="16"></button>
@@ -269,7 +285,7 @@
 					<td>Nombre:</td>
 					<td><input class="label" type="text" id="txtNombrePac"></td>
 					<td>Apellido:</td>
-					<td><inpu class="label"t type="text" id="txtApellidoPac"></td>
+					<td><input class="label"t type="text" id="txtApellidoPac"></td>
 				</tr>
 				<tr>
 					<td>Celular:</td>
@@ -330,15 +346,16 @@
 			<li><a href="javascript:void(0);" onclick="fichaPaciente(getValue('hidMenuTurno'));">Ficha Paciente</a></li>
 		</ul>
 	</div>		
+	<? include('header.php'); ?>
 	<h3>Agenda diaria</h3>
 	<input type="hidden" id="hidProf">
 	<div id="divFecha">
 		<input id="txtFecha" type="date">
-		<button onclick="cargarProf();" class="botonok" style="font-size:0.8em">Ver</button>
+		<button onclick="cargarProf();" class="botonok" style="font-size:1em">Ver</button>
 	</div>
 	<div id="divAgenda">
 		<div id="divProf">
-			<table id="tblProf">
+			<table id="tblProf" class="tabla2">
 			<thead><tr><th>Profesionales</th></tr></thead>
 			<tbody id="tbodyProf"></tbody>
 			</table>

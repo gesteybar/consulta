@@ -15,6 +15,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 #tblNPer input, select {border:1px solid #dddddd;border-radius: 3px;padding: 5px 8px; font-family: Abel}
 #tblNProf {margin:0 auto; width: 90%;font-family: Abel;}
 #tblNProf input, select {border:1px solid #dddddd;border-radius: 3px;padding: 5px 8px; font-family: Abel}
+#tblNTur {font-family: Abel;}
 #divAgenda {}
 #divProf {width: 20vw;min-height: 50vh;border:1px solid gray;float:left;}
 #divTurnos {width: 75vw;min-height: 50vh;border:1px solid gray;float:left;margin-left:20px;max-height: 70vh;overflow-y: auto;}
@@ -26,3 +27,5 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .profSelected {font-weight: bold;color:#22aacc;font-family: Abel;text-decoration: none}
 .profUnSelected {font-weight: normal;color:gray;font-family: Abel;text-decoration: none;}
 //#cmdBuscarPaciente img {width: 24px; height: 24px;}
+#txtFecha {border:1px solid #dddddd;background-color: transparent;padding: 5px 10px;font-family: Abel; font-size: 1.1em}
+#tblProf {border-collapse: collapse;font-family: Abel;font-size: 1em;width: 100%}
