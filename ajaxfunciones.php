@@ -169,7 +169,33 @@ switch ($consulta) {
 		echo query($cadena, "Q", null);
 
 		break;		
+	case 'cargarUsuarios':
+		$cadena="select idUsuario, Nombre from usuarios order by 2";
 
+		echo query($cadena, "Q", null);
+
+		break;		
+
+	case 'cargarPermisos':
+		$user=$_GET['id'];
+		$cadena="SELECT m.idModulo, m.Nombre ,p.idPermiso
+				FROM modulos m LEFT JOIN permisos p ON p.idModulo=m.idModulo AND p.idUsuario=$user order by 1";
+
+		echo query($cadena, "Q", null);
+
+		break;		
+	case 'grant':
+		$user=$_GET['user'];
+		$mod=$_GET['modulo'];
+		$tipo=$_GET['tipo'];
+
+		if ($tipo=='on') {
+			$cadena="insert into permisos (idUsuario, idModulo) values ($user, $mod)";
+		} else {
+			$cadena="delete from permisos where idUsuario=$user and idModulo=$mod";
+		}
+		echo query($cadena, "E", null);
+		break;
 	case 'cargarPacientes':
 		if (sizeof($_GET)>1) {
 			

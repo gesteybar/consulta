@@ -31,7 +31,7 @@
 	<? if (!isset($_SESSION['idUsuario'])) {?>
 	<div id="header">
 		<img src="./imagenes/logo1.png">
-		<p id="tituloLogo">CRECER Consultorios Médicos</p>
+		<p id="tituloLogo">CRECER Consultorios</p>
 	</div>
 	<div id="divLogin">
 		<table id="tblLogin">

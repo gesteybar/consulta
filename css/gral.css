@@ -105,9 +105,9 @@ h3 {font-family: oswald;font-size: 1.2em;color:white;text-shadow: 1px 1px 1px bl
 
 /***************************************************************************************************************************************/
 /***************************************************INDEX*******************************************************************************/
-#header {position: absolute;top:0;left: 0; margin-left:auto;height: 150px;text-align: center;}
+#header {position: relative;top:0;left: 0; margin-left:auto;min-height: 150px;text-align: center;}
 #tituloLogo {font-family: Baumans;font-size: 3em;color:rgb(40,75,100);display: inline-block;margin:0;}
-#divLogin {position: absolute;
+#divLogin {position: relative;
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f5f6+0,e3eaed+37,c8d7dc+100;Grey+3D+%234 */
 background: #ffffff; /* Old browsers */
 background: -moz-linear-gradient(top, #ffffff 0%, #e3eaed 37%, #c8d7dc 100%); /* FF3.6-15 */
