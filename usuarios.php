@@ -52,6 +52,7 @@
 			setValue('txtNombre', obj[0].Nombre);
 			setValue('txtLogin', obj[0].Login);
 			setValue('txtPass', '******');
+			setValue('cboPerfil', obj[0].Perfil);
 
 			cargarPermisos(obj[0].idUsuario);
 			$("#abm").show();
@@ -89,8 +90,9 @@
 		var nombre=getValue('txtNombre');
 		var login=getValue('txtLogin');
 		var pass=getValue('txtPass');
+		var perfil=getValue('cboPerfil');
 
-		oAjax.request="customQuery&query=call SP_InsertUser("+id+", '"+nombre+"', '"+login+"', '"+pass+"')&tipo=E";
+		oAjax.request="customQuery&query=call SP_InsertUser("+id+", '"+nombre+"', '"+login+"', '"+pass+"', '"+perfil+"')&tipo=E";
 		oAjax.send(resp);
 
 		function resp(data) {
@@ -145,12 +147,12 @@
 </head>
 <body>
 <? include('header.php'); ?>
-	<h3>Especialidades</h3>
+	<h3>Usuarios</h3>
 	<div id="wrapper1">
 		<button class="botonok" onclick="nuevoDato();">Agregar</button>
 		<table id="tblUsuarios" class="tabla1">
 			<thead>
-				<tr><th>Especialidades</th></tr>
+				<tr><th>Usuarios</th></tr>
 			</thead>
 			<tbody id="tbodyUsu"></tbody>
 		</table>
@@ -177,6 +179,10 @@
 			<tr>
 				<td>Password</td>
 				<td><input type="password" id="txtPass"></td>
+			</tr>
+			<tr>
+				<td>Tipo de cuenta</td>
+				<td><select id="cboPerfil"><option value="A">Administrador</option><option value="P">Profesional</option><option value="R">Recepcionista</option></select></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">

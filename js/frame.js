@@ -173,7 +173,7 @@ function AgruparTabla (tabla, col, firstRow, condicion, colCond) {
 			ant=tr[i].cells[col].innerText;
 			
 			var th=document.createElement('th');
-			th.colSpan=tbl.rows[0].cells.length;
+			th.colSpan=tr[i].cells.length;
 			th.innerText=tr[i].cells[col].innerText;
 			var trg=tbl.insertRow(i);
 			trg.appendChild(th);
@@ -746,6 +746,26 @@ function printdiv(printpage, titulo) {
 	document.body.innerHTML = oldstr;
 	return false;
 }
+function printDiv2(printObj, titulo) {
+	var div=document.createElement('div');
+	div.id="__tmpDiv__";
+	div.style.height="100vh";
+	div.style.width="100vw";
+	div.style.position="absolute";
+	div.style.left="0";div.style.top="0";
+	div.style.zorder="10000";
+	div.style.backgroundColor="white";
+
+	var p=document.createElement('h3');
+	p.innerText=titulo;
+	div.appendChild(p);
+	div.innerHTML+=document.getElementById(printObj).innerHTML;
+	document.body.appendChild(div);
+	//$("#swimbi").hide();
+	window.print();
+	document.body.removeChild(div);
+	//$("#swimbi").show();
+}
 
 function pad(n, width, z) {
   z = z || '0';
@@ -866,4 +886,12 @@ function logoff() {
 		location.href="./index.php";
 		
 	}
+}
+function JsonParser(str) {
+	str=str.replace(/\t/g, '');
+	str=str.replace(/\&/g, '');
+	//str=str.replace(/\"/g, '´´');
+	//str=str.replace(/\'/g, "´");
+
+	return JSON.parse(str);
 }

@@ -2,13 +2,14 @@
 #swimbi{
 	padding: 0px 0px 0 0px;
 	position: absolute;
-	width: 95%;
+	width: 80%;
 	text-align: center;
 	z-index: 5000;
 	font-style: normal;
 	font-variant: normal;
 	font-weight: normal;
 	left: 0px;
+	
 }
 #swimbi>ul{
 	float: right;

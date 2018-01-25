@@ -100,7 +100,7 @@ switch ($consulta) {
 	case 'login':
 		$user=$_GET['usuario'];
 		$pass=$_GET['pass'];
-		$cadena="select Login, idUsuario, Nombre from Usuarios where login='".$user."' and pass=MD5('".$pass."')";
+		$cadena="select Login, idUsuario, Nombre, Perfil from Usuarios where login='".$user."' and pass=MD5('".$pass."')";
 		//die($cadena);
 		$db=GetConnection();
 		$r=mysqli_query($db, $cadena);
@@ -111,6 +111,7 @@ switch ($consulta) {
 					$_SESSION['idUsuario']=$f['idUsuario'];
 					$_SESSION['login']=$f['Login'];
 					$_SESSION['nombre']=$f['Nombre'];
+					$_SESSION['perfil']=$f['Perfil'];
 
 					echo 'ok';
 			}
@@ -352,6 +353,37 @@ switch ($consulta) {
 			echo '{"respuesta":"'.mysqli_error($db).'"}';
 		}
 		break;
+	case 'cargarMovimientos':
+		$desde=$_GET['desde'];
+		$hasta=$_GET['hasta'];
+
+		$cadena="SELECT idCaja, date_format(Fecha, '%d/%m/%Y') Fecha, c.idConcepto, co.Nombre Concepto, c.idMediosPago, m.Nombre Medio, c.idUsuario, u.Nombre Usuario, 
+				CASE c.Tipo WHEN 'E' THEN Importe ELSE 0 END Ingresos, CASE c.Tipo WHEN 'S' THEN Importe ELSE 0 END Salidas
+				FROM caja c INNER JOIN conceptos co ON c.idConcepto=co.idConcepto
+				INNER JOIN usuarios u ON c.idUsuario=u.idUsuario
+				INNER JOIN mediospago m ON c.idMediosPago=m.idMediosPago
+				WHERE Fecha BETWEEN '$desde' AND '$hasta'";
+
+		echo query($cadena, 'Q', null);
+		break;
+	case 'guardarMovimiento':
+		$fecha=$_GET['fecha'];
+		$con=$_GET['con'];
+		$importe=$_GET['importe'];
+		$medio=$_GET['medio'];
+		$usu=$_SESSION['idUsuario'];
+		$desc=$_GET['desc'];
+		$prof=$_GET['prof'];
+
+		if ($prof!='') $desc=$prof;
+
+		$cadena="insert into caja (idConcepto, idMediosPago, idUsuario, Fecha, Concepto, Importe, Periodo, FechaCarga, Tipo) values 
+		($con, $medio, $usu, '$fecha', '$desc', '$importe', DATE_FORMAT('$fecha', '%m/%Y'), now(), (select Tipo from conceptos where idConcepto=$con))";
+
+		echo query($cadena, 'E', null);
+
+		break;
+
 }
 
 

@@ -35,7 +35,7 @@ background: -webkit-linear-gradient(top, #fffcfc 0%,#fff4f4 37%,#c8d7dc 100%); /
 background: linear-gradient(to bottom, #fffcfc 0%,#fff4f4 37%,#c8d7dc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffcfc', endColorstr='#c8d7dc',GradientType=0 ); /* IE6-9 */	
 }
-#logo {width: 100px;display: inline-block;}
+#logo {width: 100px;display: inline-block;vertical-align: middle;}
 .botonok {
 background: #3498db;
 background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
@@ -68,11 +68,12 @@ background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */}
-.tabla1 th {background: #f2f5f6; 
-background: -moz-linear-gradient(top, #f2f5f6 0%, #e3eaed 37%, #c8d7dc 100%);
-background: -webkit-linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%);
-background: linear-gradient(to bottom, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); 
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); 
+.tabla1 th {/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b5bdc8+0,828c95+36,28343b+100;Grey+Black+3D */
+background: rgb(181,189,200); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(181,189,200,1) 0%, rgba(130,140,149,1) 36%, rgba(40,52,59,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */ 
 color: #ffffff;text-shadow: 1px 1px 1px black;font-size: 1.1em; border-radius: 3px}
 .tabla1 td {background-color: transparent;color: #333333;text-shadow: 1px 1px 1px gray;font-size: 0.9em;padding: 3px}
 .tabla2 {border-radius: 4px;font-family: Oswald;padding: 0px;}
@@ -83,6 +84,10 @@ background: linear-gradient(to bottom, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); 
 color: #ffffff;text-shadow: 1px 1px 1px black;font-size: 1.1em; border-radius: 3px}
 .tabla2 td {background-color: transparent;color: #333333;text-shadow: 1px 1px 1px gray;font-size: 0.9em;padding: 3px}
+.tablaForm {border-collapse: collapse;font-family: Abel;font-size: 1em;color: #3388aa;background-color: transparent;}
+.tablaForm th {text-shadow: 1px 1px 1px #999999; font-weight: normal;text-align: left;padding: 5px}
+.tablaForm td {padding: 5px;}
+.tablaForm input, select, textarea {border-radius: 3px;padding: 5px 8px;font-family: Abel;border:1px solid gray;}
 .linkGral {font-family: Abel;text-decoration:none; color:black;}
 h3 {font-family: oswald;font-size: 1.2em;color:white;text-shadow: 1px 1px 1px black;background-color:rgb(40,75,100); padding: 8px; font-weight: normal;}
 .contextMenu {background-color: #dddddd;color:#444444;font-family: Abel;border:1px solid gray;box-shadow: 2px 2px 2px black;border-radius: 3px;}
@@ -119,3 +124,5 @@ width: 100%;margin-top: 180px;height: 200px;left: 0}
 #tblLogin input {border:1px solid #dddddd;background-color: transparent;padding: 5px 10px;font-family: Abel; font-size: 1.1em}
 #tblLogin input:focus {border:1px solid gray;background-color: rgba(255,255,255,0.2)} 
 #content {width: 100vw;min-height: 200px;overflow: auto;padding: 10px 0 0 0;}
+#lblUsuario {vertical-align: middle;display: inline-block;margin:0 10px 0 50px;font-family: Baumans; font-size: 1.2em;float: right;}
+#lblUsuario img {vertical-align: middle;width:48px;}
