@@ -172,24 +172,20 @@
 	function ingresarPeriodo() {
 		var periodo=getValue('txtNuevoPeriodo');
 		
-		if (base!='' && base !=undefined) {
-			oAjax.async=false;
-			oAjax.request="copiarPeriodo&base="+base+"&periodo="+periodo;
-			oAjax.send(resp);
-			function resp(data) {
-				if (data.responseText!='ok') {
-					alert('Error: '+data.responseText)
-					return false;
-				}
-				cargarPeriodos();
-				setValue('hidPeriodo', periodo);
+		oAjax.async=false;
+		oAjax.request="customQuery&query=CALL SP_AbrirPeriodo('"+periodo+"')&tipo=E";
+		oAjax.send(resp);
+		function resp(data) {
+			if (data.responseText!='ok') {
+				alert('Error: '+data.responseText)
+				return false;
 			}
-		} else {
-			AgregarFila('tbodyCons', 0, periodo, [periodo]);
-			AgregarBotonTabla('tbodyCons', 0, '', 'cargarGrilla',0,'','',periodo, 0);
+			cargarPeriodos();
+			setValue('hidPeriodo', periodo);
+			cerrar('frmNuevoPeriodo');
+			cargarGrilla(periodo);
+			
 		}
-		cerrar('frmNuevoPeriodo');
-		cargarGrilla(periodo);
 	}
 	function cargarGrilla(periodo) {
 		setValue('hidPeriodo', periodo);

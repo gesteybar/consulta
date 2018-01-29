@@ -53,6 +53,11 @@
 			setValue('txtLogin', obj[0].Login);
 			setValue('txtPass', '******');
 			setValue('cboPerfil', obj[0].Perfil);
+			$("#trProf").hide();
+			if (obj[0].ProfAsoc!='') {
+				setValue('cboProf', obj[0].ProfAsoc);
+				$("#trProf").show();
+			}
 
 			cargarPermisos(obj[0].idUsuario);
 			$("#abm").show();
@@ -65,6 +70,8 @@
 		setValue('txtID','0');
 		setValue('txtNombre','');
 		setValue('txtPass','');
+		setValue('cboPerfil', 'A');
+		$("#trProf").hide();
 		$("#abm").show();
 		$("#cmdBorrar").hide();
 
@@ -91,8 +98,9 @@
 		var login=getValue('txtLogin');
 		var pass=getValue('txtPass');
 		var perfil=getValue('cboPerfil');
+		var prof=getValue('cboProf');
 
-		oAjax.request="customQuery&query=call SP_InsertUser("+id+", '"+nombre+"', '"+login+"', '"+pass+"', '"+perfil+"')&tipo=E";
+		oAjax.request="customQuery&query=call SP_InsertUser("+id+", '"+nombre+"', '"+login+"', '"+pass+"', '"+perfil+"', '"+prof+"')&tipo=E";
 		oAjax.send(resp);
 
 		function resp(data) {
@@ -182,7 +190,14 @@
 			</tr>
 			<tr>
 				<td>Tipo de cuenta</td>
-				<td><select id="cboPerfil"><option value="A">Administrador</option><option value="P">Profesional</option><option value="R">Recepcionista</option></select></td>
+				<td><select id="cboPerfil" onchange="if (getValue(this.id)=='P') $('#trProf').show(); else $('#trProf').hide();"><option value="A">Administrador</option><option value="P">Profesional</option><option value="R">Recepcionista</option></select></td>
+			</tr>
+			<tr id="trProf" style="display:none;">
+				<td>Profesional asociado</td>
+				<td><select id="cboProf"></select></td>
+				<script type="text/javascript">
+					LlenarComboSQL('cboProf', 'select idProfesional, Nombre from profesionales order by 2', true);
+				</script>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">

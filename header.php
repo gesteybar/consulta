@@ -1,6 +1,7 @@
 		<!-- swimbi code start -->
 		<link rel="stylesheet" type="text/css" href="menu_files/swimbi.css"/>
 		<img id="logo" src="./imagenes/logo1.png">
+		<p style="float:left;font-family:Baumans;font-size:1.5em;color:#006677">Crecer Consultorios</p>
 
 		<div id="swimbi" style="display:inline-block;z-index:5000;">
 		<? if($_SESSION['perfil']=='A') {?>
@@ -43,11 +44,12 @@
 		        <li><a href="javascript:void(0);">Consultorio</a>
 		            <ul>
 		                <li><a href="javascript:void(0);" onclick="go(6);">Turnos</a></li>
+		                <li><a href="javascript:logoff();">Cerrar sesión</a></li>
 		            </ul>
 		        </li>
 		        <li><a href="javascript:void(0);">Reportes</a>
 		            <ul>
-		                <li><a href="javascript:void(0);" onclick="go(8);">Reportes de agendas</a></li>
+		                <li><a href="javascript:void(0);" onclick="go(13,'id=13');">Reportes agendas</a></li>
 		                <li><a href="#">Reportes de productividad</a></li>
 		            </ul>
 		        </li>

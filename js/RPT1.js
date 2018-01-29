@@ -32,7 +32,14 @@ function filtrar(rpt) {
 			cadena+=" WHERE t.Fecha='"+f.formats.compound.mySQL+"' ORDER BY t.idProfesional, t.Hora";
 
 			break;
-
+		case '13':
+			var prof=getValue('hidProf');
+			var cadena="SELECT date_format(t.Fecha, '%d/%m/%Y') Fecha, t.Hora, t.Paciente, t.ApellidoPac, p.Celular,p.DNI, p.NroSocio, t.Estado, pr.Nombre ";
+			cadena+=" FROM turnos t INNER JOIN pacientes p ON t.idPaciente=p.idPaciente";
+			cadena+=" LEFT JOIN prepagas pr ON pr.idPrepaga=p.idPrepaga ";
+			cadena+=" WHERE t.idProfesional="+prof;
+			cadena+=" ORDER BY Fecha, Hora";
+			break;
 	}
 
 	oQuery.query=cadena;
@@ -42,6 +49,9 @@ function filtrar(rpt) {
 	switch (rpt) {
 		case '8':
 			AgruparTabla('tblReporte', 0, 1, '',0);
+			break;
+		case '13':
+			AgruparTabla('tblReporte', 0, 1, '', 0);
 			break;
 	}
 }

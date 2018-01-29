@@ -112,14 +112,14 @@ h3 {font-family: oswald;font-size: 1.2em;color:white;text-shadow: 1px 1px 1px bl
 /***************************************************INDEX*******************************************************************************/
 #header {position: relative;top:0;left: 0; margin-left:auto;min-height: 150px;text-align: center;}
 #tituloLogo {font-family: Baumans;font-size: 3em;color:rgb(40,75,100);display: inline-block;margin:0;}
-#divLogin {position: relative;
+#divLogin {position: absolute;
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f5f6+0,e3eaed+37,c8d7dc+100;Grey+3D+%234 */
 background: #ffffff; /* Old browsers */
 background: -moz-linear-gradient(top, #ffffff 0%, #e3eaed 37%, #c8d7dc 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(top, #ffffff 0%,#e3eaed 37%,#c8d7dc 100%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(to bottom, #ffffff 0%,#e3eaed 37%,#c8d7dc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#c8d7dc',GradientType=0 ); /* IE6-9 */
-width: 100%;margin-top: 180px;height: 200px;left: 0}
+width: 100vw;margin-top: 0;height: 100vh;left: 0;top:0;}
 #tblLogin {margin:20px auto;border-collapse: collapse;font-family: Abel;font-size: 1.2em;color:rgb(40,75,100);}
 #tblLogin input {border:1px solid #dddddd;background-color: transparent;padding: 5px 10px;font-family: Abel; font-size: 1.1em}
 #tblLogin input:focus {border:1px solid gray;background-color: rgba(255,255,255,0.2)} 

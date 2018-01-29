@@ -100,7 +100,7 @@ switch ($consulta) {
 	case 'login':
 		$user=$_GET['usuario'];
 		$pass=$_GET['pass'];
-		$cadena="select Login, idUsuario, Nombre, Perfil from Usuarios where login='".$user."' and pass=MD5('".$pass."')";
+		$cadena="select Login, idUsuario, Nombre, Perfil, ProfAsoc from Usuarios where login='".$user."' and pass=MD5('".$pass."')";
 		//die($cadena);
 		$db=GetConnection();
 		$r=mysqli_query($db, $cadena);
@@ -112,6 +112,7 @@ switch ($consulta) {
 					$_SESSION['login']=$f['Login'];
 					$_SESSION['nombre']=$f['Nombre'];
 					$_SESSION['perfil']=$f['Perfil'];
+					$_SESSION['prof']=$f['ProfAsoc'];
 
 					echo 'ok';
 			}

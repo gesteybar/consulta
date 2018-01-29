@@ -29,11 +29,11 @@
 </head>
 <body>
 	<? if (!isset($_SESSION['idUsuario'])) {?>
-	<div id="header">
-		<img src="./imagenes/logo1.png">
-		<p id="tituloLogo">CRECER Consultorios</p>
-	</div>
 	<div id="divLogin">
+		<div id="header">
+			<img src="./imagenes/logo1.png">
+			<p id="tituloLogo">CRECER Consultorios</p>
+		</div>
 		<table id="tblLogin">
 			<tr>
 				<td>Usuario:</td>
