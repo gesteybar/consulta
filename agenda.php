@@ -49,8 +49,8 @@
 				if (j>0) {
 					
 					if (dia<dias) 
-					if (oF.getDay()==j && dia==0)
-						dia++;
+						if ((oF.getDay()==j || oF.getDay()==0) && dia==0)
+							dia++;
 
 					if (dia>0 && dia<=dias) {
 						var a =document.createElement('a');
