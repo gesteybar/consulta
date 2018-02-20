@@ -335,7 +335,9 @@
 				</tr>
 			</table>
 		</div>		
-
+		<div id="divTurnosLibres">
+			
+		</div>
 	</div>
 	<div class="contextMenu" id="ctxMenu" style="display:none;">
 		<input type="hidden" id="hidMenuTurno">

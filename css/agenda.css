@@ -1,19 +1,21 @@
 #wrapper1 {width: 10vw;float:left;min-height: 50vh;}
 #wrapper2 {width: 85vw;float:left;min-height: 50vh;margin-left: 10px}
 #abm {width:85vw;float: left;margin-left: 20px;min-height: 50vh;
-background: #ffffff; /* Old browsers */
-background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+background: #ffffff;
+background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);
+background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 );}
 #tblPeriodo {width: 10vw;}
+h4 {font-family: RobotoThin;font-size: 1.2em;background-color: transparent;color:gray;padding: 3px;margin:3px;font-weight: lighter;}
 .tabla1 a {font-family: Abel;text-decoration:none; color:black;color:#444444;font-size: 1em;}
 .tabla1 a:hover {color:orange;}
 #tblAgenda {border-collapse: collapse;font-family: Abel;width: 100%}
 #tblAgenda td {border:1px solid #dddddd;border-radius: 3px;height: 80px;vertical-align: top;}
 #frmNuevoPeriodo {width: 40vw;height: 200px;overflow: auto;}
-#frmAgregarProf {width: 40vw;height: 200px;overflow: auto;}
+#frmAgregarProf {width: 40vw;height: 260px;overflow: auto;}
 #tblNPer {margin:0 auto; width: 90%;font-family: Abel;}
 #tblNPer input, select {border:1px solid #dddddd;border-radius: 3px;padding: 5px 8px; font-family: Abel}
 #tblNProf {margin:0 auto; width: 90%;font-family: Abel;}
 #tblNProf input, select {border:1px solid #dddddd;border-radius: 3px;padding: 5px 8px; font-family: Abel}
+#cboConsultorio {padding:2px;margin:0;font-family: RobotoNormal; font-size: 1em}

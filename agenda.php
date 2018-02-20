@@ -72,8 +72,14 @@
 						mod2.innerHTML="Mod 2: Disponible";
 						mod2.onclick=function () {addProf(this)};
 
+						var mod3=mod1.cloneNode(false);
+						mod3.id="mod3_"+dia;
+						mod3.innerHTML="Mod 3: Disponible";
+						mod3.onclick=function () {addProf(this)};
+
 						td.appendChild(mod1);
 						td.appendChild(mod2);
+						td.appendChild(mod3);
 						dia++;
 					}
 				} else {
@@ -92,7 +98,7 @@
 	function addProf(obj) {
 		var periodo=getValue('hidPeriodo');
 
-		var fecha= pad(obj.id.replace('mod1_', '').replace('mod2_', '')+"/"+periodo,10, '0');
+		var fecha= pad(obj.id.replace('mod1_', '').replace('mod2_', '').replace('mod3_', '')+"/"+periodo,10, '0');
 		var mod=obj.id.substring(3,4);
 		mostrarNuevo('frmAgregarProf');
 		setValue('cboModulo', mod);
@@ -109,10 +115,17 @@
 		var prof=getValue('cboProf');
 		var esp=getValue('cboEsp');
 		var cons=getValue('cboConsultorio');
+		var desde=getValue('txtDesde');
+		var hasta=getValue('txtHasta');
+
+		if (mod==0 && (desde=='' || hasta=='')) {
+			alert('Debe ingresar el horario para atención cuando selecciona Por Horario');
+			return false;
+		}
 
 		var link=document.getElementById(getValue('hidMod'));
 
-		oAjax.request="ingresarModulo&prof="+prof+"&fecha="+fecha+"&mod="+mod+"&periodo="+periodo+"&esp="+esp+"&cons="+cons;
+		oAjax.request="ingresarModulo&prof="+prof+"&fecha="+fecha+"&mod="+mod+"&desde="+desde+"&hasta="+hasta+"&periodo="+periodo+"&esp="+esp+"&cons="+cons;
 		oAjax.send(resp);
 
 		function resp(data) {
@@ -151,7 +164,7 @@
 
 	}
 	function cargarPeriodos() {
-		oAjax.request="customQuery&query=select distinct Periodo from agenda order by Fecha desc&tipo=Q";
+		oAjax.request="customQuery&query=select distinct Periodo, '' boton from agenda order by Fecha desc&tipo=Q";
 		oAjax.send(resp);
 
 		function resp(data) {
@@ -161,9 +174,30 @@
 			}
 			var obj=JSON.parse(data.responseText);
 			JsonToTable(obj, 'tbodyCons', false);
+			AgregarBotonTabla('tbodyCons', 1, 'redalert.png', 'eliminarPeriodo',0, true);
 			AgregarBotonTabla('tbodyCons', 0, '', 'cargarGrilla',0);
+			
+			
+			
 		}
 
+	}
+	function eliminarPeriodo(id) {
+		if (!confirm('Confirma eliminar este período?'))
+			return false;
+
+		oAjax.request="borrarPeriodo&id="+id;
+		oAjax.send(resp);
+
+		function resp(data) {
+			if (data.responseText=='ok') {
+				cargarPeriodos();
+			} else {
+				setValue('tbodyAgenda', '');
+				alert(data.responseText);
+				return false;
+			}
+		}
 	}
 	function cerrar(ventana) {
 		var padre=document.getElementById(ventana).parentNode;
@@ -321,7 +355,11 @@
 				</tr>
 				<tr>
 					<td>Módulo</td>
-					<td><select id="cboModulo"><option value="1">Módulo 1 (Mañana)</option><option value="2">Módulo 2 (Tarde)</option></select></td>
+					<td><select id="cboModulo" onchange="if (getValue(this.id)==3) $('#trCustom').show(); else $('#trCustom').hide();"><option value="3">Por horario</option> <option value="1">Módulo 1 (Mañana)</option><option value="2">Módulo 2 (Tarde)</option></select></td>
+				</tr>
+				<tr id="trCustom" style="display:none">
+					<td>Horarios</td>
+					<td>De: <input type="time" id="txtDesde"> a <input type="time" id="txtHasta"></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
@@ -345,7 +383,7 @@
 	<? include('header.php'); ?>
 	<h3>Agenda</h3>
 	<div id="wrapper1">
-		<button class="botonok" onclick="mostrarNuevo('frmNuevoPeriodo');">Abrir nuevo Período</button>
+		<button class="botonok" onclick="mostrarNuevo('frmNuevoPeriodo');">Abrir Período</button>
 		<table id="tblPeriodo" class="tabla1">
 			<thead>
 				<tr><th>Período</th></tr>
@@ -356,8 +394,9 @@
 	</div>
 	<input type="hidden" id="hidPeriodo">
 	<div id="wrapper2">
-		<select id="cboConsultorio" onchange="cargarGrilla(getValue('hidPeriodo'));"></select>
-		<h3 style="display:inline-block;margin:0 10px;" id="lblPeriodo"></h3>
+		
+		<h4 style="display:inline-block;margin:0 10px;" id="lblPeriodo"></h4>
+		<h4 style="display:inline-block;padding:2px">Consultorio seleccionado: <select id="cboConsultorio" onchange="cargarGrilla(getValue('hidPeriodo'));"></select></h4>
 		<script>LlenarComboSQL('cboConsultorio', 'select idConsultorio, Nombre from consultorios')</script>
 		<table id="tblAgenda" class="tabla1">
 			<thead>
@@ -367,9 +406,9 @@
 				</tr>
 			</thead>
 			<tbody id="tbodyAgenda">
-	<td id="tdDemo">
+<!--	<td id="tdDemo">
 		<a id="aDemo" href="" onclick="asignar(this)"></a>
-	</td>
+	</td>-->
 				
 			</tbody>
 		</table>

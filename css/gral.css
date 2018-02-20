@@ -12,10 +12,14 @@
 	font-family:Abel;
 	src:url("../fonts/Abel-Regular.ttf");
 }
-/*@font-face {
-	font-family:Cabin;
-	src:url("../fonts/Cabin-Regular.ttf");
-}*/
+@font-face {
+	font-family:RobotoThin;
+	src:url("../fonts/Roboto-Thin.ttf");
+}
+@font-face {
+	font-family:RobotoNormal;
+	src:url("../fonts/Roboto-Regular.ttf");
+}
 /*@font-face {
 	font-family:Nunito;
 	src:url("../fonts/Nunito-Regular.ttf");

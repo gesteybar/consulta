@@ -231,10 +231,12 @@ switch ($consulta) {
 		$mod=$_GET['mod'];
 		$esp=$_GET['esp'];
 		$cons=$_GET['cons'];
+		$desde=$_GET['desde'];
+		$hasta=$_GET['hasta'];
 
 		/*$cadena="insert into agenda (idEspecialidad, idConsultorio, idProfesional, Turno, Fecha, Periodo) values (
 		$esp, $cons, $prof, $mod, '$fecha', '$periodo')";*/
-		$cadena="Call SP_InsertAgenda($esp, $prof, $cons, $mod, '$fecha', '$periodo')";
+		$cadena="Call SP_InsertAgenda($esp, $prof, $cons, $mod, '$fecha', '$periodo', '$desde', '$hasta')";
 
 		echo query($cadena, "E", null);
 		break;
@@ -383,6 +385,12 @@ switch ($consulta) {
 
 		echo query($cadena, 'E', null);
 
+		break;
+	case 'borrarPeriodo':
+		$id=$_GET['id'];
+		$cadena="delete from agenda where Periodo='$id'";
+
+		echo query($cadena, 'E', null);		
 		break;
 
 }
