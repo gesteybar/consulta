@@ -47,9 +47,15 @@
 		}
 	}
 	function cancel() {
-		setValue('txtSup','');
-		setValue('txtID','0');
-		setValue('txtNombre','');
+			setValue('txtID', 0);
+			setValue('txtNombre', '');
+			setValue('txtApellido', '');
+			setValue('txtCelular', '');
+			setValue('txtMail', '');
+			setValue('txtNroDoc', '');
+			setValue('txtSocio', '');
+			setValue('cboPrepaga', '');
+			setValue('txtFechaNac', '');
 		$("#abm").hide();
 	}
 

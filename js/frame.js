@@ -137,8 +137,10 @@ function AgregarBotonTabla(tabla, col, imagen, funcion, refcol,prefijo, clase,co
 	for (var i = 0; i < tr.length; i++) {
 		if (col<0) {
 			for (var j = 0; j < tr[i].cells.length; j++) {
-				
-				tr[i].cells[j].innerHTML ='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+tr[i].cells[refcol].innerText+'\', this);">'+tr[i].cells[j].innerHTML+'</a>';
+				var trtmp=tr[i];
+				trtmp='<tr class="trClickable" onclick="'+funcion+'(\''+tr[i].cells[refcol].innerText+'\', this);">'+tr[i].innerHTML+'</tr>';
+				//tr[i].cells[j].innerHTML ='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+tr[i].cells[refcol].innerText+'\', this);">'+tr[i].cells[j].innerHTML+'</a>';
+				tr[i].outerHTML=trtmp;
 				
 			}
 		} else {

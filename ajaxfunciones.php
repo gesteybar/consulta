@@ -217,7 +217,7 @@ switch ($consulta) {
 
 		} else {
 			
-			$cadena="SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail from pacientes pa inner join prepagas pr on pa.idPrepaga=pr.idPrepaga where FechaAlta >=date_add(now(), INTERVAL -30 DAY) order by 2";
+			$cadena="SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga ORDER BY FechaAlta DESC, 2 ASC LIMIT 50";
 		}
 
 
@@ -312,7 +312,7 @@ switch ($consulta) {
 		$fecha=$_GET['fecha'];
 		$prof=$_GET['Prof'];
 
-		$cadena="Call SP_LeerTurnos('$fecha',$prof);";
+		$cadena="Call SP_LeerTurnos('$fecha',$prof,1);";
 
 		echo query($cadena, "Q", null);
 		break;
@@ -392,7 +392,24 @@ switch ($consulta) {
 
 		echo query($cadena, 'E', null);		
 		break;
+	case 'turnosLibres':
+		$idProf=$_GET['idProf'];
+		$fecha=$_GET['fecha'];
 
+		
+		$cadena="Call SP_TurnosLibres($idProf,'$fecha')";
+		query($cadena,'E', null);
+
+		$cadena="SELECT Fecha, COUNT(1) libres, Paciente FROM tmpbuffer WHERE Paciente IS NULL GROUP BY Fecha, Paciente LIMIT 5";
+		echo query($cadena,'Q', null);
+
+		break; 
+	case 'horarioLibre':
+		$fecha=$_GET['fecha'];
+
+		$cadena="select Hora from tmpbuffer where Fecha='$fecha' and Paciente is null";
+		echo query($cadena, "Q", null);
+		break;
 }
 
 

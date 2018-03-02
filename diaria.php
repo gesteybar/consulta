@@ -27,7 +27,7 @@
 			JsonToTable(obj, 'tbodyProf', false);
 			OcultarColumnaTabla('tbodyProf', 0);
 			AgregarBotonTabla('tbodyProf', 1, '', 'cargarTurnos', 0, false, 'profUnSelected');
-			AgregarBotonTabla('tbodyProf', 1, 'doctor.png', 'cargarTurnos', 0, true, 'icono');
+			AgregarBotonTabla('tbodyProf', 1, 'doctor.png', 'turnosLibres', 0, true, 'icono');
 		}
 	}
 	function cargarTurnos(id, obj) {
@@ -62,6 +62,7 @@
 			OcultarColumnaTabla('tbodyTurnos', 2);
 			OcultarColumnaTabla('tbodyTurnos', 4);
 			OcultarColumnaTabla('tbodyTurnos', 8);
+			OcultarColumnaTabla('tbodyTurnos', 9);
 			AgregarBotonTabla('tbodyTurnos', 1, '', 'mostrarAsignarTurno', 0);
 			AgregarBotonTabla('tbodyTurnos', 1, 'menu2.png', 'showMenu', 0, true, 'icono');
 
@@ -225,6 +226,50 @@
 
 
 	}
+	function turnosLibres(idProf) {
+		$("#divTurnosLibres").parent().show();
+		$("#divTurnosLibres").show();
+		setValue('hidProf', idProf);
+		espera('on');
+		oAjax.request="turnosLibres&idProf="+idProf+"&fecha="+getValue('txtFecha');
+		oAjax.send(resp);
+
+		function resp(data) {
+			espera('off');
+			if (data.responseText.length<3) {
+				setValue('tbodyFechasLibres', '');
+				return false;
+			}
+			var obj=JSON.parse(data.responseText);
+			JsonToTable(obj, 'tbodyFechasLibres', false);
+			AgregarBotonTabla('tbodyFechasLibres', 0, '', 'mostrarHorarioLibre', 0);
+		}
+	}
+	function mostrarHorarioLibre(fecha) {
+		setValue('hidFechaLibre', fecha);
+		oAjax.request="horarioLibre&fecha="+fecha;
+		oAjax.send(resp);
+
+		function resp(data) {
+			
+			if (data.responseText.length<3) {
+				setValue('tbodyFechasLibres', '');
+				return false;
+			}
+			var obj=JSON.parse(data.responseText);
+			JsonToTable(obj, 'tbodyHorariosLibres', false);
+			AgregarBotonTabla('tbodyHorariosLibres', 0, '', 'setHorario', 0);
+		}
+
+	}
+	function setHorario(id) {
+		var fecha=getValue('hidFechaLibre');
+		setValue('txtFecha', fecha);
+		cargarProf();
+		cargarTurnos(getValue('hidProf'), null);
+		cerrar('divTurnosLibres');
+		
+	}
 	</script>
 
 <script type="text/javascript">
@@ -259,7 +304,7 @@
 </head>
 <body>
 	<div class="fondonegro" style="display:none;">
-		<div id="frmNuevoTurno" class="ventana">
+		<div id="frmNuevoTurno" class="ventana" style="z-index:10000;display:none;">
 			<h2>Nuevo turno</h2>
 			<input type="hidden" id="hidTurno">
 			<table id="tblNTur">
@@ -335,8 +380,19 @@
 				</tr>
 			</table>
 		</div>		
-		<div id="divTurnosLibres">
-			
+		<div id="divTurnosLibres" class="ventana" style="z-index:10000;display:none;">
+			<h2>Buscar turnos libres</h2>
+			<table class="tabla1" id="tblFechasLibres">
+				<thead><col width="50%"><col width="50%"><tr><th>Fecha</th><th>Turnos libres</th></tr></thead>
+				<tbody id="tbodyFechasLibres"></tbody>
+			</table>
+			<input type="hidden" id="hidFechaLibre">
+			<table class="tabla1" id="tblHorariosLibres">
+				<thead><col width="100%"><tr><th>Horario</th></tr></thead>
+				<tbody id="tbodyHorariosLibres"></tbody>
+
+			</table>
+			<div style="text-align:center"><button class="botoncancel" type="button" onclick="cerrar('divTurnosLibres')">Cerrar</button></div>
 		</div>
 	</div>
 	<div class="contextMenu" id="ctxMenu" style="display:none;">

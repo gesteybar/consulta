@@ -29,3 +29,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 //#cmdBuscarPaciente img {width: 24px; height: 24px;}
 #txtFecha {border:1px solid #dddddd;background-color: transparent;padding: 5px 10px;font-family: Abel; font-size: 1.1em}
 #tblProf {border-collapse: collapse;font-family: Abel;font-size: 1em;width: 100%}
+#divTurnosLibres {width: 50vw;min-height: 300px;max-height: 60vh;overflow-y: auto;}
+#tblFechasLibres {float:left;display: inline-block; min-height: 200px; width: 300px}
+#tblHorariosLibres {float:left;display: inline-block;min-height: 200px; width: 150px}
