@@ -16,6 +16,7 @@
 	function cargarProf() {
 		var fecha=getValue('txtFecha');
 		oAjax.request="profxdia&fecha="+fecha;
+		oAjax.async=false;
 		oAjax.send(resp);
 
 		function resp(data) {
@@ -63,10 +64,41 @@
 			OcultarColumnaTabla('tbodyTurnos', 4);
 			OcultarColumnaTabla('tbodyTurnos', 8);
 			OcultarColumnaTabla('tbodyTurnos', 9);
-			AgregarBotonTabla('tbodyTurnos', 1, '', 'mostrarAsignarTurno', 0);
+			if (getValue('hidPaciente')=='')
+				AgregarBotonTabla('tbodyTurnos', 1, '', 'mostrarAsignarTurno', 0);
+			else 
+				AgregarBotonTabla('tbodyTurnos', 1, '', 'asignarTurnoRapido', 1);
 			AgregarBotonTabla('tbodyTurnos', 1, 'menu2.png', 'showMenu', 0, true, 'icono');
 
 		}
+	}
+	function asignarTurnoRapido(id, obj) {
+		var turno=getValue('hidTurno');
+		var pac=getValue('hidPaciente');
+		var nom="";
+		var ape="";
+		var cel="";
+		var mail='';
+		var fecha=getValue('txtFecha');
+		var hora=id;
+		var espec='0';
+		var prof=getValue('hidProf');
+		var dni="";
+		var socio='';
+
+		oAjax.request="ingresarTurno&turno="+turno+"&pac="+pac+"&nom="+nom+"&ape="+ape+"&cel="+cel+"&mail="+mail+"&fecha="+fecha+"&hora="+hora+"&espec="+espec+"&prof="+prof+"&dni="+dni+"&socio="+socio;
+		oAjax.send(resp);
+
+		function resp(data) {
+			if (data.responseText!='ok') {
+				alert(data.responseText);
+				return false;
+			}
+			//cerrar('frmNuevoTurno');
+			setValue('hidPaciente', '');
+			setValue('pPaciente', '');
+			cargarTurnos(getValue('hidProf'), null);
+		}		
 	}
 	function mostrarAsignarTurno(id, obj) {
 		setValue('txtHora', obj.innerText);
@@ -85,10 +117,18 @@
 		var tipo=getValue('cboDoc');
 		var nro=getValue('txtDNI');
 		var nom="";
-		if (tipo=='N' && nro.indexOf(",")>0) {
-			var s=nro.split(',');
-			nro=s[0].trim();
-			nom=s[1].trim();
+		if (tipo=='N') {
+				if (nro.indexOf(",")>0) {
+					var s=nro.split(',');
+					nro=s[0].trim();
+					nom=s[1].trim();
+
+				}
+				if (nro.indexOf(" ")>0) {
+					var s=nro.split(' ');
+					nro=s[0].trim();
+					nom=s[1].trim();					
+				}
 		}
 
 		oAjax.request="customQuery&query=Call SP_BuscarPaciente('"+tipo+"', '"+nro+"', '"+nom+"')&tipo=Q";
@@ -318,7 +358,7 @@
 						<input type="hidden" id="hidPaciente">
 					
 					
-						<select id="cboDoc"><option value="N">Nombre</option><option value="D">DNI</option><option value="S">Socio</option><option value="H">Hist. Clínica</option></select>
+						<select id="cboDoc"><option value="N">Apellido y Nombre</option><option value="D">DNI</option><option value="S">Socio</option><option value="H">Hist. Clínica</option></select>
 						<input id="txtDNI" type="text">
 						<button id="cmdBuscarPaciente" type="button" class="botonok" onclick="buscarPaciente();"><img src="./imagenes/lupa.png"></button>
 						<button id="cmdNuevoPaciente" type="button" class="botonok" onclick="altaPaciente();"><img src="./imagenes/nueva.png" width="16"></button>
@@ -410,6 +450,7 @@
 	<div id="divFecha">
 		<input id="txtFecha" type="date">
 		<button onclick="cargarProf();" class="botonok" style="font-size:1em">Ver</button>
+		<p class="texto" id="pPaciente" style="float:right;margin:0">Paciente: <span id="idPaciente"></span> - <span id="nomPaciente"></span></p>
 	</div>
 	<div id="divAgenda">
 		<div id="divProf">
@@ -430,6 +471,18 @@
 	var hoy=new DateTime();hoy.init();
 	setValue('txtFecha',hoy.formats.compound.mySQL);
 
+<? if (isset($_GET['fecha'])) {?>
+		var fecha='<?= $_GET['fecha'] ?>';
+		setValue('txtFecha', fecha);
+		cargarProf();
+		setValue('hidPaciente', '<?= $_GET['pac'] ?>');
+		setValue('idPaciente', '<?= $_GET['pac'] ?>');
+		var nombre=BuscarDato("select concat(Nombre, ' ', Apellido) nom from pacientes where idPaciente=<?= $_GET['pac'] ?>");
+		setValue('nomPaciente', nombre);
+		cargarTurnos(<?= $_GET['prof'] ?>, null);
+
+<?}
+?>
 </script>
 </body>
 

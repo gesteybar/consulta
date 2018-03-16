@@ -118,7 +118,7 @@ function JsonToTable(arr, tabla, headers) {
  return columnSet;
  }
 
-function AgregarBotonTabla(tabla, col, imagen, funcion, refcol,prefijo, clase,condicion, colcond, title) {
+function AgregarBotonTabla(tabla, col, imagen, funcion, refcol,prefijo, clase,condicion, colcond, title, evento) {
 	var tbl=document.getElementById(tabla);
 	var tr=tbl.getElementsByTagName("tr");
 
@@ -133,12 +133,15 @@ function AgregarBotonTabla(tabla, col, imagen, funcion, refcol,prefijo, clase,co
 		var addClass="class='"+clase+"'";
 	else
 		var addClass='';
+
+	if (evento=='' || evento==null || evento==undefined) 
+		var evento='onclick';
 	
 	for (var i = 0; i < tr.length; i++) {
 		if (col<0) {
 			for (var j = 0; j < tr[i].cells.length; j++) {
 				var trtmp=tr[i];
-				trtmp='<tr class="trClickable" onclick="'+funcion+'(\''+tr[i].cells[refcol].innerText+'\', this);">'+tr[i].innerHTML+'</tr>';
+				trtmp='<tr class="trClickable" '+evento+'="'+funcion+'(\''+tr[i].cells[refcol].innerText+'\', this);">'+tr[i].innerHTML+'</tr>';
 				//tr[i].cells[j].innerHTML ='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+tr[i].cells[refcol].innerText+'\', this);">'+tr[i].cells[j].innerHTML+'</a>';
 				tr[i].outerHTML=trtmp;
 				
@@ -149,11 +152,11 @@ function AgregarBotonTabla(tabla, col, imagen, funcion, refcol,prefijo, clase,co
 				if (td[colcond].innerText==condicion || condicion=='' || condicion==undefined) {
 					if (imagen!='')
 						if (prefijo)
-							td[col].innerHTML='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+td[refcol].innerHTML+'\', this);"><img src="./imagenes/'+imagen+'" width="16" title="'+title+'"></a>'+td[col].innerHTML;	
+							td[col].innerHTML='<a '+addClass+' href="javascript:void(0)" '+evento+'="'+funcion+'(\''+td[refcol].innerHTML+'\', this);"><img src="./imagenes/'+imagen+'" width="16" title="'+title+'"></a>'+td[col].innerHTML;	
 						else
-							td[col].innerHTML+='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+td[refcol].innerHTML+'\', this);"><img src="./imagenes/'+imagen+'" width="16" title="'+title+'"></a>';
+							td[col].innerHTML+='<a '+addClass+' href="javascript:void(0)" '+evento+'="'+funcion+'(\''+td[refcol].innerHTML+'\', this);"><img src="./imagenes/'+imagen+'" width="16" title="'+title+'"></a>';
 					else
-						td[col].innerHTML ='<a '+addClass+' href="javascript:void(0)" onclick="'+funcion+'(\''+td[refcol].innerHTML+'\', this);">'+td[col].innerHTML+'</a>';
+						td[col].innerHTML ='<a '+addClass+' href="javascript:void(0)" '+evento+'="'+funcion+'(\''+td[refcol].innerHTML+'\', this);">'+td[col].innerHTML+'</a>';
 				}
 		}
 	}

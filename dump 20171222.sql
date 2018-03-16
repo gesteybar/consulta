@@ -14,8 +14,6 @@ MySQL - 10.1.28-MariaDB : Database - consulta
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*Table structure for table `agenda` */
 
-DROP TABLE IF EXISTS `agenda`;
-
 CREATE TABLE `agenda` (
   `idAgenda` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `idEspecialidad` int(10) unsigned NOT NULL,
@@ -41,8 +39,6 @@ insert  into `agenda`(`idAgenda`,`idEspecialidad`,`idConsultorio`,`idProfesional
 
 /*Table structure for table `alquiler` */
 
-DROP TABLE IF EXISTS `alquiler`;
-
 CREATE TABLE `alquiler` (
   `idAlquiler` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `idProfesional` int(10) unsigned NOT NULL,
@@ -65,8 +61,6 @@ CREATE TABLE `alquiler` (
 /*Data for the table `alquiler` */
 
 /*Table structure for table `caja` */
-
-DROP TABLE IF EXISTS `caja`;
 
 CREATE TABLE `caja` (
   `idCaja` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -93,8 +87,6 @@ insert  into `caja`(`idCaja`,`idConcepto`,`idMediosPago`,`idUsuario`,`Fecha`,`Co
 
 /*Table structure for table `conceptos` */
 
-DROP TABLE IF EXISTS `conceptos`;
-
 CREATE TABLE `conceptos` (
   `idConcepto` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(50) DEFAULT NULL,
@@ -109,8 +101,6 @@ insert  into `conceptos`(`idConcepto`,`Nombre`,`Tipo`,`Adicional`) values (1,'Ga
 
 /*Table structure for table `consultorios` */
 
-DROP TABLE IF EXISTS `consultorios`;
-
 CREATE TABLE `consultorios` (
   `idConsultorio` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(100) DEFAULT NULL,
@@ -123,8 +113,6 @@ CREATE TABLE `consultorios` (
 insert  into `consultorios`(`idConsultorio`,`Nombre`,`m2`) values (1,'Cons 1',12),(2,'Cons 2',12),(3,'Cons 3',12),(4,'Cons 4',12),(5,'Cons 5',12);
 
 /*Table structure for table `especialidades` */
-
-DROP TABLE IF EXISTS `especialidades`;
 
 CREATE TABLE `especialidades` (
   `idEspecialidad` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -139,8 +127,6 @@ insert  into `especialidades`(`idEspecialidad`,`Nombre`,`CostoMod`) values (1,'G
 
 /*Table structure for table `mediospago` */
 
-DROP TABLE IF EXISTS `mediospago`;
-
 CREATE TABLE `mediospago` (
   `idMediosPago` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(50) DEFAULT NULL,
@@ -153,22 +139,34 @@ insert  into `mediospago`(`idMediosPago`,`Nombre`) values (1,'EFECTIVO'),(2,'DEB
 
 /*Table structure for table `modulos` */
 
-DROP TABLE IF EXISTS `modulos`;
-
 CREATE TABLE `modulos` (
   `idModulo` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(50) DEFAULT NULL,
   `Pagina` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idModulo`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `modulos` */
 
-insert  into `modulos`(`idModulo`,`Nombre`,`Pagina`) values (1,'Pacientes','pacientes.php'),(2,'Profesionales','profesionales.php'),(3,'Especialidades','especialidades.php'),(4,'Consultorios','consultorios.php'),(5,'Param Agenda','agenda.php'),(6,'Agenda diaria','diaria.php'),(7,'Proyecciones','proyeccion.php'),(8,'Reportes','reportes.php'),(9,'Prepagas','prepagas.php'),(10,'Usuarios','usuarios.php'),(11,'Caja','caja.php'),(12,'Reporte agenda diaria','#'),(13,'Reporte agenda profesional','reportes.php');
+insert  into `modulos`(`idModulo`,`Nombre`,`Pagina`) values (1,'Pacientes','pacientes.php'),(2,'Profesionales','profesionales.php'),(3,'Especialidades','especialidades.php'),(4,'Consultorios','consultorios.php'),(5,'Param Agenda','agenda.php'),(6,'Agenda diaria','diaria.php'),(7,'Proyecciones','proyeccion.php'),(8,'Reportes','reportes.php'),(9,'Prepagas','prepagas.php'),(10,'Usuarios','usuarios.php'),(11,'Caja','caja.php'),(12,'Reporte agenda diaria','#'),(13,'Reporte agenda profesional','reportes.php'),(14,'Nomenclador','nomenclador.php'),(15,'Carga de prestaciones','prestaciones.php');
+
+/*Table structure for table `nomenclador` */
+
+CREATE TABLE `nomenclador` (
+  `idNomenclador` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idEspecialidad` int(10) unsigned NOT NULL,
+  `Codigo` varchar(50) DEFAULT NULL,
+  `Descripcion` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`idNomenclador`),
+  KEY `Nomenclador_FKIndex1` (`idEspecialidad`),
+  CONSTRAINT `nomenclador_ibfk_1` FOREIGN KEY (`idEspecialidad`) REFERENCES `especialidades` (`idEspecialidad`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+/*Data for the table `nomenclador` */
+
+insert  into `nomenclador`(`idNomenclador`,`idEspecialidad`,`Codigo`,`Descripcion`) values (1,1,'01.01','Cosa 12'),(3,5,'10.01.01','Consulta sola'),(4,5,'10.10.02','Consulta y chequeo');
 
 /*Table structure for table `pacientes` */
-
-DROP TABLE IF EXISTS `pacientes`;
 
 CREATE TABLE `pacientes` (
   `idPaciente` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -181,17 +179,16 @@ CREATE TABLE `pacientes` (
   `FechaAlta` date DEFAULT NULL,
   `NroSocio` varchar(50) DEFAULT NULL,
   `DNI` int(10) unsigned DEFAULT NULL,
+  `NroFicha` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`idPaciente`),
   KEY `pacientes_FKIndex1` (`idPrepaga`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 /*Data for the table `pacientes` */
 
-insert  into `pacientes`(`idPaciente`,`idPrepaga`,`Apellido`,`Nombre`,`FechaNac`,`Celular`,`Mail`,`FechaAlta`,`NroSocio`,`DNI`) values (1,2,'ESTEYBAR','GUSTAVO','1976-08-25','1138986069','gesteybar@arimex.com','2017-12-29','12345678/9',25356574),(3,1,'mansur','maria clara','1899-11-30','654654','','2018-01-03','24027210',24027210),(5,0,'Esteybar','Santiago','0000-00-00','','','2018-01-04','',50525794),(6,0,'Delgado','Marcelo','0000-00-00','1166546655','','2018-01-04','',0),(7,0,'rocchi','gaby','0000-00-00','','','2018-01-05','',0),(8,0,'novak','claudio','0000-00-00','6584621','','2018-01-12','',33333333),(9,0,'pereira','elias','0000-00-00','654321351','','2018-02-20','',16466614);
+insert  into `pacientes`(`idPaciente`,`idPrepaga`,`Apellido`,`Nombre`,`FechaNac`,`Celular`,`Mail`,`FechaAlta`,`NroSocio`,`DNI`,`NroFicha`) values (1,2,'ESTEYBAR','GUSTAVO','1976-08-25','1138986069','gesteybar@arimex.com','2017-12-29','12345678/9',25356574,NULL),(3,1,'mansur','maria clara','1899-11-30','654654','','2018-01-03','24027210',24027210,NULL),(5,0,'Esteybar','Santiago','0000-00-00','','','2018-01-04','',50525794,NULL),(6,0,'Delgado','Marcelo','0000-00-00','1166546655','','2018-01-04','',0,NULL),(7,0,'rocchi','gaby','0000-00-00','','','2018-01-05','',0,NULL),(8,0,'novak','claudio','0000-00-00','6584621','','2018-01-12','',33333333,NULL),(9,0,'pereira','elias','0000-00-00','654321351','','2018-02-20','',16466614,NULL),(10,0,'perez','juan','0000-00-00','1651651','','2018-03-07','',46563,NULL),(11,0,'fernandez','juan','0000-00-00','4654658','','2018-03-07','',464658,NULL),(12,2,'fernandez','laurita','1899-11-30','6546546','','2018-03-07','1234',4294967295,'123'),(13,0,'lopez','carlos','0000-00-00','16516','','2018-03-07','',651651,NULL);
 
 /*Table structure for table `paramagenda` */
-
-DROP TABLE IF EXISTS `paramagenda`;
 
 CREATE TABLE `paramagenda` (
   `idParamAgenda` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -212,8 +209,6 @@ insert  into `paramagenda`(`idParamAgenda`,`idProfesional`,`idEspecialidad`,`Mod
 
 /*Table structure for table `permisos` */
 
-DROP TABLE IF EXISTS `permisos`;
-
 CREATE TABLE `permisos` (
   `idPermiso` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `idUsuario` int(10) unsigned NOT NULL,
@@ -223,15 +218,13 @@ CREATE TABLE `permisos` (
   KEY `Permisos_FKIndex2` (`idUsuario`),
   CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`idModulo`) REFERENCES `modulos` (`idModulo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `permisos_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
 
 /*Data for the table `permisos` */
 
-insert  into `permisos`(`idPermiso`,`idUsuario`,`idModulo`) values (1,1,1),(2,1,8),(3,1,5),(4,1,2),(5,1,3),(6,1,4),(7,1,6),(8,1,7),(10,1,10),(11,2,1),(12,2,6),(13,2,5),(14,2,7),(15,2,3),(16,2,2),(17,2,4),(18,2,8),(19,2,9),(20,2,10),(34,3,1),(35,3,2),(38,3,5),(39,3,6),(40,3,7),(42,3,8),(43,3,4),(44,3,3),(45,2,11),(46,1,11),(47,4,1),(49,4,6),(50,4,8),(51,4,9),(52,4,11),(53,2,12),(54,5,13);
+insert  into `permisos`(`idPermiso`,`idUsuario`,`idModulo`) values (1,1,1),(2,1,8),(3,1,5),(4,1,2),(5,1,3),(6,1,4),(7,1,6),(8,1,7),(10,1,10),(11,2,1),(12,2,6),(13,2,5),(14,2,7),(15,2,3),(16,2,2),(17,2,4),(18,2,8),(19,2,9),(20,2,10),(34,3,1),(35,3,2),(38,3,5),(39,3,6),(40,3,7),(42,3,8),(43,3,4),(44,3,3),(45,2,11),(46,1,11),(47,4,1),(49,4,6),(50,4,8),(51,4,9),(52,4,11),(53,2,12),(54,5,13),(55,2,14),(56,2,15),(57,4,14),(58,4,15);
 
 /*Table structure for table `prepagas` */
-
-DROP TABLE IF EXISTS `prepagas`;
 
 CREATE TABLE `prepagas` (
   `idPrepaga` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -243,9 +236,35 @@ CREATE TABLE `prepagas` (
 
 insert  into `prepagas`(`idPrepaga`,`Nombre`) values (1,'PARTICULAR'),(2,'OSDE'),(3,'PAMI');
 
-/*Table structure for table `profatiende` */
+/*Table structure for table `prestaciones` */
 
-DROP TABLE IF EXISTS `profatiende`;
+CREATE TABLE `prestaciones` (
+  `idPrestacion` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idPrepaga` int(10) unsigned NOT NULL,
+  `idNomenclador` int(10) unsigned NOT NULL,
+  `idEspecialidad` int(10) unsigned NOT NULL,
+  `idProfesional` int(10) unsigned NOT NULL,
+  `idPaciente` int(10) unsigned NOT NULL,
+  `Fecha` date DEFAULT NULL,
+  `Observ` text,
+  `Cantidad` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`idPrestacion`),
+  KEY `Prestaciones_FKIndex1` (`idPaciente`),
+  KEY `Prestaciones_FKIndex2` (`idProfesional`),
+  KEY `Prestaciones_FKIndex3` (`idEspecialidad`),
+  KEY `Prestaciones_FKIndex4` (`idNomenclador`),
+  KEY `Prestaciones_FKIndex5` (`idPrepaga`),
+  CONSTRAINT `prestaciones_ibfk_1` FOREIGN KEY (`idPaciente`) REFERENCES `pacientes` (`idPaciente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `prestaciones_ibfk_2` FOREIGN KEY (`idProfesional`) REFERENCES `profesionales` (`idProfesional`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `prestaciones_ibfk_3` FOREIGN KEY (`idEspecialidad`) REFERENCES `especialidades` (`idEspecialidad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `prestaciones_ibfk_4` FOREIGN KEY (`idNomenclador`) REFERENCES `nomenclador` (`idNomenclador`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `prestaciones` */
+
+insert  into `prestaciones`(`idPrestacion`,`idPrepaga`,`idNomenclador`,`idEspecialidad`,`idProfesional`,`idPaciente`,`Fecha`,`Observ`,`Cantidad`) values (1,1,1,2,1,1,'2018-03-16',NULL,1);
+
+/*Table structure for table `profatiende` */
 
 CREATE TABLE `profatiende` (
   `idProfAtiende` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -268,8 +287,6 @@ insert  into `profatiende`(`idProfAtiende`,`idProfesional`,`idConsultorio`,`Dia`
 
 /*Table structure for table `profesionales` */
 
-DROP TABLE IF EXISTS `profesionales`;
-
 CREATE TABLE `profesionales` (
   `idProfesional` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(100) DEFAULT NULL,
@@ -278,15 +295,13 @@ CREATE TABLE `profesionales` (
   `DocCompleta` int(11) DEFAULT NULL,
   `Estado` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`idProfesional`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 /*Data for the table `profesionales` */
 
 insert  into `profesionales`(`idProfesional`,`Nombre`,`Matricula`,`FechaVenc`,`DocCompleta`,`Estado`) values (1,'maria clara mansur','16513','2010-01-01',1,'ACTIVO'),(2,'Nusshold',NULL,NULL,NULL,'ACTIVO'),(3,'Cuello',NULL,NULL,NULL,'ACTIVO'),(4,'Torres',NULL,NULL,NULL,'ACTIVO'),(5,'Longas',NULL,NULL,NULL,'ACTIVO'),(6,'Pereira',NULL,NULL,NULL,'ACTIVO'),(7,'Bucci',NULL,NULL,NULL,'ACTIVO'),(8,'Cousido',NULL,NULL,NULL,'ACTIVO'),(10,'Barreiro',NULL,NULL,NULL,'ACTIVO'),(11,'Castiglione',NULL,NULL,NULL,'ACTIVO'),(12,'Zampedri',NULL,NULL,NULL,'ACTIVO'),(13,'Nieto',NULL,NULL,NULL,'ACTIVO'),(14,'Enjuto',NULL,NULL,NULL,'ACTIVO'),(15,'Pecchia',NULL,NULL,NULL,'ACTIVO'),(16,'Flitt',NULL,NULL,NULL,'ACTIVO'),(17,'Troilo',NULL,NULL,NULL,'ACTIVO'),(18,'Wybert',NULL,NULL,NULL,'ACTIVO');
 
 /*Table structure for table `reportes` */
-
-DROP TABLE IF EXISTS `reportes`;
 
 CREATE TABLE `reportes` (
   `idReporte` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -307,8 +322,6 @@ insert  into `reportes`(`idReporte`,`idModulo`,`Nombre`,`Leyenda`,`Ruta`,`Grupo`
 
 /*Table structure for table `tmpbuffer` */
 
-DROP TABLE IF EXISTS `tmpbuffer`;
-
 CREATE TABLE `tmpbuffer` (
   `idTurno` int(11) DEFAULT NULL,
   `Hora` varchar(10) DEFAULT NULL,
@@ -324,11 +337,9 @@ CREATE TABLE `tmpbuffer` (
 
 /*Data for the table `tmpbuffer` */
 
-insert  into `tmpbuffer`(`idTurno`,`Hora`,`idPaciente`,`Paciente`,`idEspecialidad`,`Especialidad`,`DNI`,`Celular`,`Estado`,`Fecha`) values (42,'16:00:00',3,'maria clara mansur',1,'',24027210,'654654','PENDIENTE','2018-03-14'),(NULL,'16:25:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-14'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-14'),(NULL,'17:15:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-14'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-14'),(NULL,'18:05:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-14'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-14'),(NULL,'18:55:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-14'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-14'),(NULL,'19:45:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-14'),(NULL,'16:00:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-16'),(NULL,'16:25:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-16'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-16'),(NULL,'17:15:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-16'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-16'),(NULL,'18:05:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-16'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-16'),(NULL,'18:55:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-16'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-16'),(NULL,'19:45:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-16'),(NULL,'16:00:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-21'),(NULL,'16:25:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-21'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-21'),(NULL,'17:15:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-21'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-21'),(NULL,'18:05:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-21'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-21'),(NULL,'18:55:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-21'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-21'),(NULL,'19:45:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-21'),(NULL,'16:00:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-23'),(NULL,'16:25:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-23'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-23'),(NULL,'17:15:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-23'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-23'),(NULL,'18:05:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-23'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-23'),(NULL,'18:55:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-23'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-23'),(NULL,'19:45:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-23'),(NULL,'16:00:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-28'),(NULL,'16:25:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-28'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-28'),(NULL,'17:15:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-28'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-28'),(NULL,'18:05:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-28'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-28'),(NULL,'18:55:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-28'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-28'),(NULL,'19:45:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-28'),(NULL,'16:00:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-30'),(NULL,'16:25:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-30'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-30'),(NULL,'17:15:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-30'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-30'),(NULL,'18:05:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-30'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-30'),(NULL,'18:55:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-30'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-30'),(NULL,'19:45:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-30');
+insert  into `tmpbuffer`(`idTurno`,`Hora`,`idPaciente`,`Paciente`,`idEspecialidad`,`Especialidad`,`DNI`,`Celular`,`Estado`,`Fecha`) values (NULL,'16:00:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-20'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-20'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-20'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-20'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-20'),(NULL,'16:00:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-20'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-20'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-20'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-20'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-20'),(NULL,'16:00:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-22'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-22'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-22'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-22'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-22'),(NULL,'16:00:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-22'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-22'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-22'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-22'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-22'),(NULL,'16:00:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-27'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-27'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-27'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-27'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-27'),(NULL,'16:00:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-27'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-27'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-27'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-27'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-27'),(NULL,'16:00:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-29'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-29'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-29'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-29'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-29'),(NULL,'16:00:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-29'),(NULL,'16:50:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-29'),(NULL,'17:40:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-29'),(NULL,'18:30:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-29'),(NULL,'19:20:00',NULL,NULL,NULL,NULL,NULL,NULL,'DISPONIBLE','2018-03-29');
 
 /*Table structure for table `turnos` */
-
-DROP TABLE IF EXISTS `turnos`;
 
 CREATE TABLE `turnos` (
   `idTurno` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -348,15 +359,13 @@ CREATE TABLE `turnos` (
   KEY `Turnos_FKIndex2` (`idEspecialidad`),
   CONSTRAINT `turnos_ibfk_1` FOREIGN KEY (`idProfesional`) REFERENCES `profesionales` (`idProfesional`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `turnos_ibfk_2` FOREIGN KEY (`idEspecialidad`) REFERENCES `especialidades` (`idEspecialidad`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
 
 /*Data for the table `turnos` */
 
-insert  into `turnos`(`idTurno`,`idPaciente`,`idEspecialidad`,`idProfesional`,`Fecha`,`Hora`,`Paciente`,`DNI`,`NroSocio`,`Celular`,`ApellidoPac`,`Estado`) values (5,0,5,18,'2018-01-03','16:00:00','gustavo a','','','1150051111','','PENDIENTE'),(6,0,5,6,'2018-01-03','10:00:00','Clara','24027210','','561651663','Mansur','PENDIENTE'),(7,0,5,6,'2018-01-03','11:00:00','Pilar','35142136','','651698466','happn','PENDIENTE'),(8,0,5,6,'2018-01-03','09:00:00','Claudio','21358165','','165165433','Novak','PENDIENTE'),(10,2,5,14,'2018-01-03','17:40:00','gus','25356574','','1138986069','esteybar','PENDIENTE'),(11,3,5,14,'2018-01-03','16:50:00','maria clara','16165','','654654','mansur','PENDIENTE'),(12,3,5,6,'2018-01-03','08:30:00','maria clara','16165','','654654','mansur','PENDIENTE'),(13,1,5,6,'2018-01-04','17:30:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(16,1,2,1,'2018-01-05','10:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','TOMADO'),(18,7,5,10,'2018-01-05','08:00:00','gaby','0','','','rocchi','PENDIENTE'),(19,3,5,2,'2018-01-09','16:00:00','maria clara','24027210','24027210','654654','mansur','PENDIENTE'),(20,1,5,2,'2018-01-09','16:36:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(21,6,5,2,'2018-01-09','17:12:00','Marcelo','0','','1166546655','Delgado','PENDIENTE'),(22,7,5,2,'2018-01-09','17:48:00','gaby','0','','','rocchi','PENDIENTE'),(23,5,5,2,'2018-01-09','18:12:00','Santiago','50525794','','','Esteybar','PENDIENTE'),(24,1,5,3,'2018-01-09','16:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(25,5,5,3,'2018-01-09','19:00:00','Santiago','50525794','','','Esteybar','PENDIENTE'),(26,3,5,12,'2018-01-09','16:00:00','maria clara','24027210','24027210','654654','mansur','PENDIENTE'),(27,6,5,12,'2018-01-09','17:40:00','Marcelo','0','','1166546655','Delgado','PENDIENTE'),(28,0,2,1,'2018-01-12','16:00:00','claudio','33333333','','6584621','novak','PENDIENTE'),(29,6,5,4,'2018-01-19','16:00:00','Marcelo','0','','1166546655','Delgado','AUSENTE'),(30,1,5,7,'2018-01-25','16:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(31,3,1,7,'2018-02-01','17:45:00','maria clara','24027210','24027210','654654','mansur','PENDIENTE'),(32,5,1,7,'2018-02-01','18:30:00','Santiago','50525794','','','Esteybar','PENDIENTE'),(33,1,1,16,'2018-03-05','12:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(34,1,1,1,'2018-03-02','16:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(36,5,1,1,'2018-03-02','17:00:00','Santiago','50525794','','','Esteybar','PENDIENTE'),(37,7,1,1,'2018-03-02','18:00:00','gaby','0','','','rocchi','PENDIENTE'),(38,8,1,1,'2018-03-02','19:00:00','claudio','33333333','','6584621','novak','PENDIENTE'),(39,5,1,1,'2018-03-05','16:00:00','Santiago','50525794','','','Esteybar','PENDIENTE'),(40,7,1,1,'2018-03-05','17:00:00','gaby','0','','','rocchi','PENDIENTE'),(41,1,1,1,'2018-03-12','17:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(42,3,1,18,'2018-03-14','16:00:00','maria clara','24027210','24027210','654654','mansur','PENDIENTE');
+insert  into `turnos`(`idTurno`,`idPaciente`,`idEspecialidad`,`idProfesional`,`Fecha`,`Hora`,`Paciente`,`DNI`,`NroSocio`,`Celular`,`ApellidoPac`,`Estado`) values (5,0,5,18,'2018-01-03','16:00:00','gustavo a','','','1150051111','','PENDIENTE'),(6,0,5,6,'2018-01-03','10:00:00','Clara','24027210','','561651663','Mansur','PENDIENTE'),(7,0,5,6,'2018-01-03','11:00:00','Pilar','35142136','','651698466','happn','PENDIENTE'),(8,0,5,6,'2018-01-03','09:00:00','Claudio','21358165','','165165433','Novak','PENDIENTE'),(10,2,5,14,'2018-01-03','17:40:00','gus','25356574','','1138986069','esteybar','PENDIENTE'),(11,3,5,14,'2018-01-03','16:50:00','maria clara','16165','','654654','mansur','PENDIENTE'),(12,3,5,6,'2018-01-03','08:30:00','maria clara','16165','','654654','mansur','PENDIENTE'),(13,1,5,6,'2018-01-04','17:30:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(16,1,2,1,'2018-01-05','10:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','TOMADO'),(18,7,5,10,'2018-01-05','08:00:00','gaby','0','','','rocchi','PENDIENTE'),(19,3,5,2,'2018-01-09','16:00:00','maria clara','24027210','24027210','654654','mansur','PENDIENTE'),(20,1,5,2,'2018-01-09','16:36:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(21,6,5,2,'2018-01-09','17:12:00','Marcelo','0','','1166546655','Delgado','PENDIENTE'),(22,7,5,2,'2018-01-09','17:48:00','gaby','0','','','rocchi','PENDIENTE'),(23,5,5,2,'2018-01-09','18:12:00','Santiago','50525794','','','Esteybar','PENDIENTE'),(24,1,5,3,'2018-01-09','16:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(25,5,5,3,'2018-01-09','19:00:00','Santiago','50525794','','','Esteybar','PENDIENTE'),(26,3,5,12,'2018-01-09','16:00:00','maria clara','24027210','24027210','654654','mansur','PENDIENTE'),(27,6,5,12,'2018-01-09','17:40:00','Marcelo','0','','1166546655','Delgado','PENDIENTE'),(28,0,2,1,'2018-01-12','16:00:00','claudio','33333333','','6584621','novak','PENDIENTE'),(29,6,5,4,'2018-01-19','16:00:00','Marcelo','0','','1166546655','Delgado','AUSENTE'),(30,1,5,7,'2018-01-25','16:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(31,3,1,7,'2018-02-01','17:45:00','maria clara','24027210','24027210','654654','mansur','PENDIENTE'),(32,5,1,7,'2018-02-01','18:30:00','Santiago','50525794','','','Esteybar','PENDIENTE'),(33,1,1,16,'2018-03-05','12:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(34,1,1,1,'2018-03-02','16:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(36,5,1,1,'2018-03-02','17:00:00','Santiago','50525794','','','Esteybar','PENDIENTE'),(37,7,1,1,'2018-03-02','18:00:00','gaby','0','','','rocchi','PENDIENTE'),(38,8,1,1,'2018-03-02','19:00:00','claudio','33333333','','6584621','novak','PENDIENTE'),(39,5,1,1,'2018-03-05','16:00:00','Santiago','50525794','','','Esteybar','PENDIENTE'),(40,7,1,1,'2018-03-05','17:00:00','gaby','0','','','rocchi','PENDIENTE'),(41,1,1,1,'2018-03-12','17:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(42,3,1,18,'2018-03-14','16:00:00','maria clara','24027210','24027210','654654','mansur','PENDIENTE'),(43,1,1,1,'2018-03-16','16:00:00',NULL,NULL,NULL,NULL,NULL,'PENDIENTE'),(44,1,1,1,'2018-03-16','','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(45,1,1,1,'2018-03-16','','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(46,1,1,1,'2018-03-16','','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(49,1,1,1,'2018-03-16','17:00:00','GUSTAVO','25356574','12345678/9','1138986069','ESTEYBAR','PENDIENTE'),(55,0,1,1,'2018-03-16','19:00:00',NULL,NULL,'',NULL,NULL,'PENDIENTE'),(57,3,1,1,'2018-03-16','18:00:00','maria clara','24027210','24027210','654654','mansur','PENDIENTE'),(58,10,1,2,'2018-03-13','17:24:00','juan','46563','','1651651','perez','PENDIENTE'),(59,0,1,11,'2018-03-08','16:00:00',NULL,NULL,'',NULL,NULL,'PENDIENTE'),(60,0,1,11,'2018-03-08','16:00:00',NULL,NULL,'',NULL,NULL,'PENDIENTE'),(61,0,1,18,'2018-03-07','16:00:00','carlos','651651','','16516','lopez','PENDIENTE'),(62,5,1,5,'2018-03-12','18:30:00','Santiago','50525794','',NULL,'Esteybar','PENDIENTE'),(63,12,1,5,'2018-03-12','16:25:00','laurita','4294967295','1234','6546546','fernandez','PENDIENTE');
 
 /*Table structure for table `usuarios` */
-
-DROP TABLE IF EXISTS `usuarios`;
 
 CREATE TABLE `usuarios` (
   `idUsuario` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -374,11 +383,9 @@ insert  into `usuarios`(`idUsuario`,`Nombre`,`Login`,`Pass`,`Perfil`,`ProfAsoc`)
 
 /* Procedure structure for procedure `SP_AbrirPeriodo` */
 
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_AbrirPeriodo` */;
-
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_AbrirPeriodo`(pPeriodo varchar(10))
+/*!50003 CREATE PROCEDURE `SP_AbrirPeriodo`(pPeriodo varchar(10))
 BEGIN
 	declare vInicio date;
 	declare vFin date;
@@ -406,33 +413,31 @@ DELIMITER ;
 
 /* Procedure structure for procedure `SP_BuscarPaciente` */
 
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_BuscarPaciente` */;
-
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_BuscarPaciente`(pTipo varchar(1), pNro varchar(60), pNombre varchar(60))
+/*!50003 CREATE PROCEDURE `SP_BuscarPaciente`(pTipo varchar(1), pNro varchar(60), pNombre varchar(60))
 BEGIN
 	IF pTipo='H' THEN
-		SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail 
+		SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail, pa.NroFicha 
 		FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga WHERE idPaciente=pNro;
 	END IF;
 	
 	if pTipo='D' then
-		SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail 
+		SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail, pa.NroFicha 
 		FROM pacientes pa left join prepagas pr on pa.idPrepaga=pr.idPrepaga WHERE DNI=pNro;
 	end if;
 	if pTipo='S' then
-		SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail 
+		SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail , pa.NroFicha
 		FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga
 		WHERE NroSocio=pNro and pa.idPrepaga=pNombre;
 	end if;
 	if pTipo='N' then
 		if ifnull(pNombre, '')='' then
-			SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail 
+			SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail , pa.NroFicha
 			FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga
 			WHERE Apellido LIKE CONCAT('%', pNro, '%');		
 		else
-			SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail 
+			SELECT pa.idPaciente, pa.Apellido, pa.Nombre, pr.Nombre Prepaga, pa.NroSocio, pa.Celular, pa.Mail , pa.NroFicha
 			FROM pacientes pa LEFT JOIN prepagas pr ON pa.idPrepaga=pr.idPrepaga
 			where Apellido like concat('%', pNro, '%') and pa.Nombre LIKE CONCAT('%', pNombre, '%');
 		end if;
@@ -442,11 +447,9 @@ DELIMITER ;
 
 /* Procedure structure for procedure `SP_InsertAgenda` */
 
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertAgenda` */;
-
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertAgenda`(pEsp int, pProf int, pCons int, pMod int, pFecha varchar(20), pPeriodo varchar(7), pDesde varchar(12), pHasta varchar(12))
+/*!50003 CREATE PROCEDURE `SP_InsertAgenda`(pEsp int, pProf int, pCons int, pMod int, pFecha varchar(20), pPeriodo varchar(7), pDesde varchar(12), pHasta varchar(12))
 BEGIN
 	if exists(select 1 from agenda where Fecha=pFecha and Turno=pMod and idConsultorio=pCons) then
 		delete FROM agenda WHERE Fecha=pFecha AND Turno=pMod AND idConsultorio=pCons;
@@ -468,11 +471,9 @@ DELIMITER ;
 
 /* Procedure structure for procedure `SP_InsertAtencion` */
 
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertAtencion` */;
-
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertAtencion`(pidProf int, pDia int, pidCons int, pMod int)
+/*!50003 CREATE PROCEDURE `SP_InsertAtencion`(pidProf int, pDia int, pidCons int, pMod int)
 BEGIN
 	if not exists(select 1 from profatiende where idProfesional=pidProf and Dia=pDia and idConsultorio=pidCons and Modulo=pMod) then
 		insert into profatiende (idProfesional, idConsultorio, Dia, Modulo) values (
@@ -481,13 +482,26 @@ BEGIN
     END */$$
 DELIMITER ;
 
-/* Procedure structure for procedure `SP_InsertConsultorio` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertConsultorio` */;
+/* Procedure structure for procedure `SP_InsertCodigo` */
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertConsultorio`(pid integer, pNombre varchar(100), pSup float)
+/*!50003 CREATE PROCEDURE `SP_InsertCodigo`(pid INTEGER, pEsp int, pCodigo varchar(20), pDesc varchar(200))
+BEGIN
+	IF EXISTS(SELECT 1 FROM nomenclador WHERE idNomenclador=pid) THEN
+		UPDATE nomenclador SET Descripcion=pDesc, Codigo=pCodigo, idEspecialidad=pEsp where idNomenclador=pid;
+	ELSE
+		INSERT INTO nomenclador (idEspecialidad, Descripcion, Codigo) VALUES (pEsp,pDesc, pCodigo);
+	END IF;
+		
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SP_InsertConsultorio` */
+
+DELIMITER $$
+
+/*!50003 CREATE PROCEDURE `SP_InsertConsultorio`(pid integer, pNombre varchar(100), pSup float)
 BEGIN
 	if exists(select 1 from consultorios where idConsultorio=pid) then
 		update consultorios set Nombre=pNombre, m2=pSup where idConsultorio=pid;
@@ -500,11 +514,9 @@ DELIMITER ;
 
 /* Procedure structure for procedure `SP_InsertEspec` */
 
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertEspec` */;
-
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertEspec`(pid INTEGER, pNombre VARCHAR(100), pCostoMod float)
+/*!50003 CREATE PROCEDURE `SP_InsertEspec`(pid INTEGER, pNombre VARCHAR(100), pCostoMod float)
 BEGIN
 	IF EXISTS(SELECT 1 FROM especialidades WHERE idEspecialidad=pid) THEN
 		UPDATE especialidades SET Nombre=pNombre, CostoMod=pCostoMod WHERE idEspecialidad=pid;
@@ -517,29 +529,25 @@ DELIMITER ;
 
 /* Procedure structure for procedure `SP_InsertPaciente` */
 
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertPaciente` */;
-
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertPaciente`(pidPaciente int, pidPrepaga int, pApellido varchar(50), pNombre varchar(50), pFechaNac varchar(12), pCelular varchar(50), pMail varchar(100), pNroSocio varchar(30), pDNI varchar(20))
+/*!50003 CREATE PROCEDURE `SP_InsertPaciente`(pidPaciente int, pidPrepaga int, pApellido varchar(50), pNombre varchar(50), pFechaNac varchar(12), pCelular varchar(50), pMail varchar(100), pNroSocio varchar(30), pDNI varchar(20), pNroFicha varchar(20))
 BEGIN
 	if exists(select 1 from pacientes where idPaciente=pidPaciente) then
-		update pacientes set Apellido=pApellido, Nombre=pNombre, idPrepaga=pidPrepaga,FechaNac= pFechaNac, Celular=pCelular, Mail=pMail, NroSocio=pNroSocio, DNI=pDNI
+		update pacientes set Apellido=pApellido, Nombre=pNombre, idPrepaga=pidPrepaga,FechaNac= pFechaNac, Celular=pCelular, Mail=pMail, NroSocio=pNroSocio, DNI=pDNI, NroFicha=pNroFicha 
 		where idPaciente=pidPaciente;
 	else
-		insert into pacientes (idPrepaga, Apellido, Nombre, FechaNac, Celular, Mail, FechaAlta, NroSocio, DNI) values (
-		pidPrepaga, pApellido, pNombre, pFechaNac, pCelular, pMail, now(), pNroSocio, pDNI);
+		insert into pacientes (idPrepaga, Apellido, Nombre, FechaNac, Celular, Mail, FechaAlta, NroSocio, DNI, NroFicha) values (
+		pidPrepaga, pApellido, pNombre, pFechaNac, pCelular, pMail, now(), pNroSocio, pDNI, pNroFicha);
 	end if;
     END */$$
 DELIMITER ;
 
 /* Procedure structure for procedure `SP_InsertProf` */
 
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertProf` */;
-
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertProf`(pid INTEGER, pNombre VARCHAR(100), pMatricula varchar(10), pFechaVenc date, pDocComp int)
+/*!50003 CREATE PROCEDURE `SP_InsertProf`(pid INTEGER, pNombre VARCHAR(100), pMatricula varchar(10), pFechaVenc date, pDocComp int)
 BEGIN
 	IF EXISTS(SELECT 1 FROM profesionales WHERE idProfesional=pid) THEN
 		UPDATE profesionales SET Nombre=pNombre, Matricula=pMatricula, FechaVenc=pFechaVenc, DocCompleta=pDocComp WHERE idProfesional=pid;
@@ -552,11 +560,9 @@ DELIMITER ;
 
 /* Procedure structure for procedure `SP_InsertUser` */
 
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertUser` */;
-
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertUser`(pid integer, pNombre varchar(100), pLogin varchar(30), pPass varchar(34), pPerfil varchar(1), pProf int)
+/*!50003 CREATE PROCEDURE `SP_InsertUser`(pid integer, pNombre varchar(100), pLogin varchar(30), pPass varchar(34), pPerfil varchar(1), pProf int)
 BEGIN
 	if pPerfil<>'P' then set pProf=null; end if;
 	if exists(select 1 from usuarios where idUsuario=pid) then
@@ -573,11 +579,9 @@ DELIMITER ;
 
 /* Procedure structure for procedure `SP_InsertTurno` */
 
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_InsertTurno` */;
-
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertTurno`(pTurno int, pidPaciente int, pidEspec int, pidProf int, pFecha varchar(12), pHora varchar(10), 
+/*!50003 CREATE PROCEDURE `SP_InsertTurno`(pTurno int, pidPaciente int, pidEspec int, pidProf int, pFecha varchar(12), pHora varchar(10), 
 					pNombre varchar(100), pApellido varchar(100), pDNI varchar(20), pSocio varchar(30), pCelular varchar(50), pEstado varchar(40))
 BEGIN
 	declare vEspec int;
@@ -597,18 +601,19 @@ BEGIN
 	end if;
 	
 	insert into turnos (idPaciente, idEspecialidad, idProfesional, Fecha, Hora, Paciente, ApellidoPac, DNI, NroSocio, Celular, Estado) values (
-			pidPaciente, vEspec, pidProf, pFecha, pHora, pNombre, pApellido, pDNI, pSocio, pCelular, pEstado);
+			pidPaciente, vEspec, pidProf, pFecha, pHora, case pNombre when '' then null else pNombre end, 
+			case pApellido when '' then null else pApellido end, 
+			case pDNI when '' then null else  pDNI end, pSocio, 
+			case pCelular when '' then null else pCelular end, pEstado);
 			
     END */$$
 DELIMITER ;
 
 /* Procedure structure for procedure `SP_LeerTurnos` */
 
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_LeerTurnos` */;
-
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LeerTurnos`(pFecha varchar(15), pProf int, pResult int)
+/*!50003 CREATE PROCEDURE `SP_LeerTurnos`(pFecha varchar(15), pProf int, pResult int)
 BEGIN
 	declare vHoraI varchar(10);
 	declare vHoraF varchar(10);
@@ -637,7 +642,10 @@ BEGIN
 			
 			if exists(select 1 from turnos where Fecha=pFecha and idProfesional=pProf AND Hora >= vHoraI AND Hora < vHoraF) then
 				insert into tmpturnos (
-				select idTurno, Hora, idPaciente, concat(Paciente,' ', ApellidoPac) Paciente, idEspecialidad, '', DNI, Celular, Estado, Fecha from Turnos 
+				select idTurno, Hora, t.idPaciente, 
+				ifnull(concat(t.Paciente,' ', t.ApellidoPac), CONCAT(p.Nombre,' ', p.Apellido)) Paciente, t.idEspecialidad, '', 
+				ifnull(t.DNI, p.DNI) DNI, 
+				ifnull(t.Celular, p.Celular) Celular, Estado, Fecha from Turnos t left join Pacientes p on t.idPaciente=p.idPaciente
 				where idProfesional=pProf and Fecha=pFecha 
 				and Hora >= vHoraI and Hora< vHoraF);
 			else 
@@ -660,11 +668,9 @@ DELIMITER ;
 
 /* Procedure structure for procedure `SP_ReplicarAgenda` */
 
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_ReplicarAgenda` */;
-
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ReplicarAgenda`(pDiaActual varchar(15), pTipo varchar(3))
+/*!50003 CREATE PROCEDURE `SP_ReplicarAgenda`(pDiaActual varchar(15), pTipo varchar(3))
 BEGIN
 	declare vFecha date;
 	declare vHoy int;
@@ -694,11 +700,9 @@ DELIMITER ;
 
 /* Procedure structure for procedure `SP_TurnosLibres` */
 
-/*!50003 DROP PROCEDURE IF EXISTS  `SP_TurnosLibres` */;
-
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_TurnosLibres`(pProf int, pFechaInicio date)
+/*!50003 CREATE PROCEDURE `SP_TurnosLibres`(pProf int, pFechaInicio date)
 BEGIN
 	DECLARE vFrecuencia FLOAT;
 	DECLARE vHoras FLOAT;

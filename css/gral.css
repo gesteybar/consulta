@@ -89,7 +89,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', end
 color: #ffffff;text-shadow: 1px 1px 1px black;font-size: 1.1em; border-radius: 3px}
 .tabla2 td {background-color: transparent;color: #333333;text-shadow: 1px 1px 1px gray;font-size: 0.9em;padding: 3px}
 .tabla3 {border-radius: 4px;font-family: Oswald;padding: 0px;}
-.tabla3 th {background-color: transparent;font-family: Abel;font-weight: bold;}
+.tabla3 th {background-color: transparent;font-family: Abel;font-weight: bold;border-bottom: 1px solid #dddddd}
 .tabla3 td {background-color: transparent;color: inherit;font-size: 0.9em;padding: 3px}
 .tabla3 a {text-decoration: none;color:#555555;font-size: 0.9em;padding: 3px}
 .tabla3 a:hover {text-decoration: none;color:orange;font-size: 0.9em;padding: 3px}
@@ -140,3 +140,4 @@ width: 100vw;margin-top: 0;height: 100vh;left: 0;top:0;}
 #lblUsuario img {vertical-align: middle;width:48px;}
 .ventanaInicio {border:1px solid #dddddd; border-radius: 5px;margin:20px auto;width: 50vw;padding: 20px;box-shadow: 2px 2px 5px gray; font-family:Abel;}
 .ventanaInicio input, select {padding: 5px 8px; border-radius: 3px; border:1px solid #dddddd;}
+.texto {font-family: Abel;color:#666666;margin:0;font-size: 1em;}

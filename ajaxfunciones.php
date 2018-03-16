@@ -397,7 +397,8 @@ switch ($consulta) {
 		$fecha=$_GET['fecha'];
 
 		
-		$cadena="Call SP_TurnosLibres($idProf,'$fecha')";
+		$cadena="Call SP_TurnosLibres($idProf,$fecha)";
+		//die($cadena);
 		query($cadena,'E', null);
 
 		$cadena="SELECT Fecha, COUNT(1) libres, Paciente FROM tmpbuffer WHERE Paciente IS NULL GROUP BY Fecha, Paciente LIMIT 5";
@@ -410,6 +411,30 @@ switch ($consulta) {
 		$cadena="select Hora from tmpbuffer where Fecha='$fecha' and Paciente is null";
 		echo query($cadena, "Q", null);
 		break;
+	case 'leerNomenclador':
+		$esp=$_GET['esp'];
+
+		$cadena="select * from nomenclador where idEspecialidad=$esp";
+
+		echo query($cadena, "Q", null);
+		break;
+	case 'guardarCodigo':
+		$esp=$_GET['esp'];
+		$codigo=$_GET['codigo'];
+		$desc=$_GET['desc'];
+		$id=$_GET['id'];
+
+		$cadena="call SP_InsertCodigo($id, $esp, '$codigo','$desc')";
+
+		echo query($cadena, 'E', null);
+
+		break;
+	case 'leerPrestaciones':
+		$pac=$_GET['pac'];
+
+		$cadena="";
+		break;
+
 }
 
 

@@ -12,6 +12,7 @@
 		                <li><a href="javascript:void(0);" onclick="go(6);">Turnos</a></li>
 		                <li><a href="javascript:void(0);" onclick="go(5);">Definición de agendas</a></li>
 		                <li><a href="javascript:void(0);" onclick="go(11);">Operaciones de caja</a></li>
+		                <li><a href="javascript:void(0);" onclick="go(15);">Carga de prestaciones</a></li>
 		            </ul>
 		        </li>
 		        <li><a href="javascript:void(0);">Reportes</a>
@@ -27,6 +28,7 @@
 		                        <li><a href="javascript:void(0);" onclick="go(4);">Consultorios</a></li>
 		                        <li><a href="javascript:void(0);" onclick="go(2);">Profesionales</a></li>
 		                        <li><a href="javascript:void(0);" onclick="go(3);">Especialidades</a></li>
+		                        <li><a href="javascript:void(0);" onclick="go(14);">Nomenclador</a></li>
 		                        <li><a href="javascript:void(0);" onclick="go(1);">Pacientes</a></li>
 		                        <li><a href="javascript:void(0);" onclick="go(9);">Prepagas</a></li>
 		                        <li><a href="javascript:void(0);" onclick="go(10);">Usuarios</a></li>

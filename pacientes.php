@@ -56,6 +56,7 @@
 			setValue('txtSocio', '');
 			setValue('cboPrepaga', '');
 			setValue('txtFechaNac', '');
+			setValue('txtFicha', '');
 		$("#abm").hide();
 	}
 
@@ -78,6 +79,7 @@
 			setValue('txtSocio', obj[0].NroSocio);
 			setValue('cboPrepaga', obj[0].idPrepaga);
 			setValue('txtFechaNac', obj[0].FechaNac);
+			setValue('txtFicha', obj[0].NroFicha);
 
 
 			$("#abm").show();
@@ -94,6 +96,7 @@
 		setValue('txtNroDoc','');
 		setValue('txtSocio','');
 		setValue('txtFechaNac','');
+		setValue('txtFicha','');
 		$("#abm").show();
 		$("#cmdBorrar").hide();
 
@@ -124,8 +127,9 @@
 		var fechaNac=getValue('txtFechaNac');
 		var prep=getValue('cboPrepaga');
 		var socio=getValue('txtSocio');
+		var ficha=getValue('txtFicha');
 
-		oAjax.request="customQuery&query=call SP_InsertPaciente("+id+", "+prep+", '"+ape+"', '"+nom+"','"+fechaNac+"','"+cel+"','"+mail+"','"+socio+"','"+dni+"')&tipo=E";
+		oAjax.request="customQuery&query=call SP_InsertPaciente("+id+", "+prep+", '"+ape+"', '"+nom+"','"+fechaNac+"','"+cel+"','"+mail+"','"+socio+"','"+dni+"', '"+ficha+"')&tipo=E";
 		oAjax.send(resp);
 
 		function resp(data) {
@@ -217,6 +221,10 @@
 			<tr>
 				<td>Apellido</td>
 				<td><input type="text" id="txtApellido"></td>
+			</tr>
+			<tr>
+				<td>Nro Ficha</td>
+				<td><input type="text" id="txtFicha"></td>
 			</tr>
 			<tr>
 				<td>Nro Doc.</td>

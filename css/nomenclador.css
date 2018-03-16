@@ -1,0 +1,20 @@
+#wrapper1 {width: 90vw;float:left;min-height: 30px; overflow-y: auto;height: 60vh}
+#abm {width:75vw;float: left;margin-left: 20px;min-height: 50vh;
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 );}
+#tblCodigos {width: 40vw;}
+.tabla1 a {font-family: Abel;text-decoration:none; color:black;color:#444444;font-size: 1em;}
+.tabla1 a:hover {color:orange;}
+#tblABM {border-collapse: collapse;font-family: Abel;display: inline-block;}
+#abm input, select, textarea {border:1px solid gray;border-radius: 3px;padding: 5px 8px; font-family: Abel;}
+#divPermisos {float:right;margin-right: 30px;min-width: 300px;width: 30vw;height: 90%;position: relative;display: inline-block;}
+#tblPermisos {width: 100%}
+#tblGastos {border-collapse: collapse;width: 90%;margin:10px 0;}
+
+#divNuevo {width: 50vw;}
+#tblForm {width: 70%;margin:0 15%;}
+#lblFecha {font-family: Abel; font-size: 1.1em;color:#444444;margin:0 0 10px 0;}
+#lblFecha input {font-family: Abel; font-size: 1.1em;color:#444444;border-radius: 4px;border:1px solid gray;}
