@@ -2,7 +2,7 @@
 	$pEntorno="consulta";
 
 	function GetConnection() {
-		$dbi=mysqli_connect('localhost', 'root', '42walloby', 'consulta');
+		$dbi=mysqli_connect('200.85.158.85', 'gustavo', '42walloby', 'consulta');
 			if (!$dbi)
 			  die('No se puede conectar a la base de datos');
 
@@ -11,7 +11,7 @@
 			return $dbi;
 	}
 	function GetConnectionObj() {
-		$dbi=new mysqli('localhost', 'root', '42walloby', 'consulta');
+		$dbi=new mysqli('200.85.158.85', 'gustavo', '42walloby', 'consulta');
 			if ($dbi->connect_errno)
 			  die('No se puede conectar a la base de datos');
 

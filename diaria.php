@@ -8,10 +8,10 @@
 	<link rel="stylesheet" type="text/css" href="./css/gral.css">
 	<link rel="stylesheet" type="text/css" href="./css/diaria.css">
 	<link rel="shortcut icon" type="image/x-icon" href="./imagenes/logo.ico">
-	<script type="text/javascript" src="./js/frame.js"></script>
-	<script type="text/javascript" src="./js/permisos.js"></script>
 	<script src="./js/jquery-1.10.2.js"></script>
 	<script src="./js/jquery-ui-1.10.4.custom.min.js"></script>  	
+	<script type="text/javascript" src="./js/frame.js"></script>
+	<script type="text/javascript" src="./js/permisos.js"></script>
 	<script type="text/javascript">
 	function cargarProf() {
 		var fecha=getValue('txtFecha');
@@ -152,10 +152,10 @@
 	function pickPaciente(id, obj) {
 		//alert(obj.innerHTML);
 		setValue('hidPaciente', id);
-		setValue('txtNombrePac', obj.parentNode.parentNode.cells[2].innerText);
-		setValue('txtApellidoPac', obj.parentNode.parentNode.cells[1].innerText);
-		setValue('txtCelularPac', obj.parentNode.parentNode.cells[5].innerText);
-		setValue('txtDNIPac', obj.parentNode.parentNode.cells[4].innerText);
+		setValue('txtNombrePac', obj.cells[2].innerText);
+		setValue('txtApellidoPac', obj.cells[1].innerText);
+		setValue('txtCelularPac', obj.cells[5].innerText);
+		setValue('txtDNIPac', obj.cells[4].innerText);
 		$('#frmListaPacientes').hide();
 
 	}
@@ -189,6 +189,7 @@
 			}
 			cerrar('frmNuevoTurno');
 			cargarTurnos(getValue('hidProf'), null);
+			setValue('hidPaciente', '');
 		}
 
 	}
@@ -314,7 +315,7 @@
 
 <script type="text/javascript">
 
-	function showMenu(id,obj) {
+/*	function showMenu(id,obj) {
 		setValue('hidMenuTurno', id);
 		var rect = obj.getBoundingClientRect();
 		//alert(rect.left);
@@ -339,7 +340,13 @@
 	        container.hide();
 	    }
 	});
-
+*/
+function showMenu(id, objOrigen) {
+	var rect = objOrigen.getBoundingClientRect();
+	//console.log(rect.top, rect.right, rect.bottom, rect.left);	
+	var jason=[{"Op":"Anular turno","Fc":"anularTurno("+id+")", "img":"redalert.png"},{"Op":"Marcar asistencia", "Fc":"marcarTurno('"+id+"', true)", "img":"on.png"},{"Op":"Marcar inasistencia", "Fc":"marcarTurno('"+id+"', false)", "img":"off.png"},{"Op":"Ficha paciente", "Fc":"fichaPaciente("+id+")", "img":"user.png"}];
+	showPopup(jason, rect.left-100, rect.top, '','classPopup',document.getElementsByTagName('body')[0]);
+}
 </script>	
 </head>
 <body>

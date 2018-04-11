@@ -141,3 +141,15 @@ width: 100vw;margin-top: 0;height: 100vh;left: 0;top:0;}
 .ventanaInicio {border:1px solid #dddddd; border-radius: 5px;margin:20px auto;width: 50vw;padding: 20px;box-shadow: 2px 2px 5px gray; font-family:Abel;}
 .ventanaInicio input, select {padding: 5px 8px; border-radius: 3px; border:1px solid #dddddd;}
 .texto {font-family: Abel;color:#666666;margin:0;font-size: 1em;}
+.classPopup {
+	background-color:rgb(50,50,50);
+	color:white;
+	//border:1px solid blue;
+	border-radius: 3px;
+	font-family: Abel;
+	font-size: 1em;
+
+}
+.classPopup a { color:white; text-decoration: none }
+.classPopup a:hover { color:orange;  }
+.classPopup ul {list-style-type: none; padding:3px 5px;}

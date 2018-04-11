@@ -900,3 +900,61 @@ function JsonParser(str) {
 
 	return JSON.parse(str);
 }
+
+function showPopup (obj, x, y, style, classname, owner) {
+/*----------------------------DESCRIPCION DEL METODO-----------------------
+la fc recibe un vector de objetos JS con la estructura:
+[{"Op":"opcion1", "Fc":"Funcion1", "img":"imagen sin directorio"}]
+x e y son las coordenadas para tomar posicion
+classname es la clase asignada a la div que se crea, debe incluir formato de div, ul, li, a, etc...
+owner es el contenedor del popup*/
+
+	var div=document.createElement('div');
+	var ul=document.createElement('ul');
+
+	div.id="_divPopup"
+	if (classname=="") {
+		div.style.backgroundColor="white";
+		div.color="gray";
+		div.style.border="1px solid blue";
+	} else {
+		div.classList.add(classname);
+	}
+	div.style.position="absolute";
+	div.style.display="none";
+	div.style.zIndex="10000";
+	div.style.width="400px";
+	div.style.heigth="200px";
+	div.style.left=x+"px";
+	div.style.top=y+"px";
+
+	for (var i = 0; i < obj.length; i++) {
+		var li=document.createElement('li');
+		if (obj[i].img!="")
+			li.innerHTML='<a href="javascript:void(0);" onclick="'+obj[i].Fc+'"><img src="imagenes/'+obj[i].img+'" class="icono">'+obj[i].Op+'</a>';
+		else
+			li.innerHTML='<a href="javascript:void(0);" onclick="'+obj[i].Fc+'">'+obj[i].Op+'</a>';
+		ul.appendChild(li);
+	}
+	div.appendChild(ul);
+	owner.appendChild(div);
+
+	$(_divPopup).fadeIn();
+
+}
+function quitarPopup() {
+	$("#_divPopup").fadeOut();	
+	$("#_divPopup").remove();
+}
+
+$(document).mouseup(function(e) 
+{
+    var container = $("#_divPopup");
+
+    // if the target of the click isn't the container nor a descendant of the container
+    if (!container.is(e.target) && container.has(e.target).length === 0) 
+    {
+        quitarPopup();
+    }
+    
+});
